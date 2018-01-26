@@ -29,7 +29,16 @@ public class PlayerController : MonoBehaviour {
         {
             other.gameObject.SendMessage("CheckVision", this.gameObject);
         }
+
        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "BasicTrap")
+        {
+            (collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
+        }
     }
 
 }
