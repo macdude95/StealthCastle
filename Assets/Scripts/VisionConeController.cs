@@ -9,9 +9,8 @@ public class VisionConeController : MonoBehaviour {
 	void Start () {
         offset = transform.position - transform.parent.position;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void FixedUpdate () {
         transform.position = transform.parent.position + offset;
 	}
 
