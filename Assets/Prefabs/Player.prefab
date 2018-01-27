@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   smoothMoveTime: 0.1
-  turnSpeed: 10
+  turnSpeed: 20
 --- !u!212 &212264823815375950
 SpriteRenderer:
   m_ObjectHideFlags: 1
