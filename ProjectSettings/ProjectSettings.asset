@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: M3
+  productName: StealthCastle
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -558,14 +558,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: M3
+  metroPackageName: StealthCastle
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: M3
+  metroApplicationDescription: StealthCastle
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -635,7 +635,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 8e52b278-29c3-4d49-82d7-6380a73ae957
-  projectName: M3
+  projectName: StealthCastle
   organizationId: nullskillvoid
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
