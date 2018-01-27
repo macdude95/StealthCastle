@@ -712,6 +712,22 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -3.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 50297489165315798, guid: 0c695892a1f9d5e4299a87abc6467f4c,
+        type: 2}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212845807841248536, guid: 0c695892a1f9d5e4299a87abc6467f4c,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212845807841248536, guid: 0c695892a1f9d5e4299a87abc6467f4c,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 50297489165315798, guid: 0c695892a1f9d5e4299a87abc6467f4c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0c695892a1f9d5e4299a87abc6467f4c, type: 2}
   m_IsPrefabParent: 0
