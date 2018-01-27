@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  smoothMoveTime: 0.1
+  smoothMoveTime: 0.05
   turnSpeed: 20
 --- !u!212 &212264823815375950
 SpriteRenderer:

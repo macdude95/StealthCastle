@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4330878864225280}
   - component: {fileID: 212802382189945994}
-  - component: {fileID: 50822795688217948}
   - component: {fileID: 61393007040153032}
   - component: {fileID: 114078352812293730}
   m_Layer: 0
@@ -75,26 +74,6 @@ Transform:
   m_Father: {fileID: 4330878864225280}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!50 &50822795688217948
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1344973124932710}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &60305698673195784
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -160,9 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 0}
-  speed: 0
-  waitTime: 0
-  turnSpeed: 0
+  speed: 2
+  waitTime: 0.1
+  turnSpeed: 10
 --- !u!114 &114287226270137348
 MonoBehaviour:
   m_ObjectHideFlags: 1
