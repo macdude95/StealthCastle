@@ -44,7 +44,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     IEnumerator TurnToFace(Vector3 lookTarget)
     {
-        Vector3 dirToLookTarget = (lookTarget - transform.position).normalized;
+        Vector2 dirToLookTarget = (lookTarget - transform.position).normalized;
         float targetAngle = 90 - Mathf.Atan2(dirToLookTarget.x, dirToLookTarget.y) * Mathf.Rad2Deg;
 
         while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) > 0.05f)
