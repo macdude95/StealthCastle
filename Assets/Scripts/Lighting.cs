@@ -51,23 +51,12 @@ public class Lighting : MonoBehaviour {
 		triangles.Add (1);
 		triangles.Add (numOfRays);
 
-		Vector2[] uvs = new Vector2[] {
-			new Vector2( 0, 0 ),
-			new Vector2(0.1f, 0 ),
-			new Vector2( 0, 0.1f ),
-			new Vector2( 0.1f, 0.1f )
-		};
-
 		Mesh mesh = triangleOject.GetComponent<MeshFilter>().mesh;
 		mesh.Clear();
 		mesh.vertices = vertices.ToArray ();
 		mesh.uv = System.Array.ConvertAll<Vector3, Vector2> (mesh.vertices, getV3fromV2);
 		mesh.triangles = triangles.ToArray();
 		triangleOject.GetComponent<MeshRenderer> ().material = mat;
-	}
-	void Start () {
-		triangleOject.AddComponent<MeshFilter>();
-		triangleOject.AddComponent<MeshRenderer>();
 	}
 
 	private static Vector2 getV3fromV2 (Vector3 v3)
