@@ -4,41 +4,58 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    Rigidbody2D rb;
-    public int speed;
+	public float speed = 7;
+	public float smoothMoveTime = 0.1f;
+	public float turnSpeed = 8;
+
+	private float angle;
+	private float smoothInputMagnitude;
+	private float smoothMoveVelocity;
+	private Vector2 velocity;
+
+	private Rigidbody2D rigidBody;
 
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody2D>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		rigidBody = GetComponent<Rigidbody2D>();
 	}
 
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
-    }
+	private void Update()
+	{
+		Vector3 inputDirection = new Vector3 (-Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"), 0).normalized;
+		float inputMagnitude = inputDirection.magnitude;
+		smoothInputMagnitude = Mathf.SmoothDamp (smoothInputMagnitude, inputMagnitude, ref smoothMoveVelocity, smoothMoveTime);
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-      
-        if (other.gameObject.tag == "VisionDetector")
-        {
-            other.gameObject.SendMessage("CheckVision", this.gameObject);
-        }
+		float targetAngle = Mathf.Atan2 (inputDirection.x, inputDirection.y) * Mathf.Rad2Deg;
+		angle = Mathf.LerpAngle (angle, targetAngle, Time.deltaTime * turnSpeed * inputMagnitude);
 
-       
-    }
+		velocity = transform.up * speed * smoothInputMagnitude;
+	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "BasicTrap")
-        {
-            (collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
-        }
-    }
+
+	void FixedUpdate()
+	{
+		rigidBody.MoveRotation (angle);
+		rigidBody.MovePosition (rigidBody.position + velocity * Time.deltaTime);
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+
+		if (other.gameObject.tag == "VisionDetector")
+		{
+			other.gameObject.SendMessage("CheckVision", this.gameObject);
+		}
+
+
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "BasicTrap")
+		{
+			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
+		}
+	}
 
 }
