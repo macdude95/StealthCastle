@@ -7,7 +7,6 @@ public class Lighting : MonoBehaviour {
 
 	public GameObject myLight;
 	public GameObject triangleOject;
-	public Material mat;
 	public int numOfRays = 50;
 	public float lightRange = 100.0f;
 
@@ -56,7 +55,6 @@ public class Lighting : MonoBehaviour {
 		mesh.vertices = vertices.ToArray ();
 		mesh.uv = System.Array.ConvertAll<Vector3, Vector2> (mesh.vertices, getV3fromV2);
 		mesh.triangles = triangles.ToArray();
-		triangleOject.GetComponent<MeshRenderer> ().material = mat;
 	}
 
 	private static Vector2 getV3fromV2 (Vector3 v3)
@@ -65,6 +63,7 @@ public class Lighting : MonoBehaviour {
 	}
 
 	public void Start() {
+		Material mat = triangleOject.GetComponent<MeshRenderer> ().material;
 		float textureXSize = 1.0f/mat.mainTexture.texelSize.x * transform.localScale.x;
 		float textureYSize = 1.0f/mat.mainTexture.texelSize.y * transform.localScale.y;
 		mat.SetTextureScale("_MainTex", new Vector2(100f/textureXSize, 100f/textureYSize));
