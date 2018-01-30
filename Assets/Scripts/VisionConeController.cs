@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class VisionConeController : MonoBehaviour {
 
-    private void CheckVision(GameObject player) {
-        Vector3 direction;
-        Vector2[] corners = player.GetComponent<PolygonCollider2D>().points;
-        List<Vector3> points = new List<Vector3>();
+	BasicEnemyController enemyScript;
 
-        points.Add(player.transform.position);
-        foreach(Vector2 corner in corners) {
-            points.Add(new Vector3(corner[0] * player.transform.localScale.x, corner[1] * player.transform.localScale.y) + player.transform.position);
-        }
+	public void Start() {
+		enemyScript = GetComponentInParent<BasicEnemyController>();
+	}
 
-        foreach(Vector3 target in points) {
-			direction = (target - transform.parent.position);
-			RaycastHit2D hit = Physics2D.Raycast(transform.parent.position, direction);
-            if (hit.collider != null && hit.collider.gameObject.tag == "Player") {
-				Debug.DrawRay(transform.parent.position, direction, Color.red, 1F);
-            }
-            else {
-                //Debug.DrawRay(this.getRay2DOrigin(), direction, Color.blue, 1.5F);
-            }
+	public void CheckVision(GameObject player) {
+		bool playerWithinVision = false;
+		Vector2 enemyPosition = transform.parent.position;
+		Vector2 playerPosition = player.transform.position;
+		Vector2 direction = (playerPosition - enemyPosition);
+
+		RaycastHit2D hit = Physics2D.Raycast(playerPosition, direction);
+		playerWithinVision = hit.collider != null &&
+							 hit.collider.gameObject.tag == "Player";
+
+		if (playerWithinVision) {
+			Debug.DrawRay(enemyPosition, direction, Color.red, 1.5F);
+			transform.parent.position =
+				Vector2.MoveTowards(enemyPosition,
+									playerPosition,
+									enemyScript.speed);
         }
     }
 }
