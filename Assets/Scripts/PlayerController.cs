@@ -4,40 +4,62 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed = 7;
-	public float smoothMoveTime = 0.1f;
-	public float turnSpeed = 8;
+    public float speed = 8;
 
-	private float angle;
-	private float smoothInputMagnitude;
-	private float smoothMoveVelocity;
-	private Vector2 velocity;
+    private Animator animationController;
+    private Rigidbody2D rb;
 
-	private Rigidbody2D rigidBody;
+    // Use this for initialization
+    void Start() {
+        rb = GetComponent<Rigidbody2D>();
+        animationController = GetComponent<Animator>();
+    }
 
-	// Use this for initialization
-	void Start () {
-		rigidBody = GetComponent<Rigidbody2D>();
-	}
+    private void Update()
+    {
+        
+    }
 
-	private void Update()
-	{
-		Vector3 inputDirection = new Vector3 (-Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"), 0).normalized;
-		float inputMagnitude = inputDirection.magnitude;
-		smoothInputMagnitude = Mathf.SmoothDamp (smoothInputMagnitude, inputMagnitude, ref smoothMoveVelocity, smoothMoveTime);
 
-		float targetAngle = Mathf.Atan2 (inputDirection.x, inputDirection.y) * Mathf.Rad2Deg;
-		angle = Mathf.LerpAngle (angle, targetAngle, Time.deltaTime * turnSpeed * inputMagnitude);
 
-		velocity = transform.up * speed * smoothInputMagnitude;
-	}
+    private void SetDir(){
+        float horizontal = rb.velocity.x, vertical = rb.velocity.y;
+        if (horizontal == 0 && vertical == 0)
+        {
+            animationController.SetBool("IS_MOVING", false);
+            return;
+        }
+        if (horizontal >= vertical)
+        {
+            if(horizontal > 0)
+            {
+                animationController.SetInteger("DIR", 1);//right
+            }
+            else
+            {
+                animationController.SetInteger("DIR", 2);//left
+            }
+        }
+        else
+        {
+            if (vertical > 0)
+            {
+                animationController.SetInteger("DIR", 0);//up
+            }
+            else
+            {
+                animationController.SetInteger("DIR", 3);//down
+            }
+        }
+        animationController.SetBool("IS_MOVING", true);
+    }
 
 
 	void FixedUpdate()
 	{
-		rigidBody.MoveRotation (angle);
-		rigidBody.MovePosition (rigidBody.position + velocity * Time.deltaTime);
-	}
+        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
+        SetDir();
+    }
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
