@@ -6,6 +6,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     Vector3 target;
     public float speed = 0.01f;
+    Vector2 velocity;
 
     public void Start()
     {
@@ -16,9 +17,7 @@ public class BasicEnemyController : MonoBehaviour {
     {
         if(this.transform.position != target)
         {
-           
-           this.transform.position = Vector2.MoveTowards(this.transform.position, target, speed);
-            
+           this.transform.position = Vector2.MoveTowards(this.transform.position, target, speed);         
         }
     }
 
