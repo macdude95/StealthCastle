@@ -6,6 +6,9 @@ TagManager:
   tags:
   - VisionDetector
   - BasicTrap
+  - PathNode
+  - Enemy
+  - PathContainer
   layers:
   - Default
   - TransparentFX
