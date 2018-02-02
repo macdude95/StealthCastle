@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float speed = 8;
+	public float runSpeed = 10;
+	public float walkSpeed = 4;
+    private float speed = 4;
 
     private Animator animationController;
     private Rigidbody2D rb;
@@ -16,12 +18,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update()
-    {
-        
+	{
+		SetDir();
+		if (Input.GetButton ("Run")) {
+			speed = runSpeed;
+		} else {
+			speed = walkSpeed;
+		}
     }
-
-
-
+		
     private void SetDir(){
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
         if (horizontal == 0 && vertical == 0)
@@ -58,7 +63,6 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate()
 	{
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
-        SetDir();
     }
 
 	private void OnTriggerStay2D(Collider2D other)
