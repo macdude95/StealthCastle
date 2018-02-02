@@ -26,8 +26,7 @@ public class BasicEnemyController : MonoBehaviour {
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
         //move to self, to kick off pathfinding
-        pathController.destination = nextNode.transform.position;
-        pathController.SearchPath();
+		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
     }
 
