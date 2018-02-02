@@ -29,11 +29,11 @@ public class VisionConeController : MonoBehaviour {
         if (seen)
         {
             this.SendMessageUpwards("PlayerInVision", player);
-            rotateVision(player.transform.position);
+            RotateVision(player.transform.position);
         }            
     }
 
-    public void rotateVision(Vector3 target)
+    public void RotateVision(Vector3 target)
     {
         var dir = target - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
