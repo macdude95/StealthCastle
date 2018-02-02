@@ -10,38 +10,60 @@ public class BasicEnemyController : MonoBehaviour {
 
 
     //pathfinding controller
-    public GameObject pathNode;
+    public GameObject nextNode;
+
+    private GameObject lastNode;
     private AIPath pathController;
     private Seeker seeker;
 
+    private int state;
 
     public void Start()
     {
         pathController = this.GetComponent<AIPath>();
-        InitPath();
+        //move to self, to kick off pathfinding
+        pathController.destination = nextNode.transform.position;
+        pathController.SearchPath();
+        state = BasicEnemyController.STATE_PATHING;
     }
 
     public void FixedUpdate()
     {
         if(!pathController.pathPending && pathController.reachedEndOfPath)
         {
-            UpdateDestination();
+            ArrivedAtDestination();
+        }
+    }
+
+    private void ArrivedAtDestination()
+    {
+        lastNode = nextNode;
+        if (state == BasicEnemyController.STATE_PATHING)
+        {
+            nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
+            UpdateDestination(nextNode.transform.position);
+        }
+        else if (state == BasicEnemyController.STATE_HUNTING)
+        {
+            state = STATE_PATHING;
+            pathController.maxSpeed = 2;
+            UpdateDestination(lastNode.transform.position);
         }
     }
 
     //update destination based on current state
-    private void UpdateDestination()
+    private void UpdateDestination(Vector3 newDestination)
     {
-        pathNode = pathNode.GetComponent<PathNodeController>().getNextNode();
-        pathController.destination = pathNode.transform.position;
+        pathController.destination = newDestination;
         pathController.SearchPath();
+
     }
 
-    private void InitPath()
+    //called when a player is in direct LOS
+    public void PlayerInVision(GameObject player)
     {
-        //move to self, to kick off pathfinding
-        pathController.destination = pathNode.transform.position;
-        pathController.SearchPath();
+        state = BasicEnemyController.STATE_HUNTING;
+        pathController.maxSpeed = 4;
+        UpdateDestination(player.transform.position);
     }
-
 }

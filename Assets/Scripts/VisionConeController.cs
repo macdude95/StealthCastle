@@ -28,7 +28,14 @@ public class VisionConeController : MonoBehaviour {
             }
         }
         if (seen)
-            this.SendMessageUpwards("MoveToSeenPosition", player.transform.position);
+        {
+            this.SendMessageUpwards("PlayerInVision", player);
+            var dir = player.transform.position - transform.position;
+            Debug.DrawLine(player.transform.position, transform.position, Color.grey, 1F);
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.localRotation = Quaternion.AngleAxis(angle+90, Vector3.forward);
+        }
+            
     }
 
 }
