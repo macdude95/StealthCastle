@@ -60,7 +60,6 @@ public class BasicEnemyController : MonoBehaviour {
     //update destination based on current state
     private void UpdateDestination(Vector3 newDestination)
     {
-//        visionCone.SendMessage("RotateVision", newDestination);
         pathController.destination = newDestination;
         pathController.SearchPath();
 
