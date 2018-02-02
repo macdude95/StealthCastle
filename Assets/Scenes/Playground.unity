@@ -1163,7 +1163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a861fce1fa6324999d7f79aa5e1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  particlePrefab: {fileID: 1433802092634904, guid: f1d0a0fe3be624573979ade98a99251a,
+    type: 2}
+  numberOfParticles: 4
+  particleSpeed: 0.5
+  runSpeed: 10
+  walkSpeed: 4
 --- !u!60 &1128282844
 PolygonCollider2D:
   m_ObjectHideFlags: 0

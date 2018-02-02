@@ -5,8 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float runSpeed = 10;
-	public float walkSpeed = 4;
+	public float walkSpeed = 4;	
+	public GameObject particlePrefab;
+	public int numberOfParticles = 20;
+	public int numberOfFramesUntilNextSoundWave = 10;
+
     private float speed = 4;
+	private int numberOfFramesSinceLastParticle = 0;
 
     private Animator animationController;
     private Rigidbody2D rb;
@@ -20,12 +25,38 @@ public class PlayerController : MonoBehaviour {
     private void Update()
 	{
 		SetDir();
+		RunOrWalk ();
+    }
+
+	private void SoundParticles() {
+		GameObject particle;
+		Rigidbody2D rb;
+		Vector2 dirToFly;
+
+		if (this.numberOfFramesSinceLastParticle < this.numberOfFramesUntilNextSoundWave) {
+			this.numberOfFramesSinceLastParticle++;
+			return;
+		}
+		this.numberOfFramesSinceLastParticle = 0;
+
+		for (int i = 0; i < numberOfParticles; i++) {
+			float angle = i * Mathf.PI * 2 / numberOfParticles;
+			Vector2 pos = new Vector2 (Mathf.Cos (angle) + transform.position.x, Mathf.Sin (angle) + transform.position.y) * 1f;
+			particle = Instantiate (particlePrefab, pos, Quaternion.identity);
+			dirToFly = particle.transform.position - this.transform.position;
+			rb = particle.GetComponent<Rigidbody2D> ();
+			rb.velocity = dirToFly;
+		}
+	}
+
+	private void RunOrWalk() {
 		if (Input.GetButton ("Run")) {
 			speed = runSpeed;
+			SoundParticles ();
 		} else {
 			speed = walkSpeed;
 		}
-    }
+	}
 		
     private void SetDir(){
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
