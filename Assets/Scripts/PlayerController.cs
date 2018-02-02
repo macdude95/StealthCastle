@@ -7,13 +7,28 @@ public class PlayerController : MonoBehaviour {
 	public float runSpeed = 10;
 	public float walkSpeed = 4;	
 	public int framesBetweenRings = 30;
-	public GameObject soundRingPrefab;
+	
 
     private float speed = 4;
 	private int framesSinceLastRing = 0;
 
     private Animator animationController;
     private Rigidbody2D rb;
+
+    public GameObject soundRingPrefab;
+    private GameObject[] soundRingPool;
+    private int ringCount = 6;
+    private int currentRing = 0;
+
+    private void Awake()
+    {
+        soundRingPool = new GameObject[ringCount];
+        for(int i = 0; i < ringCount; i++)
+        {
+            soundRingPool[i] = (GameObject) Instantiate(soundRingPrefab, this.transform.position, Quaternion.identity);
+            soundRingPool[i].SetActive(false);
+        }
+    }
 
     // Use this for initialization
     void Start() {
@@ -33,8 +48,15 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 		framesSinceLastRing = 0;
-		Instantiate (soundRingPrefab, this.transform.position, Quaternion.identity);
+        if (currentRing >= ringCount)
+            currentRing = 0;
 
+        soundRingPool[currentRing].transform.position = this.transform.position;
+        soundRingPool[currentRing].transform.localScale = new Vector3(.2f, .2f, 0f);
+        SpriteRenderer sr = soundRingPool[currentRing].GetComponent<SpriteRenderer>();
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
+        soundRingPool[currentRing].SetActive(true);
+        currentRing++;
 	}
 
 	private void SetSpeed() {

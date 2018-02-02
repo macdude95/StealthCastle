@@ -10,7 +10,7 @@ public class RingBehavior : MonoBehaviour {
 
 	private float velocity;
 
-	void Start () {
+	void OnEnable () {
 		StartCoroutine (FadeAndDestroy ());
 	}
 
@@ -20,7 +20,8 @@ public class RingBehavior : MonoBehaviour {
 			sr.color = new Color (sr.color.r, sr.color.g, sr.color.b, f);
 			yield return null;
 		}
-		Destroy (gameObject);
+        this.gameObject.transform.localScale = Vector3.zero;
+        this.gameObject.SetActive(false);
 	}
 
 	void Update() {
