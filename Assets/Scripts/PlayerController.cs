@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 		
+    //sets animation direction
     private void SetDir(){
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
         if (horizontal == 0 && vertical == 0)
