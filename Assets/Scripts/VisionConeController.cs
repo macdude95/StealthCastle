@@ -39,7 +39,6 @@ public class VisionConeController : MonoBehaviour {
     public void rotateVision(Vector3 target)
     {
         var dir = target - transform.position;
-        Debug.DrawLine(target, transform.position, Color.grey, 1F);
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
     }

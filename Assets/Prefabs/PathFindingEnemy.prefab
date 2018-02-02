@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 61861508332031568}
   - component: {fileID: 114443726230594166}
   - component: {fileID: 50065278033846342}
-  - component: {fileID: 114280722106300684}
   - component: {fileID: 114906972635995958}
   - component: {fileID: 114445805580491538}
   m_Layer: 0
@@ -58,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234933235095798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.73, y: 3.6, z: 0}
+  m_LocalPosition: {x: -5.01, y: -2.58, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 4799112940867838}
@@ -71,13 +70,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1285793920783712}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 4433058531286310}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50065278033846342
 Rigidbody2D:
   serializedVersion: 4
@@ -113,7 +112,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 1}
     oldSize: {x: 3, y: 3}
     newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
@@ -122,10 +121,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.10654044, y: 1.2920082}
-      - {x: -0.10655308, y: 1.2926607}
-      - {x: -1.4969349, y: -1.50628}
-      - {x: 1.4947305, y: -1.4949269}
+    - - {x: 0.07850463, y: -0.15334469}
+      - {x: -0.09720869, y: -0.15269196}
+      - {x: -1.5378195, y: -2.9985347}
+      - {x: 1.4742876, y: -2.9803681}
 --- !u!61 &61861508332031568
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -162,19 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a9ed7085b6931438578c1b98172f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114280722106300684
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1234933235095798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 0}
 --- !u!114 &114443726230594166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd161662ee69594eb3cec3a318ee361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextNode: {fileID: 0}
 --- !u!114 &114445805580491538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,9 +211,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 2
   repathRate: 0.5
-  canSearch: 1
+  canSearch: 0
   canMove: 1
-  maxSpeed: 3
+  maxSpeed: 2
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -235,10 +222,10 @@ MonoBehaviour:
   rotationIn2D: 1
   targetCompatibility: {fileID: 0}
   rotationSpeed: 360
-  slowdownDistance: 0.6
+  slowdownDistance: 0.3
   pickNextWaypointDist: 2
-  endReachedDistance: 0.2
-  alwaysDrawGizmos: 1
+  endReachedDistance: 0.3
+  alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
 --- !u!212 &212097389028999548
