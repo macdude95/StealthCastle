@@ -9,6 +9,7 @@ TagManager:
   - PathNode
   - Enemy
   - PathContainer
+  - SoundRing
   layers:
   - Default
   - TransparentFX

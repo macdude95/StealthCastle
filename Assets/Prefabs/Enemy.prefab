@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114740022131291508}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 1}
     oldSize: {x: 3, y: 3}
     newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd161662ee69594eb3cec3a318ee361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  nextNode: {fileID: 0}
 --- !u!114 &114406268692550556
 MonoBehaviour:
   m_ObjectHideFlags: 1

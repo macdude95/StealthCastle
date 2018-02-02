@@ -102,9 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a861fce1fa6324999d7f79aa5e1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  smoothMoveTime: 0.05
-  turnSpeed: 20
+  runSpeed: 10
+  walkSpeed: 4
+  framesBetweenRings: 30
+  soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
+    type: 2}
 --- !u!212 &212264823815375950
 SpriteRenderer:
   m_ObjectHideFlags: 1
