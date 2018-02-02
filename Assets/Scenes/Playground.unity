@@ -968,7 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 10
   walkSpeed: 4
-  framesBetweenRings: 30
+  framesBetweenRings: 20
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
 --- !u!60 &1128282844
