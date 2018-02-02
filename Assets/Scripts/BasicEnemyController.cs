@@ -11,7 +11,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     //pathfinding controller
     public GameObject nextNode;
-
+    public float huntingSpeedMult;
     private GameObject visionCone;
     private GameObject lastNode;
     private AIPath pathController;
@@ -19,6 +19,7 @@ public class BasicEnemyController : MonoBehaviour {
     private Animator animationController;
 
     private int state;
+    private float baseSpeed;
 
     public void Start()
     {
@@ -28,6 +29,7 @@ public class BasicEnemyController : MonoBehaviour {
         //move to self, to kick off pathfinding
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
+        baseSpeed = pathController.maxSpeed;
     }
 
     public void Update()
@@ -36,7 +38,6 @@ public class BasicEnemyController : MonoBehaviour {
         {
             ArrivedAtDestination();
         }
-		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
         SetDir();
     }
 
@@ -47,12 +48,14 @@ public class BasicEnemyController : MonoBehaviour {
         {
             nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
+            visionCone.SendMessage("RotateVision", nextNode.transform.position);
         }
         else if (state == BasicEnemyController.STATE_HUNTING)
         {
             state = STATE_PATHING;
-            pathController.maxSpeed = 2;
+            pathController.maxSpeed = baseSpeed;
             UpdateDestination(lastNode.transform.position);
+            visionCone.SendMessage("RotateVision", lastNode.transform.position);
         }
     }
 
@@ -68,7 +71,7 @@ public class BasicEnemyController : MonoBehaviour {
     public void PlayerInVision(GameObject player)
     {
         state = BasicEnemyController.STATE_HUNTING;
-        pathController.maxSpeed = 4;
+        pathController.maxSpeed = baseSpeed * huntingSpeedMult;
         UpdateDestination(player.transform.position);
     }
 
