@@ -12,14 +12,15 @@ public class BasicEnemyController : MonoBehaviour {
     //pathfinding controller
     public GameObject nextNode;
 
+    private GameObject visionCone;
     private GameObject lastNode;
     private AIPath pathController;
-    private Seeker seeker;
 
     private int state;
 
     public void Start()
     {
+        visionCone = transform.GetChild(0).gameObject;
         pathController = this.GetComponent<AIPath>();
         //move to self, to kick off pathfinding
         pathController.destination = nextNode.transform.position;
@@ -54,6 +55,7 @@ public class BasicEnemyController : MonoBehaviour {
     //update destination based on current state
     private void UpdateDestination(Vector3 newDestination)
     {
+        visionCone.SendMessage("rotateVision", newDestination);
         pathController.destination = newDestination;
         pathController.SearchPath();
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class VisionConeController : MonoBehaviour {
 
 
+
+
     private void CheckVision(GameObject player) {
         bool seen = false;
         Vector3 direction;
@@ -30,12 +32,16 @@ public class VisionConeController : MonoBehaviour {
         if (seen)
         {
             this.SendMessageUpwards("PlayerInVision", player);
-            var dir = player.transform.position - transform.position;
-            Debug.DrawLine(player.transform.position, transform.position, Color.grey, 1F);
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.AngleAxis(angle+90, Vector3.forward);
-        }
-            
+            rotateVision(player.transform.position);
+        }            
+    }
+
+    public void rotateVision(Vector3 target)
+    {
+        var dir = target - transform.position;
+        Debug.DrawLine(target, transform.position, Color.grey, 1F);
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
     }
 
 }
