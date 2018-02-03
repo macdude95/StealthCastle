@@ -503,7 +503,18 @@ Prefab:
       propertyPath: nextNode
       value: 
       objectReference: {fileID: 159761771}
-    m_RemovedComponents: []
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: endReachedDistance
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: pickNextWaypointDist
+      value: 64
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114790755250400622, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &919395952
