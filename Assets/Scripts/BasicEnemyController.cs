@@ -37,7 +37,8 @@ public class BasicEnemyController : MonoBehaviour {
         if(!pathController.pathPending && pathController.reachedEndOfPath)
         {
             ArrivedAtDestination();
-        }
+		}
+		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
         SetDir();
     }
 
@@ -48,14 +49,14 @@ public class BasicEnemyController : MonoBehaviour {
         {
             nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
-            visionCone.SendMessage("RotateVision", nextNode.transform.position);
+//            visionCone.SendMessage("RotateVision", nextNode.transform.position);
         }
         else if (state == BasicEnemyController.STATE_HUNTING)
         {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(lastNode.transform.position);
-            visionCone.SendMessage("RotateVision", lastNode.transform.position);
+//            visionCone.SendMessage("RotateVision", lastNode.transform.position);
         }
     }
 
@@ -113,7 +114,7 @@ public class BasicEnemyController : MonoBehaviour {
 		if (other.tag == "SoundRing") { 
 			//the guard just heard the player
 			state = BasicEnemyController.STATE_HUNTING;
-			pathController.maxSpeed = 4;
+			pathController.maxSpeed = baseSpeed;
 			UpdateDestination(other.transform.position);
 		}
 	}
