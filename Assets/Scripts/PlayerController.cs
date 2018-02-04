@@ -127,6 +127,11 @@ public class PlayerController : MonoBehaviour {
 		{
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
 		}
-	}
+        else if (collision.gameObject.tag == "Door")
+        {
+            LeverAnimation.instanceLever.ChangeLeverAnimation();
+            DoorAnimation.instanceDoor.ChangeDoorStatus();
+        }
+    }
 
 }

@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - PathContainer
   - SoundRing
+  - Door
   layers:
   - Default
   - TransparentFX
