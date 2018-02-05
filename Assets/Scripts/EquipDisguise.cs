@@ -17,9 +17,8 @@ public class EquipDisguise : MonoBehaviour {
 		playerAnim = GetComponent<Animator>();
 	}
 
-	private void OnTriggerStay2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("Disguise") &&
-			Input.GetButtonDown("Submit")) {
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("Disguise")) {
 			gear = collision.gameObject;
 
 			SpriteRenderer gearRenderer =

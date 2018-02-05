@@ -128,14 +128,16 @@ public class PlayerController : MonoBehaviour {
 		else if (collision.gameObject.tag == "Gadget02") {
 			gadget02 = true;
 		}
+		else if (collision.gameObject.tag == "Finish") {
+			SceneManager.LoadScene ("Playtest01");
+		}
     }
 
 	private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.tag == "VisionDetector" && !isDisguised) {
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
-		else if (collision.gameObject.CompareTag("Disguise") &&
-				 Input.GetButtonDown("Submit")) {
+		else if (collision.gameObject.CompareTag("Disguise")) {
 			isDisguised = true;
 		}
 	}
@@ -144,9 +146,6 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "SpiderWeb") {
 			walkSpeed = 100;
 			runSpeed = 200;
-		}
-		if (collision.gameObject.tag == "Finish") {
-			SceneManager.LoadScene ("Playtest01");
 		}
 	}
 }
