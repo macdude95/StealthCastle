@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 		animationController.SetBool("IS_MOVING", true);
-		if (speed == runSpeed) {
+		if (speed == runSpeed && !gadget02) {
 			SoundRings();
 		}
     }
@@ -142,6 +143,9 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "SpiderWeb") {
 			walkSpeed = 100;
 			runSpeed = 200;
+		}
+		if (collision.gameObject.tag == "Finish") {
+			SceneManager.LoadScene ("Playtest01");
 		}
 	}
 }

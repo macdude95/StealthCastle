@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class BasicEnemyController : MonoBehaviour {
 
@@ -109,6 +110,11 @@ public class BasicEnemyController : MonoBehaviour {
         }
         animationController.SetBool("IS_MOVING", true);
     }
+
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.gameObject.tag == "Player")
+			SceneManager.LoadScene ("Playtest01");
+	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "SoundRing") { 
