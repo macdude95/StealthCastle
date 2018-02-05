@@ -12,6 +12,8 @@ TagManager:
   - SoundRing
   - Door
   - SpiderWeb
+  - Gadget01
+  - Gadget02
   layers:
   - Default
   - TransparentFX

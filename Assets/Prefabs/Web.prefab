@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212756003705059504}
   - component: {fileID: 50652726843107186}
   - component: {fileID: 61313190222176902}
+  - component: {fileID: 114198840366240976}
   m_Layer: 0
   m_Name: Web
   m_TagString: SpiderWeb
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &114198840366240976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048146632237110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dd2f3fde44540c28ef07e85294e17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212756003705059504
 SpriteRenderer:
   m_ObjectHideFlags: 1
