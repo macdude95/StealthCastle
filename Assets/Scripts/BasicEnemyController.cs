@@ -120,7 +120,7 @@ public class BasicEnemyController : MonoBehaviour {
 		if (other.tag == "SoundRing") { 
 			//the guard just heard the player
 			state = BasicEnemyController.STATE_HUNTING;
-			pathController.maxSpeed = baseSpeed;
+			pathController.maxSpeed = baseSpeed*huntingSpeedMult;
 			UpdateDestination(other.transform.position);
 		}
 	}

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public float slowWalk = 20;
 	public float slowRun = 50;
 	public int framesBetweenRings = 30;
+	public float ringStartScale = 0f;
 	public bool gadget01 = false;
 	public bool gadget02 = false;
 	
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour {
             currentRing = 0;
 
         soundRingPool[currentRing].transform.position = this.transform.position;
-        soundRingPool[currentRing].transform.localScale = new Vector3(.2f, .2f, 0f);
+		soundRingPool[currentRing].transform.localScale = new Vector3(ringStartScale, ringStartScale, 0f);
         SpriteRenderer sr = soundRingPool[currentRing].GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
         soundRingPool[currentRing].SetActive(true);
