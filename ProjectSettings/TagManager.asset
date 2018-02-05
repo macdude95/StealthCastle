@@ -13,6 +13,8 @@ TagManager:
   - Door
   - SpiderWeb
   - Disguise
+  - Gadget01
+  - Gadget02
   layers:
   - Default
   - TransparentFX

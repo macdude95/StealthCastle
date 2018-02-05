@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
 	public bool gadget01 = false;
 	public bool gadget02 = false;
 	
-
     private float speed = 4;
 	private int framesSinceLastRing = 0;
 
@@ -24,11 +23,11 @@ public class PlayerController : MonoBehaviour {
     private int ringCount = 6;
     private int currentRing = 0;
 
-    private void Awake()
-    {
+	public bool isDisguised = false;
+
+    private void Awake() {
         soundRingPool = new GameObject[ringCount];
-        for(int i = 0; i < ringCount; i++)
-        {
+        for(int i = 0; i < ringCount; i++) {
             soundRingPool[i] = (GameObject) Instantiate(soundRingPrefab, this.transform.position, Quaternion.identity);
             soundRingPool[i].SetActive(false);
         }
@@ -40,10 +39,9 @@ public class PlayerController : MonoBehaviour {
         animationController = GetComponent<Animator>();
     }
 
-    private void Update()
-	{
+    private void Update() {
 		SetDir();
-		SetSpeed ();
+		SetSpeed();
     }
 
 	private void SoundRings() {
@@ -72,80 +70,73 @@ public class PlayerController : MonoBehaviour {
 	}
 		
     //sets animation direction
-    private void SetDir(){
+    private void SetDir() {
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
-        if (horizontal == 0 && vertical == 0)
-        {
+        if (horizontal == 0 && vertical == 0) {
             animationController.SetBool("IS_MOVING", false);
 			framesSinceLastRing = 0;
             return;
         }
-        if (horizontal >= vertical)
-        {
-            if(horizontal > 0)
-            {
+        if (horizontal >= vertical) {
+            if (horizontal > 0) {
                 animationController.SetInteger("DIR", 1);//right
             }
-            else
-            {
+            else {
                 animationController.SetInteger("DIR", 2);//left
             }
         }
-        else
-        {
-            if (vertical > 0)
-            {
+        else {
+            if (vertical > 0) {
                 animationController.SetInteger("DIR", 0);//up
             }
-            else
-            {
+            else {
                 animationController.SetInteger("DIR", 3);//down
             }
         }
 		animationController.SetBool("IS_MOVING", true);
 		if (speed == runSpeed) {
-			SoundRings ();
+			SoundRings();
 		}
     }
 
-
-	void FixedUpdate()
-	{
+	void FixedUpdate() {
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
     }
 
-	private void OnTriggerStay2D(Collider2D other)
-	{
-
-		if (other.gameObject.tag == "VisionDetector")
-		{
-			other.gameObject.SendMessage("CheckVision", this.gameObject);
-		}
-
-
-	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
+	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "BasicTrap") {
-			(collision.gameObject.transform.GetChild (0)).SendMessage ("ActivateTrap");
-		} else if (collision.gameObject.tag == "Door") {
-			LeverAnimation.instanceLever.ChangeLeverAnimation ();
-			DoorAnimation.instanceDoor.ChangeDoorStatus ();
-		} else if (collision.gameObject.tag == "SpiderWeb") {
+			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
+		}
+		else if (collision.gameObject.tag == "Door") {
+			LeverAnimation.instanceLever.ChangeLeverAnimation();
+			DoorAnimation.instanceDoor.ChangeDoorStatus();
+		}
+		else if (collision.gameObject.tag == "SpiderWeb") {
 			if (gadget01 == true) {
-				
-			} else {
+
+			}
+			else {
 				walkSpeed = slowWalk;
 				runSpeed = slowRun;
 			}
-		} else if (collision.gameObject.tag == "Gadget01") {
+		}
+		else if (collision.gameObject.tag == "Gadget01") {
 			gadget01 = true;
-		} else if (collision.gameObject.tag == "Gadget02") {
+		}
+		else if (collision.gameObject.tag == "Gadget02") {
 			gadget02 = true;
 		}
-
     }
+
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.gameObject.tag == "VisionDetector" && !isDisguised) {
+			collision.gameObject.SendMessage("CheckVision", this.gameObject);
+		}
+		else if (collision.gameObject.CompareTag("Disguise") &&
+				 Input.GetButtonDown("Submit")) {
+			isDisguised = true;
+		}
+	}
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.tag == "SpiderWeb") {
@@ -153,5 +144,4 @@ public class PlayerController : MonoBehaviour {
 			runSpeed = 200;
 		}
 	}
-
 }

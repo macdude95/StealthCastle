@@ -26,15 +26,13 @@ public class VisionConeController : MonoBehaviour {
                 Debug.DrawRay(transform.parent.position, direction, Color.blue, 0.3F);
             }
         }
-        if (seen)
-        {
+        if (seen) {
             this.SendMessageUpwards("PlayerInVision", player);
             RotateVision(player.transform.position);
         }            
     }
 
-    public void RotateVision(Vector3 target)
-    {
+    public void RotateVision(Vector3 target) {
         var dir = target - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 //		transform.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
