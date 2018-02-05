@@ -11,6 +11,7 @@ TagManager:
   - PathContainer
   - SoundRing
   - Door
+  - SpiderWeb
   layers:
   - Default
   - TransparentFX

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float runSpeed = 10;
-	public float walkSpeed = 4;	
+	public float runSpeed = 200;
+	public float walkSpeed = 100;	
+	public float slowWalk = 20;
+	public float slowRun = 50;
 	public int framesBetweenRings = 30;
+	public bool gadget01 = false;
+	public bool gadget02 = false;
 	
 
     private float speed = 4;
@@ -123,15 +127,31 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "BasicTrap")
-		{
-			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
+		if (collision.gameObject.tag == "BasicTrap") {
+			(collision.gameObject.transform.GetChild (0)).SendMessage ("ActivateTrap");
+		} else if (collision.gameObject.tag == "Door") {
+			LeverAnimation.instanceLever.ChangeLeverAnimation ();
+			DoorAnimation.instanceDoor.ChangeDoorStatus ();
+		} else if (collision.gameObject.tag == "SpiderWeb") {
+			if (gadget01 == true) {
+				
+			} else {
+				walkSpeed = slowWalk;
+				runSpeed = slowRun;
+			}
+		} else if (collision.gameObject.tag == "Gadget01") {
+			gadget01 = true;
+		} else if (collision.gameObject.tag == "Gadget02") {
+			gadget02 = true;
 		}
-        else if (collision.gameObject.tag == "Door")
-        {
-            LeverAnimation.instanceLever.ChangeLeverAnimation();
-            DoorAnimation.instanceDoor.ChangeDoorStatus();
-        }
+
     }
+
+	private void OnTriggerExit2D(Collider2D collision) {
+		if (collision.gameObject.tag == "SpiderWeb") {
+			walkSpeed = 100;
+			runSpeed = 200;
+		}
+	}
 
 }
