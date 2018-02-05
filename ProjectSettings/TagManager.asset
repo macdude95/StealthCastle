@@ -12,6 +12,7 @@ TagManager:
   - SoundRing
   - Door
   - SpiderWeb
+  - Disguise
   layers:
   - Default
   - TransparentFX
