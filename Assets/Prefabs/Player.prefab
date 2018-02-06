@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114555880878487098}
   - component: {fileID: 60482892989089588}
   - component: {fileID: 50407524071034234}
+  - component: {fileID: 114740694097702684}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -38,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621537995879004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.3, y: -10.67, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalPosition: {x: -176, y: -208, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,10 +89,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -8, y: -8}
-      - {x: 8, y: -8}
-      - {x: 8, y: 8}
-      - {x: -8, y: 8}
+    - - {x: -3.6604614, y: -6.990814}
+      - {x: 2.8531036, y: -7.0917206}
+      - {x: 2.3485107, y: 0.53196716}
+      - {x: -2.8531036, y: 0.22918701}
 --- !u!95 &95815700921932874
 Animator:
   serializedVersion: 3
@@ -120,11 +121,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a861fce1fa6324999d7f79aa5e1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 200
-  walkSpeed: 100
+  runSpeed: 125
+  walkSpeed: 75
+  slowWalk: 20
+  slowRun: 50
   framesBetweenRings: 20
+  ringStartScale: 0
+  gadget01: 0
+  gadget02: 0
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
+  isDisguised: 0
+--- !u!114 &114740694097702684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621537995879004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d41a8ce11e0ce48af73db68a0a648c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212068994646694432
 SpriteRenderer:
   m_ObjectHideFlags: 1

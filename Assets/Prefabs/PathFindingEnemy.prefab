@@ -212,7 +212,7 @@ MonoBehaviour:
   rotationIn2D: 1
   targetCompatibility: {fileID: 0}
   rotationSpeed: 2560
-  slowdownDistance: 128
+  slowdownDistance: 64
   pickNextWaypointDist: 32
   endReachedDistance: 16
   alwaysDrawGizmos: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextNode: {fileID: 0}
-  huntingSpeedMult: 1.5
+  huntingSpeedMult: 2
 --- !u!114 &114269306698637264
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -50,14 +50,13 @@ public class BasicEnemyController : MonoBehaviour {
         {
             nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
-//            visionCone.SendMessage("RotateVision", nextNode.transform.position);
         }
         else if (state == BasicEnemyController.STATE_HUNTING)
         {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(lastNode.transform.position);
-//            visionCone.SendMessage("RotateVision", lastNode.transform.position);
+			pathController.slowdownDistance = 64;
         }
     }
 
@@ -75,6 +74,7 @@ public class BasicEnemyController : MonoBehaviour {
         state = BasicEnemyController.STATE_HUNTING;
         pathController.maxSpeed = baseSpeed * huntingSpeedMult;
         UpdateDestination(player.transform.position);
+		pathController.slowdownDistance = 0;
     }
 
 
