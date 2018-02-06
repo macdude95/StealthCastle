@@ -9,9 +9,9 @@ public class RingBehavior : MonoBehaviour {
 	public float fadeSpeed = 50;
 
 	private float velocity;
-
 	void OnEnable () {
 		StartCoroutine (FadeAndDestroy ());
+		SoundController.PlaySound (gameSounds.footstep);
 	}
 
 	IEnumerator FadeAndDestroy() {
