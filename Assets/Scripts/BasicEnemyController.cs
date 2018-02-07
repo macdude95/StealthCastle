@@ -9,7 +9,6 @@ public class BasicEnemyController : MonoBehaviour {
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
 
-
     //pathfinding controller
     public GameObject nextNode;
     public float huntingSpeedMult;
@@ -22,6 +21,9 @@ public class BasicEnemyController : MonoBehaviour {
     private int state;
     private float baseSpeed;
 
+    //Death Audio
+    private AudioSource a_found;
+
     public void Start()
     {
         visionCone = transform.GetChild(0).gameObject;
@@ -31,6 +33,7 @@ public class BasicEnemyController : MonoBehaviour {
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
+        a_found = GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -113,8 +116,11 @@ public class BasicEnemyController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player")
-			SceneManager.LoadScene ("Playtest01");
-	}
+        {
+            a_found.Play();
+            SceneManager.LoadScene("Playtest01");
+        }
+    }
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "SoundRing") { 

@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour {
 
 	public bool isDisguised = false;
 
+    public AudioSource a_door;
+    public GameObject doorOpenText;
+
     private void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
 		SetDir();
 		SetSpeed();
+        DoorPlayerOpen();
     }
 
 	private void SoundRings() {
@@ -105,13 +109,27 @@ public class PlayerController : MonoBehaviour {
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
     }
 
-	private void OnTriggerEnter2D(Collider2D collision) {
+    void DoorPlayerOpen()
+    {
+        if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>()))
+        {
+            doorOpenText.SetActive(true);
+            if (Input.GetKeyDown("space"))
+            {
+                a_door.Play();
+                LeverAnimation.instanceLever.ChangeLeverAnimation();
+                DoorAnimation.instanceDoor.ChangeDoorStatus();
+            }
+        }
+        else
+        {
+            doorOpenText.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "BasicTrap") {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
-		}
-		else if (collision.gameObject.tag == "Door") {
-			LeverAnimation.instanceLever.ChangeLeverAnimation();
-			DoorAnimation.instanceDoor.ChangeDoorStatus();
 		}
 		else if (collision.gameObject.tag == "SpiderWeb") {
 			if (gadget01 == true) {
