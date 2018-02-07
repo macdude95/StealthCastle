@@ -13,6 +13,12 @@ public class EquipDisguise : MonoBehaviour {
 	private GameObject gear;
 	private Animator playerAnim;
 
+	public void SetAnimControlToGuard() {
+		string guardAnimControl = "BasicGuardAnimator";
+		playerAnim.runtimeAnimatorController =
+				Resources.Load<RuntimeAnimatorController>(guardAnimControl);
+	}
+
 	private void Start() {
 		playerAnim = GetComponent<Animator>();
 	}
@@ -24,10 +30,7 @@ public class EquipDisguise : MonoBehaviour {
 			SpriteRenderer gearRenderer =
 				collision.gameObject.GetComponent<SpriteRenderer>();
 			gearRenderer.sprite = null;
-
-			string animControl = GetAnimControlName();
-			playerAnim.runtimeAnimatorController =
-				Resources.Load<RuntimeAnimatorController>(animControl);
+			playerAnim.SetBool("IS_CHANGING", true);
 		}
 	}
 
