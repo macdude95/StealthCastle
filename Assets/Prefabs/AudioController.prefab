@@ -132,4 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50fbad21cbfcd4dda9837885889aba79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footStep: {fileID: 8300000, guid: 9a564187ac17045089f6a889877d951a, type: 3}
+  footStep: {fileID: 8300000, guid: 064bb4f8c7ece4a278e860054d83e9f1, type: 3}
