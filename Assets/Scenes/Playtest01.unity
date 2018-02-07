@@ -878,7 +878,7 @@ Prefab:
     - target: {fileID: 61980994344343652, guid: 326b5b801832240fcb02878215cebad0,
         type: 2}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 50858573462738612, guid: 326b5b801832240fcb02878215cebad0, type: 2}
