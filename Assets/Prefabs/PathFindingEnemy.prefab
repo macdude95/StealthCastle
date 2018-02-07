@@ -293,7 +293,7 @@ MonoBehaviour:
   rotationIn2D: 1
   targetCompatibility: {fileID: 0}
   rotationSpeed: 2560
-  slowdownDistance: 16
+  slowdownDistance: 0
   pickNextWaypointDist: 32
   endReachedDistance: 16
   alwaysDrawGizmos: 0
