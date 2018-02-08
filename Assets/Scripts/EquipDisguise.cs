@@ -12,6 +12,12 @@ public class EquipDisguise : MonoBehaviour {
 
 	private GameObject gear;
 	private Animator playerAnim;
+	private AudioSource disguiseSound;
+
+	private void Start() {
+		playerAnim = GetComponent<Animator>();
+		disguiseSound = GetComponent<AudioSource>();
+	}
 
 	public void SetAnimControlToGuard() {
 		string guardAnimControl = "BasicGuardAnimator";
@@ -19,8 +25,8 @@ public class EquipDisguise : MonoBehaviour {
 				Resources.Load<RuntimeAnimatorController>(guardAnimControl);
 	}
 
-	private void Start() {
-		playerAnim = GetComponent<Animator>();
+	public void PlayDisguiseSound() {
+		disguiseSound.Play();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision) {
