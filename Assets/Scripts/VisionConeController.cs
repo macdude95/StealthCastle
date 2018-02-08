@@ -19,11 +19,11 @@ public class VisionConeController : MonoBehaviour {
 			direction = (target - transform.parent.position);
 			RaycastHit2D hit = Physics2D.Raycast(transform.parent.position, direction);
             if (hit.collider != null && hit.collider.gameObject.tag == "Player") {
-				Debug.DrawRay(transform.parent.position, direction, Color.red, 0.3F);
+				//Debug.DrawRay(transform.parent.position, direction, Color.red, 0.3F);
                 seen = true;
             }
             else {
-                Debug.DrawRay(transform.parent.position, direction, Color.blue, 0.3F);
+                //Debug.DrawRay(transform.parent.position, direction, Color.blue, 0.3F);
             }
         }
         if (seen) {
