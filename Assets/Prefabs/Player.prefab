@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4245603642870614}
   - component: {fileID: 212068994646694432}
+  - component: {fileID: 50407524071034234}
+  - component: {fileID: 60482892989089588}
   - component: {fileID: 95815700921932874}
   - component: {fileID: 114555880878487098}
-  - component: {fileID: 60482892989089588}
-  - component: {fileID: 50407524071034234}
   - component: {fileID: 114740694097702684}
   m_Layer: 0
   m_Name: Player
@@ -121,17 +121,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a861fce1fa6324999d7f79aa5e1a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 125
-  walkSpeed: 75
-  slowWalk: 20
-  slowRun: 50
+  runSpeed: 75
+  walkSpeed: 45
+  slowWalk: 10
+  slowRun: 30
   framesBetweenRings: 20
   ringStartScale: 0
-  gadget01: 0
-  gadget02: 0
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
   isDisguised: 0
+  a_door: {fileID: 0}
+  doorOpenText: {fileID: 0}
 --- !u!114 &114740694097702684
 MonoBehaviour:
   m_ObjectHideFlags: 1

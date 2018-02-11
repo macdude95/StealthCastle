@@ -5,22 +5,29 @@ using UnityEngine;
 public class PickUpController : MonoBehaviour {
 
 	public static PickUpController pickUp;
+	private Rigidbody2D rb2d;
+	private BoxCollider2D boxCol2d;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		rb2d = GetComponent<Rigidbody2D>();
+		boxCol2d = GetComponent<BoxCollider2D>();
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
+	public void DropItem(Vector3 position, Vector2 direction) {
+		boxCol2d.isTrigger = false;
+		this.transform.position = position;
+		rb2d.AddForce(direction * 20);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Player") {
 			gameObject.SetActive (false);
-			Destroy (gameObject);
 		} 
+	}
+
+	private void OnCollisionExit2D(Collision2D collision) {
+		boxCol2d.isTrigger = true;
+		rb2d.velocity = Vector2.zero;
 	}
 }

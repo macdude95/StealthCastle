@@ -11,7 +11,6 @@ public class RingBehavior : MonoBehaviour {
 	private float velocity;
 	void OnEnable () {
 		StartCoroutine (FadeAndDestroy ());
-		SoundController.PlaySound (gameSounds.footstep);
 	}
 
 	IEnumerator FadeAndDestroy() {

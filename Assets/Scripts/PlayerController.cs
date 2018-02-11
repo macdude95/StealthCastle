@@ -5,14 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
-	public float runSpeed = 200;
-	public float walkSpeed = 100;	
-	public float slowWalk = 20;
-	public float slowRun = 50;
-	public int framesBetweenRings = 30;
+	public float runSpeed = 75;
+	public float walkSpeed = 45;	
+	public float slowWalk = 10;
+	public float slowRun = 30;
+
+	private float normalWalkSpeed;
+	private float normalRunSpeed;
+
+	public int framesBetweenRings = 20;
 	public float ringStartScale = 0f;
-	public bool gadget01 = false;
-	public bool gadget02 = false;
 	
     private float speed = 4;
 	private int framesSinceLastRing = 0;
@@ -40,7 +42,10 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        rb = GetComponent<Rigidbody2D>();
+		normalWalkSpeed = walkSpeed;
+		normalRunSpeed = runSpeed;
+
+		rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<Animator>();
     }
 
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 		animationController.SetBool("IS_MOVING", true);
-		if (speed == runSpeed && !gadget02) {
+		if (speed == runSpeed && !GameController.instance.getItemName().Equals("HastyBoots")) {
 			SoundRings();
 		}
     }
@@ -111,18 +116,15 @@ public class PlayerController : MonoBehaviour {
 
     void DoorPlayerOpen()
     {
-        if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>()))
-        {
+        if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>())) {
             doorOpenText.SetActive(true);
-            if (Input.GetKeyDown("space"))
-            {
+            if (Input.GetKeyDown("space")) {
                 a_door.Play();
                 LeverAnimation.instanceLever.ChangeLeverAnimation();
                 DoorAnimation.instanceDoor.ChangeDoorStatus();
             }
         }
-        else
-        {
+        else {
             doorOpenText.SetActive(false);
         }
     }
@@ -132,22 +134,22 @@ public class PlayerController : MonoBehaviour {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
 		}
 		else if (collision.gameObject.tag == "SpiderWeb") {
-			if (gadget01 == true) {
-
-			}
-			else {
+			if (!GameController.instance.getItemName().Equals("WebCutter")) {
 				walkSpeed = slowWalk;
 				runSpeed = slowRun;
 			}
 		}
-		else if (collision.gameObject.tag == "Gadget01") {
-			gadget01 = true;
-		}
-		else if (collision.gameObject.tag == "Gadget02") {
-			gadget02 = true;
+		else if (collision.gameObject.CompareTag("Gadget")) {
+			GameObject oldItem = GameController.instance.currItem;
+			if (oldItem != null) {
+				oldItem.SetActive(true);
+				oldItem.GetComponent<PickUpController>().DropItem(this.transform.position,
+					new Vector2(this.rb.velocity.x, this.rb.velocity.y));
+			}
+			GameController.instance.SetPlayerItem(collision.gameObject);
 		}
 		else if (collision.gameObject.tag == "Finish") {
-			SceneManager.LoadScene ("Playtest01");
+			SceneManager.LoadScene("Playtest01");
 		}
     }
 
@@ -162,8 +164,8 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.tag == "SpiderWeb") {
-			walkSpeed = 100;
-			runSpeed = 200;
+			walkSpeed = normalWalkSpeed;
+			runSpeed = normalRunSpeed;
 		}
 	}
 }

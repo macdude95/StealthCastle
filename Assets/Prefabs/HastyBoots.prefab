@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4419755944267976}
   - component: {fileID: 212597637680190484}
-  - component: {fileID: 61615569499845718}
   - component: {fileID: 50047980292343232}
+  - component: {fileID: 61615569499845718}
   - component: {fileID: 114434543211203342}
   m_Layer: 0
   m_Name: HastyBoots
-  m_TagString: Gadget02
+  m_TagString: Gadget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

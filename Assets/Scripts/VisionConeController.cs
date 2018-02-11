@@ -32,12 +32,11 @@ public class VisionConeController : MonoBehaviour {
         }            
     }
 
-    public void RotateVision(Vector3 target) {
-        var dir = target - transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-//		transform.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+	public void RotateVision(Vector3 target) {
+		var dir = target - transform.position;
+		var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+		//transform.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 		Quaternion rot = Quaternion.AngleAxis(angle + 90, Vector3.forward);
-		transform.localRotation = Quaternion.Lerp (transform.localRotation, rot, 0.1f);
-    }
-
+		transform.localRotation = Quaternion.Lerp(transform.localRotation, rot, 0.1f);
+	}
 }

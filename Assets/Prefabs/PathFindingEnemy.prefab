@@ -39,13 +39,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4727430424261110}
   - component: {fileID: 212752189383699506}
-  - component: {fileID: 114247810565549934}
   - component: {fileID: 50863930262421042}
-  - component: {fileID: 114127262256537234}
-  - component: {fileID: 114171513506802628}
-  - component: {fileID: 95616360203973830}
   - component: {fileID: 61388849608226392}
+  - component: {fileID: 95616360203973830}
   - component: {fileID: 82857435182134778}
+  - component: {fileID: 114247810565549934}
+  - component: {fileID: 114171513506802628}
+  - component: {fileID: 114127262256537234}
   m_Layer: 0
   m_Name: PathFindingEnemy
   m_TagString: Enemy
@@ -239,7 +239,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -284,7 +284,7 @@ MonoBehaviour:
   repathRate: 0.6
   canSearch: 1
   canMove: 1
-  maxSpeed: 75
+  maxSpeed: 30
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2

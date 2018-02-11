@@ -24,8 +24,7 @@ public class BasicEnemyController : MonoBehaviour {
     //Death Audio
     private AudioSource a_found;
 
-    public void Start()
-    {
+    public void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
@@ -36,26 +35,21 @@ public class BasicEnemyController : MonoBehaviour {
         a_found = GetComponent<AudioSource>();
     }
 
-    public void Update()
-    {
-        if(!pathController.pathPending && pathController.reachedEndOfPath)
-        {
+    public void Update() {
+        if (!pathController.pathPending && pathController.reachedEndOfPath) {
             ArrivedAtDestination();
 		}
 		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
         SetDir();
     }
 
-    private void ArrivedAtDestination()
-    {
+    private void ArrivedAtDestination() {
         lastNode = nextNode;
-        if (state == BasicEnemyController.STATE_PATHING)
-        {
+        if (state == BasicEnemyController.STATE_PATHING) {
             nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
         }
-        else if (state == BasicEnemyController.STATE_HUNTING)
-        {
+        else if (state == BasicEnemyController.STATE_HUNTING) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(lastNode.transform.position);
@@ -64,50 +58,38 @@ public class BasicEnemyController : MonoBehaviour {
     }
 
     //update destination based on current state
-    private void UpdateDestination(Vector3 newDestination)
-    {
+    private void UpdateDestination(Vector3 newDestination) {
         pathController.destination = newDestination;
         pathController.SearchPath();
-
     }
 
     //called when a player is in direct LOS
-    public void PlayerInVision(GameObject player)
-    {
+    public void PlayerInVision(GameObject player) {
         state = BasicEnemyController.STATE_HUNTING;
         pathController.maxSpeed = baseSpeed * huntingSpeedMult;
         UpdateDestination(player.transform.position);
 		pathController.slowdownDistance = 0;
     }
 
-
-    private void SetDir()
-    {
+    private void SetDir() {
         float horizontal = pathController.velocity.x, vertical = pathController.velocity.y;
-        if (horizontal == 0 && vertical == 0)
-        {
+        if (horizontal == 0 && vertical == 0) {
             animationController.SetBool("IS_MOVING", false);
             return;
         }
-        if (horizontal >= vertical)
-        {
-            if (horizontal > 0)
-            {
+        if (horizontal >= vertical) {
+            if (horizontal > 0) {
                 animationController.SetInteger("DIR", 1);//right
             }
-            else
-            {
+            else {
                 animationController.SetInteger("DIR", 2);//left
             }
         }
-        else
-        {
-            if (vertical > 0)
-            {
+        else {
+            if (vertical > 0) {
                 animationController.SetInteger("DIR", 0);//up
             }
-            else
-            {
+            else {
                 animationController.SetInteger("DIR", 3);//down
             }
         }
@@ -115,15 +97,15 @@ public class BasicEnemyController : MonoBehaviour {
     }
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player")
-        {
+		if (other.gameObject.tag == "Player") {
             a_found.Play();
             SceneManager.LoadScene("Playtest01");
         }
     }
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "SoundRing") { 
+		if (other.tag == "SoundRing" &&
+			state == BasicEnemyController.STATE_PATHING) { 
 			//the guard just heard the player
 			state = BasicEnemyController.STATE_HUNTING;
 			pathController.maxSpeed = baseSpeed*huntingSpeedMult;

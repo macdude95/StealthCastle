@@ -20,11 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4909430754723088}
   - component: {fileID: 212302802224443550}
-  - component: {fileID: 114302998226396692}
-  - component: {fileID: 58938360359511612}
   - component: {fileID: 50955862402714096}
+  - component: {fileID: 58938360359511612}
+  - component: {fileID: 114302998226396692}
   m_Layer: 0
-  m_Name: soundRing
+  m_Name: SoundRing
   m_TagString: SoundRing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
