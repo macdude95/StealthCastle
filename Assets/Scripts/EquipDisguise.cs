@@ -13,45 +13,30 @@ public class EquipDisguise : MonoBehaviour {
 	private GameObject gear;
 	private Animator playerAnim;
 	private AudioSource disguiseSound;
+    private RuntimeAnimatorController updatedAnimator;
 
-	private void Start() {
+
+    private void Start() {
 		playerAnim = GetComponent<Animator>();
 		disguiseSound = GetComponent<AudioSource>();
-	}
-
-	public void SetAnimControlToGuard() {
-		string guardAnimControl = "BasicGuardAnimator";
-		playerAnim.runtimeAnimatorController =
-				Resources.Load<RuntimeAnimatorController>(guardAnimControl);
 	}
 
 	public void PlayDisguiseSound() {
 		disguiseSound.Play();
 	}
 
+    public void SetAnimControlToGuard()
+    {
+        playerAnim.runtimeAnimatorController = updatedAnimator;
+    }
+
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("Disguise")) {
 			gear = collision.gameObject;
-
-			SpriteRenderer gearRenderer =
-				collision.gameObject.GetComponent<SpriteRenderer>();
-			gearRenderer.sprite = null;
+            updatedAnimator = collision.GetComponent<DisguiseInformationContainer>().animator;
 			playerAnim.SetBool("IS_CHANGING", true);
+            collision.gameObject.SetActive(false);
 		}
 	}
 
-	private string GetAnimControlName() {
-		/*
-		 * The name of all objects that contain a "disguise" are named
-		 * "Gear*****". Therefore, to get the "*****", the start index of the
-		 * sbustring must be 4 letters ahead.
-		 */
-		string gearSubstring = gear.name.Substring(4);
-
-		/*
-		 * All animator controllers of each guard and other enemy types
-		 * wearing gear usable disguises have the name "*****Animator"
-		 */
-		return gearSubstring + "Animator";
-	}
 }

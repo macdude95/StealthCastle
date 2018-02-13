@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     private int ringCount = 6;
     private int currentRing = 0;
 
-	public bool isDisguised = false;
+	private string currentDisguise = null;
 
     public AudioSource a_door;
     public GameObject doorOpenText;
@@ -151,14 +151,17 @@ public class PlayerController : MonoBehaviour {
 		else if (collision.gameObject.tag == "Finish") {
 			SceneManager.LoadScene("Playtest01");
 		}
+        else if (collision.gameObject.CompareTag("Disguise"))
+        {
+            currentDisguise = collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
+        }
     }
 
 	private void OnTriggerStay2D(Collider2D collision) {
-		if (collision.gameObject.tag == "VisionDetector" && !isDisguised) {
+        if (collision.gameObject.CompareTag("VisionDetector") &&
+            ((currentDisguise != null) ? currentDisguise.Equals(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType) : true)
+            ) { //if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
-		}
-		else if (collision.gameObject.CompareTag("Disguise")) {
-			isDisguised = true;
 		}
 	}
 
