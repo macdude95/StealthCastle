@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 114171513506802628}
   - component: {fileID: 114127262256537234}
   m_Layer: 0
-  m_Name: PathFindingEnemy
+  m_Name: BasicGuardBlack
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  repathRate: 0.6
+  repathRate: 0.5
   canSearch: 1
   canMove: 1
   maxSpeed: 30

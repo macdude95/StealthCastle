@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4245603642870614}
   - component: {fileID: 212068994646694432}
   - component: {fileID: 50407524071034234}
-  - component: {fileID: 60482892989089588}
   - component: {fileID: 95815700921932874}
   - component: {fileID: 114555880878487098}
   - component: {fileID: 114740694097702684}
+  - component: {fileID: 61581526241406126}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -65,8 +65,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &60482892989089588
-PolygonCollider2D:
+--- !u!61 &61581526241406126
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -87,12 +87,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -3.6604614, y: -6.990814}
-      - {x: 2.8531036, y: -7.0917206}
-      - {x: 2.3485107, y: 0.53196716}
-      - {x: -2.8531036, y: 0.22918701}
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10}
+  m_EdgeRadius: 0
 --- !u!95 &95815700921932874
 Animator:
   serializedVersion: 3

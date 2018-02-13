@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212549892497219036}
   - component: {fileID: 61798331273316402}
   m_Layer: 0
-  m_Name: GearBasicGuard
+  m_Name: GearBasicGuardBlack
   m_TagString: Disguise
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

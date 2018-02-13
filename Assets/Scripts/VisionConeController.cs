@@ -7,23 +7,25 @@ public class VisionConeController : MonoBehaviour {
     private void CheckVision(GameObject player) {
         bool seen = false;
         Vector3 direction;
-        Vector2[] corners = player.GetComponent<PolygonCollider2D>().points;
+        Vector2 scale = player.GetComponent<BoxCollider2D>().size;
         List<Vector3> points = new List<Vector3>();
 
         points.Add(player.transform.position);
-        foreach(Vector2 corner in corners) {
-            points.Add(new Vector3(corner[0] * player.transform.localScale.x, corner[1] * player.transform.localScale.y) + player.transform.position);
-        }
+        //add points
+        points.Add(new Vector3(player.transform.position.x + (scale.x) * .5f, player.transform.position.y + (scale.y) * .5f)); //top right
+        points.Add(new Vector3(player.transform.position.x - (scale.x) * .5f, player.transform.position.y + (scale.y) * .5f)); //top left
+        points.Add(new Vector3(player.transform.position.x + (scale.x) * .5f, player.transform.position.y - (scale.y) * .5f)); //bottom right
+        points.Add(new Vector3(player.transform.position.x - (scale.x) * .5f, player.transform.position.y - (scale.y) * .5f)); //bottom left
 
-        foreach(Vector3 target in points) {
+        foreach (Vector3 target in points) {
 			direction = (target - transform.parent.position);
 			RaycastHit2D hit = Physics2D.Raycast(transform.parent.position, direction);
             if (hit.collider != null && hit.collider.gameObject.tag == "Player") {
-				//Debug.DrawRay(transform.parent.position, direction, Color.red, 0.3F);
+				Debug.DrawRay(transform.parent.position, direction, Color.red, 0.3F);
                 seen = true;
             }
             else {
-                //Debug.DrawRay(transform.parent.position, direction, Color.blue, 0.3F);
+                Debug.DrawRay(transform.parent.position, direction, Color.blue, 0.3F);
             }
         }
         if (seen) {
