@@ -1864,24 +1864,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!1 &1142703886 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1989988024774474, guid: c2eee6fb29bd54bca90588a52c9a39c5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1715912185}
---- !u!114 &1142703887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1142703886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f07f9ff9660fbe448518dff33b1cfa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 9100000, guid: 5bda555f1980b744883bf4206cdc176e, type: 2}
-  disguiseName: BasicGuardBlack
 --- !u!1001 &1189432320
 Prefab:
   m_ObjectHideFlags: 0
@@ -3142,11 +3124,6 @@ Prefab:
     - target: {fileID: 4746982654047430, guid: c2eee6fb29bd54bca90588a52c9a39c5, type: 2}
       propertyPath: m_RootOrder
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 61798331273316402, guid: c2eee6fb29bd54bca90588a52c9a39c5,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2eee6fb29bd54bca90588a52c9a39c5, type: 2}
