@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4746982654047430}
   - component: {fileID: 212549892497219036}
   - component: {fileID: 61798331273316402}
+  - component: {fileID: 114613159151201966}
   m_Layer: 0
   m_Name: GearBasicGuardBlack
   m_TagString: Disguise
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989988024774474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -161.87494, y: -181.16888, z: 0}
+  m_LocalPosition: {x: -146.1, y: -207.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9, y: 11}
   m_EdgeRadius: 0
+--- !u!114 &114613159151201966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989988024774474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f07f9ff9660fbe448518dff33b1cfa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 9100000, guid: 5bda555f1980b744883bf4206cdc176e, type: 2}
+  disguiseName: BasicGuardBlack
 --- !u!212 &212549892497219036
 SpriteRenderer:
   m_ObjectHideFlags: 1
