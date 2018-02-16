@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour {
 
     private bool CanBeSeen(string disguiseType)
     {
-        if (!usingBox) return true;
+        if (usingBox) return false;
         return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
     }
 
