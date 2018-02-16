@@ -164,11 +164,17 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("VisionDetector") &&
-            ((currentDisguise != null) ? currentDisguise.Equals(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType) : true) && (usingBox == false)) { 
+            CanBeSeen(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType)) { 
             //if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
 	}
+
+    private bool CanBeSeen(string disguiseType)
+    {
+        if (!usingBox) return true;
+        return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
+    }
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.tag == "SpiderWeb") {
