@@ -295,10 +295,10 @@ MonoBehaviour:
   rotationSpeed: 2560
   slowdownDistance: 0
   pickNextWaypointDist: 32
-  endReachedDistance: 16
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 0
-  whenCloseToDestination: 0
+  whenCloseToDestination: 1
 --- !u!114 &114171513506802628
 MonoBehaviour:
   m_ObjectHideFlags: 1

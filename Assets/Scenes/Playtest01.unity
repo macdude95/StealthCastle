@@ -1343,6 +1343,31 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114764108850263034, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: whenCloseToDestination
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764108850263034, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: alwaysDrawGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764108850263034, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: endReachedDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764108850263034, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: rotationSpeed
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 114764108850263034, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1a17ea879f6d794fbc82fba07f87eb8, type: 2}
   m_IsPrefabParent: 0
@@ -1644,6 +1669,41 @@ Prefab:
       propertyPath: nextNode
       value: 
       objectReference: {fileID: 1475787089}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: whenCloseToDestination
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: alwaysDrawGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: endReachedDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: rotationSpeed
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127262256537234, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 61388849608226392, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 61388849608226392, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
   m_IsPrefabParent: 0
