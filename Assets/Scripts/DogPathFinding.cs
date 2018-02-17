@@ -107,12 +107,10 @@ public class DogPathFinding : MonoBehaviour {
 		dir *= speed * Time.fixedDeltaTime;
 
 		rb.AddForce (dir, fMode);
-		transform.right = Vector3.Lerp(transform.right, path.vectorPath [currentWaypoint] - transform.position, 0.1f);
+
 		float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
 		if (dist < nextWaypointDistance) {
 			currentWaypoint++;
-//			if (currentWaypoint < path.vectorPath.Count)
-//				transform.right = path.vectorPath [currentWaypoint] - transform.position;
 			return;
 		}
 	}

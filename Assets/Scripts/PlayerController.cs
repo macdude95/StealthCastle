@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour {
     public AudioSource a_door;
     public GameObject doorOpenText;
 
+    private Sprite savePlayerSprite;
+    private bool usingBox = false;
+
     private void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
@@ -47,12 +50,14 @@ public class PlayerController : MonoBehaviour {
 
 		rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<Animator>();
+        savePlayerSprite = GetComponent<SpriteRenderer>().sprite;
     }
 
     private void Update() {
 		SetDir();
 		SetSpeed();
         DoorPlayerOpen();
+        CheckUsedBoxDisguise();
     }
 
 	private void SoundRings() {
@@ -159,11 +164,17 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("VisionDetector") &&
-            ((currentDisguise != null) ? currentDisguise.Equals(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType) : true)
-            ) { //if disguised see if can see through
+            CanBeSeen(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType)) { 
+            //if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
 	}
+
+    private bool CanBeSeen(string disguiseType)
+    {
+        if (usingBox) return false;
+        return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
+    }
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.tag == "SpiderWeb") {
@@ -171,4 +182,24 @@ public class PlayerController : MonoBehaviour {
 			runSpeed = normalRunSpeed;
 		}
 	}
+
+    private void CheckUsedBoxDisguise()
+    {
+        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetKey("space"))
+        {
+            usingBox = true;
+            runSpeed = 0;
+            walkSpeed = 0;
+            this.GetComponent<Animator>().enabled = false;
+            this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;
+        }
+        else
+        {
+            usingBox = false;
+            runSpeed = 75;
+            walkSpeed = 45;
+            GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
+            this.GetComponent<Animator>().enabled = true;
+        }
+    }
 }

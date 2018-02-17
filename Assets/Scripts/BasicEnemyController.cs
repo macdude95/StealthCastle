@@ -21,6 +21,9 @@ public class BasicEnemyController : MonoBehaviour {
     private int state;
     private float baseSpeed;
 
+	//collider used for attacking the player
+	private CircleCollider2D attackCollider;
+
     //Death Audio
     private AudioSource a_found;
 
@@ -28,6 +31,7 @@ public class BasicEnemyController : MonoBehaviour {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
+
         //move to self, to kick off pathfinding
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
@@ -37,6 +41,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     public void Update() {
         if (!pathController.pathPending && pathController.reachedEndOfPath) {
+			Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
 		}
 		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
@@ -52,8 +57,8 @@ public class BasicEnemyController : MonoBehaviour {
         else if (state == BasicEnemyController.STATE_HUNTING) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
-            UpdateDestination(lastNode.transform.position);
 			pathController.slowdownDistance = 64;
+			UpdateDestination(lastNode.transform.position);
         }
     }
 
@@ -67,8 +72,14 @@ public class BasicEnemyController : MonoBehaviour {
     public void PlayerInVision(GameObject player) {
         state = BasicEnemyController.STATE_HUNTING;
         pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-        UpdateDestination(player.transform.position);
 		pathController.slowdownDistance = 0;
+
+		Vector3 playerPosition = player.transform.position;
+		GraphNode nearestPlayerNode =
+			AstarPath.active.GetNearest(playerPosition).node;
+		playerPosition = (Vector3)nearestPlayerNode.position;
+
+        UpdateDestination(playerPosition);
     }
 
     private void SetDir() {
@@ -108,7 +119,7 @@ public class BasicEnemyController : MonoBehaviour {
 			state == BasicEnemyController.STATE_PATHING) { 
 			//the guard just heard the player
 			state = BasicEnemyController.STATE_HUNTING;
-			pathController.maxSpeed = baseSpeed*huntingSpeedMult;
+			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
 		}
 	}
