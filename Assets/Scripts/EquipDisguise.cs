@@ -13,20 +13,26 @@ public class EquipDisguise : MonoBehaviour {
 	private GameObject gear;
 	private Animator playerAnim;
 	private AudioSource disguiseSound;
-    private RuntimeAnimatorController updatedAnimator;
 
+	private RuntimeAnimatorController originalAnimator;
+	private RuntimeAnimatorController updatedAnimator;
 
     private void Start() {
 		playerAnim = GetComponent<Animator>();
 		disguiseSound = GetComponent<AudioSource>();
+
+		originalAnimator = playerAnim.runtimeAnimatorController;
 	}
 
 	public void PlayDisguiseSound() {
 		disguiseSound.Play();
 	}
 
-    public void SetAnimControlToGuard()
-    {
+	public void SetAnimControlToOrig() {
+		playerAnim.runtimeAnimatorController = originalAnimator;
+	}
+
+    public void SetAnimControlToGuard() {
         playerAnim.runtimeAnimatorController = updatedAnimator;
     }
 

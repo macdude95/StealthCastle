@@ -27,7 +27,7 @@ public class BasicEnemyController : MonoBehaviour {
     //Death Audio
     private AudioSource a_found;
 
-    public void Start() {
+    void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
@@ -39,7 +39,7 @@ public class BasicEnemyController : MonoBehaviour {
         a_found = GetComponent<AudioSource>();
     }
 
-    public void Update() {
+    void Update() {
         if (!pathController.pathPending && pathController.reachedEndOfPath) {
 			Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
@@ -48,7 +48,25 @@ public class BasicEnemyController : MonoBehaviour {
         SetDir();
     }
 
-    private void ArrivedAtDestination() {
+	//called when a player is in direct LOS
+	public void PlayerInVision(GameObject player) {
+		state = BasicEnemyController.STATE_HUNTING;
+		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
+		pathController.slowdownDistance = 0;
+
+		Vector3 playerPosition = player.transform.position;
+		GraphNode nearestPlayerNode =
+			AstarPath.active.GetNearest(playerPosition).node;
+		playerPosition = (Vector3)nearestPlayerNode.position;
+
+		UpdateDestination(playerPosition);
+	}
+
+	public void StopAttacking() {
+		animationController.SetBool("IS_ATTACKING", false);
+	}
+
+	private void ArrivedAtDestination() {
         lastNode = nextNode;
         if (state == BasicEnemyController.STATE_PATHING) {
             nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
@@ -66,20 +84,6 @@ public class BasicEnemyController : MonoBehaviour {
     private void UpdateDestination(Vector3 newDestination) {
         pathController.destination = newDestination;
         pathController.SearchPath();
-    }
-
-    //called when a player is in direct LOS
-    public void PlayerInVision(GameObject player) {
-        state = BasicEnemyController.STATE_HUNTING;
-        pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-		pathController.slowdownDistance = 0;
-
-		Vector3 playerPosition = player.transform.position;
-		GraphNode nearestPlayerNode =
-			AstarPath.active.GetNearest(playerPosition).node;
-		playerPosition = (Vector3)nearestPlayerNode.position;
-
-        UpdateDestination(playerPosition);
     }
 
     private void SetDir() {
@@ -107,13 +111,6 @@ public class BasicEnemyController : MonoBehaviour {
         animationController.SetBool("IS_MOVING", true);
     }
 
-	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player") {
-            a_found.Play();
-            SceneManager.LoadScene("Playtest01");
-        }
-    }
-
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "SoundRing" &&
 			state == BasicEnemyController.STATE_PATHING) { 
@@ -121,6 +118,11 @@ public class BasicEnemyController : MonoBehaviour {
 			state = BasicEnemyController.STATE_HUNTING;
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
+		}
+
+		if (other.CompareTag("Player")) {
+			a_found.Play();
+			animationController.SetBool("IS_ATTACKING", true);
 		}
 	}
 }

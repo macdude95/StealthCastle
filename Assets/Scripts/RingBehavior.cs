@@ -9,7 +9,8 @@ public class RingBehavior : MonoBehaviour {
 	public float fadeSpeed = 50;
 
 	private float velocity;
-	void OnEnable () {
+
+    void OnEnable () {
 		StartCoroutine (FadeAndDestroy ());
 	}
 

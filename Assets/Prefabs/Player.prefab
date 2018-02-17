@@ -205,6 +205,7 @@ MonoBehaviour:
   slowRun: 30
   framesBetweenRings: 20
   ringStartScale: 0
+  loudStep: {fileID: 8300000, guid: 064bb4f8c7ece4a278e860054d83e9f1, type: 3}
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
   a_door: {fileID: 0}

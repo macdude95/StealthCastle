@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public float slowWalk = 10;
 	public float slowRun = 30;
 
+	private bool isDead = false;
 	private float normalWalkSpeed;
 	private float normalRunSpeed;
 
@@ -19,8 +20,13 @@ public class PlayerController : MonoBehaviour {
     private float speed = 4;
 	private int framesSinceLastRing = 0;
 
-    private Animator animationController;
-    private Rigidbody2D rb;
+	private Rigidbody2D rb;
+	private Animator animationController;
+    private AudioSource audioSource;
+    public AudioClip loudStep;
+
+	//used when guard attacks player while player is disguised
+	private EquipDisguise disguiseScript;
 
     public GameObject soundRingPrefab;
     private GameObject[] soundRingPool;
@@ -35,15 +41,15 @@ public class PlayerController : MonoBehaviour {
     private Sprite savePlayerSprite;
     private bool usingBox = false;
 
-    private void Awake() {
+    void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
-            soundRingPool[i] = (GameObject) Instantiate(soundRingPrefab, this.transform.position, Quaternion.identity);
+            soundRingPool[i] =
+				Instantiate(soundRingPrefab, this.transform.position, Quaternion.identity);
             soundRingPool[i].SetActive(false);
         }
     }
 
-    // Use this for initialization
     void Start() {
 		normalWalkSpeed = walkSpeed;
 		normalRunSpeed = runSpeed;
@@ -51,14 +57,81 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<Animator>();
         savePlayerSprite = GetComponent<SpriteRenderer>().sprite;
+		disguiseScript = GetComponent<EquipDisguise>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update() {
-		SetDir();
-		SetSpeed();
-        DoorPlayerOpen();
-        CheckUsedBoxDisguise();
+    void Update() {
+		if (!isDead) {
+			SetDir();
+			SetSpeed();
+			DoorPlayerOpen();
+			CheckUsedBoxDisguise();
+		}
     }
+
+	void FixedUpdate() {
+		if (!isDead) {
+			rb.velocity =
+				new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
+		}
+	}
+
+	public void ResetScene() {
+		GameController.instance.ResetScene();
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision) {
+		if (collision.gameObject.tag == "BasicTrap") {
+			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
+		}
+		else if (collision.gameObject.tag == "SpiderWeb") {
+			if (!GameController.instance.getItemName().Equals("WebCutter")) {
+				walkSpeed = slowWalk;
+				runSpeed = slowRun;
+			}
+		}
+		else if (collision.gameObject.CompareTag("Gadget")) {
+			GameObject oldItem = GameController.instance.currItem;
+			if (oldItem != null) {
+				oldItem.SetActive(true);
+				oldItem.GetComponent<PickUpController>().DropItem(this.transform.position,
+					new Vector2(this.rb.velocity.x, this.rb.velocity.y));
+			}
+			GameController.instance.SetPlayerItem(collision.gameObject);
+		}
+		else if (collision.gameObject.CompareTag("Disguise")) {
+			currentDisguise =
+				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
+		}
+		else if (collision.gameObject.CompareTag("Enemy")) {
+			isDead = true;
+			disguiseScript.SetAnimControlToOrig();
+			animationController.SetBool("IS_DEAD", true);
+
+			rb.velocity = Vector2.zero;
+			GetComponent<BoxCollider2D>().enabled = false;
+		}
+		else if (collision.gameObject.CompareTag("Finish")) {
+			SceneManager.LoadScene("Playtest01");
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("VisionDetector") &&
+			CanBeSeen(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType)) {
+
+			//if disguised see if can see through
+			collision.gameObject.SendMessage("CheckVision", this.gameObject);
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision) {
+		if (collision.gameObject.tag == "SpiderWeb") {
+			walkSpeed = normalWalkSpeed;
+			runSpeed = normalRunSpeed;
+		}
+	}
 
 	private void SoundRings() {
 		if (framesSinceLastRing < framesBetweenRings) {
@@ -75,6 +148,7 @@ public class PlayerController : MonoBehaviour {
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
         soundRingPool[currentRing].SetActive(true);
         currentRing++;
+        audioSource.PlayOneShot(loudStep);
 	}
 
 	private void SetSpeed() {
@@ -115,12 +189,7 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-	void FixedUpdate() {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
-    }
-
-    void DoorPlayerOpen()
-    {
+    void DoorPlayerOpen() {
         if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>())) {
             doorOpenText.SetActive(true);
             if (Input.GetKeyDown("space")) {
@@ -134,67 +203,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "BasicTrap") {
-			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
-		}
-		else if (collision.gameObject.tag == "SpiderWeb") {
-			if (!GameController.instance.getItemName().Equals("WebCutter")) {
-				walkSpeed = slowWalk;
-				runSpeed = slowRun;
-			}
-		}
-		else if (collision.gameObject.CompareTag("Gadget")) {
-			GameObject oldItem = GameController.instance.currItem;
-			if (oldItem != null) {
-				oldItem.SetActive(true);
-				oldItem.GetComponent<PickUpController>().DropItem(this.transform.position,
-					new Vector2(this.rb.velocity.x, this.rb.velocity.y));
-			}
-			GameController.instance.SetPlayerItem(collision.gameObject);
-		}
-		else if (collision.gameObject.tag == "Finish") {
-			SceneManager.LoadScene("Playtest01");
-		}
-        else if (collision.gameObject.CompareTag("Disguise"))
-        {
-            currentDisguise = collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
-        }
-    }
-
-	private void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("VisionDetector") &&
-            CanBeSeen(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType)) { 
-            //if disguised see if can see through
-			collision.gameObject.SendMessage("CheckVision", this.gameObject);
-		}
-	}
-
-    private bool CanBeSeen(string disguiseType)
-    {
+    private bool CanBeSeen(string disguiseType) {
         if (usingBox) return false;
         return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
     }
 
-	private void OnTriggerExit2D(Collider2D collision) {
-		if (collision.gameObject.tag == "SpiderWeb") {
-			walkSpeed = normalWalkSpeed;
-			runSpeed = normalRunSpeed;
-		}
-	}
-
-    private void CheckUsedBoxDisguise()
-    {
-        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetKey("space"))
-        {
+    private void CheckUsedBoxDisguise() {
+        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetKey("space")) {
             usingBox = true;
             runSpeed = 0;
             walkSpeed = 0;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;
         }
-        else
-        {
+		else {
             usingBox = false;
             runSpeed = 75;
             walkSpeed = 45;

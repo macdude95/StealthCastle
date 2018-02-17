@@ -15,9 +15,6 @@ public class DogPathFinding : MonoBehaviour {
 
 	public Path path;
 
-	public float speed = 300;
-	public ForceMode2D fMode;
-
 	[HideInInspector]
 	public bool pathIsEnded = false;
 
@@ -103,15 +100,17 @@ public class DogPathFinding : MonoBehaviour {
 		}
 		pathIsEnded = false;
 
-		Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
-		dir *= speed * Time.fixedDeltaTime;
-
-		rb.AddForce (dir, fMode);
-
 		float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
 		if (dist < nextWaypointDistance) {
 			currentWaypoint++;
 			return;
 		}
 	}
+
+    public Vector2 ShortTermDirectionToTarget() {
+        if (path == null || currentWaypoint >= path.vectorPath.Count) {
+            return Vector2.zero;
+        }
+        return (path.vectorPath[currentWaypoint] - transform.position).normalized;
+    }
  }
