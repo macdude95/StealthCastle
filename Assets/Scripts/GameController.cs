@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class GameController : MonoBehaviour {
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
+		DontDestroyOnLoad(gameObject);
 	}
 
 	// Use this for initialization
@@ -40,5 +42,10 @@ public class GameController : MonoBehaviour {
 
 	public string getItemName() {
 		return currItem == null ? "none" : currItem.name;
+	}
+
+	public void ResetScene() {
+		string sceneName = SceneManager.GetActiveScene().name;
+		SceneManager.LoadScene(sceneName);
 	}
 }

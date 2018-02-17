@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: c08f37bd1ef689d429e68431099f23e5
-timeCreated: 1518840436
+guid: 0e18a76d1e658234886d66dec7026f49
+timeCreated: 1518844356
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: GuardAttacking_0
-    21300002: GuardAttacking_1
-    21300004: GuardAttacking_2
-    21300006: GuardAttacking_3
-    21300008: GuardAttacking_4
-    21300010: GuardAttacking_5
+    21300000: PlayerDeath_0
+    21300002: PlayerDeath_1
+    21300004: PlayerDeath_2
+    21300006: PlayerDeath_3
+    21300008: PlayerDeath_4
+    21300010: PlayerDeath_5
+    21300012: PlayerDeath_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -86,13 +87,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GuardAttacking_0
+      name: PlayerDeath_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 20
-        width: 20
-        height: 20
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -100,13 +101,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GuardAttacking_1
+      name: PlayerDeath_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 20
-        width: 20
-        height: 20
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,13 +115,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GuardAttacking_2
+      name: PlayerDeath_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 20
-        width: 20
-        height: 20
+        x: 32
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,13 +129,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GuardAttacking_3
+      name: PlayerDeath_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerDeath_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 20
-        height: 20
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,13 +157,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GuardAttacking_4
+      name: PlayerDeath_5
       rect:
         serializedVersion: 2
-        x: 20
+        x: 16
         y: 0
-        width: 20
-        height: 20
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,13 +171,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: GuardAttacking_5
+      name: PlayerDeath_6
       rect:
         serializedVersion: 2
-        x: 40
+        x: 32
         y: 0
-        width: 20
-        height: 20
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
