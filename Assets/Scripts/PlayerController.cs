@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour {
 			if (!GameController.instance.getItemName().Equals("WebCutter")) {
 				walkSpeed = slowWalk;
 				runSpeed = slowRun;
-                Debug.Log("slowed", this);
 			}
 		}
 		else if (collision.gameObject.CompareTag("Gadget")) {
@@ -130,7 +129,6 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "SpiderWeb") {
 			walkSpeed = normalWalkSpeed;
 			runSpeed = normalRunSpeed;
-            Debug.Log("unlslowed", this);
         }
 	}
 
