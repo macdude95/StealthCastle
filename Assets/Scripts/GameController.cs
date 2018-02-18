@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject); breaks too much rn
 	}
 
 	// Use this for initialization

@@ -41,7 +41,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     void Update() {
         if (!pathController.pathPending && pathController.reachedEndOfPath) {
-			Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
+			//Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
 		}
 		visionCone.SendMessage("RotateVision", pathController.steeringTarget);

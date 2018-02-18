@@ -65,8 +65,7 @@ public class PlayerController : MonoBehaviour {
 		if (!isDead) {
 			SetDir();
 			SetSpeed();
-			DoorPlayerOpen();
-			CheckUsedBoxDisguise();
+			//CheckUsedBoxDisguise();
 		}
     }
 
@@ -89,6 +88,7 @@ public class PlayerController : MonoBehaviour {
 			if (!GameController.instance.getItemName().Equals("WebCutter")) {
 				walkSpeed = slowWalk;
 				runSpeed = slowRun;
+                Debug.Log("slowed", this);
 			}
 		}
 		else if (collision.gameObject.CompareTag("Gadget")) {
@@ -130,7 +130,8 @@ public class PlayerController : MonoBehaviour {
 		if (collision.gameObject.tag == "SpiderWeb") {
 			walkSpeed = normalWalkSpeed;
 			runSpeed = normalRunSpeed;
-		}
+            Debug.Log("unlslowed", this);
+        }
 	}
 
 	private void SoundRings() {
@@ -189,7 +190,7 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-    void DoorPlayerOpen() {
+   /* void DoorPlayerOpen() {
         if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>())) {
             doorOpenText.SetActive(true);
             if (Input.GetKeyDown("space")) {
@@ -201,7 +202,7 @@ public class PlayerController : MonoBehaviour {
         else {
             doorOpenText.SetActive(false);
         }
-    }
+    }*/
 
     private bool CanBeSeen(string disguiseType) {
         if (usingBox) return false;
@@ -218,8 +219,8 @@ public class PlayerController : MonoBehaviour {
         }
 		else {
             usingBox = false;
-            runSpeed = 75;
-            walkSpeed = 45;
+            runSpeed = normalRunSpeed;
+            walkSpeed = normalWalkSpeed;
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
         }
