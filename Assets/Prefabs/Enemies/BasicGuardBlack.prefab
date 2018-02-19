@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 114247810565549934}
   - component: {fileID: 114171513506802628}
   - component: {fileID: 114127262256537234}
+  - component: {fileID: 58262663026422658}
   m_Layer: 0
   m_Name: BasicGuardBlack
   m_TagString: Enemy
@@ -120,6 +121,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58262663026422658
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481640617090098}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 9.5
 --- !u!60 &60801742580094520
 PolygonCollider2D:
   m_ObjectHideFlags: 1
