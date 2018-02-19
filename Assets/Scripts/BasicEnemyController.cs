@@ -8,6 +8,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
+    public float maxStuckTime;
 
     //pathfinding controller
     public GameObject nextNode;
@@ -20,6 +21,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     private int state;
     private float baseSpeed;
+    private float stuckTimer = 0;
 
 	//collider used for attacking the player
 	private CircleCollider2D attackCollider;
@@ -44,8 +46,26 @@ public class BasicEnemyController : MonoBehaviour {
 			//Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
 		}
+        checkStuck();
 		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
         SetDir();
+    }
+
+    private void checkStuck()
+    {
+        if(pathController.velocity.magnitude < .2)
+        {
+            stuckTimer++;
+            if(stuckTimer > maxStuckTime)
+            {
+                ArrivedAtDestination();
+                stuckTimer = 0;
+            }
+        }
+        else
+        {
+            stuckTimer = 0;
+        }
     }
 
 	//called when a player is in direct LOS

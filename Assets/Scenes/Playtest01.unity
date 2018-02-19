@@ -1444,6 +1444,11 @@ Prefab:
       propertyPath: maxSpeed
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 114979795838103044, guid: e1a17ea879f6d794fbc82fba07f87eb8,
+        type: 2}
+      propertyPath: maxStuckTime
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1a17ea879f6d794fbc82fba07f87eb8, type: 2}
   m_IsPrefabParent: 0
@@ -1814,6 +1819,15 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114247810565549934, guid: c2e3d5fba14fe3548bde6191a82ea14a,
+        type: 2}
+      propertyPath: maxStuckTime
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481640617090098, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
