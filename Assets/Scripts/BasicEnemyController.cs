@@ -120,7 +120,7 @@ public class BasicEnemyController : MonoBehaviour {
 			UpdateDestination(other.transform.position);
 		}
 
-		if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && !((PlayerController)other.gameObject.GetComponent<PlayerController>()).UsingBox()) {
 			a_found.Play();
 			animationController.SetBool("IS_ATTACKING", true);
 		}

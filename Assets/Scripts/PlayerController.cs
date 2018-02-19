@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour {
 	public float slowRun = 30;
 
 	private bool isDead = false;
-	private float normalWalkSpeed;
-	private float normalRunSpeed;
 
 	public int framesBetweenRings = 20;
 	public float ringStartScale = 0f;
@@ -40,6 +38,8 @@ public class PlayerController : MonoBehaviour {
 
     private Sprite savePlayerSprite;
     private bool usingBox = false;
+    private bool isSprinting = false;
+    private bool isSlowed = false;
 
     void Awake() {
         soundRingPool = new GameObject[ringCount];
@@ -51,9 +51,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-		normalWalkSpeed = walkSpeed;
-		normalRunSpeed = runSpeed;
-
 		rb = GetComponent<Rigidbody2D>();
         animationController = GetComponent<Animator>();
         savePlayerSprite = GetComponent<SpriteRenderer>().sprite;
@@ -63,9 +60,11 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
 		if (!isDead) {
-			SetDir();
+            CheckUsedBoxDisguise();
+
+            //should always be the last two calls
+            SetDir();
 			SetSpeed();
-			//CheckUsedBoxDisguise();
 		}
     }
 
@@ -86,8 +85,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (collision.gameObject.tag == "SpiderWeb") {
 			if (!GameController.instance.getItemName().Equals("WebCutter")) {
-				walkSpeed = slowWalk;
-				runSpeed = slowRun;
+                isSlowed = true;
 			}
 		}
 		else if (collision.gameObject.CompareTag("Gadget")) {
@@ -103,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 			currentDisguise =
 				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
 		}
-		else if (collision.gameObject.CompareTag("Enemy")) {
+		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
 			isDead = true;
 			disguiseScript.SetAnimControlToOrig();
 			animationController.SetBool("IS_DEAD", true);
@@ -127,8 +125,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.tag == "SpiderWeb") {
-			walkSpeed = normalWalkSpeed;
-			runSpeed = normalRunSpeed;
+            isSlowed = false;
         }
 	}
 
@@ -150,14 +147,34 @@ public class PlayerController : MonoBehaviour {
         audioSource.PlayOneShot(loudStep);
 	}
 
+    //do not touch this unless you're adding a brand new interaction that HAS to behave differently
 	private void SetSpeed() {
-		if (Input.GetButton ("Run")) {
-			speed = runSpeed;
-		} else {
-			speed = walkSpeed;
-		}
+        isSprinting = Input.GetButton("Run");
+
+        //check immediately for immobilization
+        if (usingBox)
+            { speed = 0; return; }
+        if(isSprinting)
+        {
+            if (isSlowed)
+                speed = slowRun;
+            else
+                speed = runSpeed;
+        }
+        else
+        {
+            if (isSlowed)
+                speed = slowWalk;
+            else
+                speed = walkSpeed;
+        }
 	}
-		
+
+    public bool UsingBox()
+    {
+        return usingBox;
+    }
+
     //sets animation direction
     private void SetDir() {
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
@@ -210,15 +227,11 @@ public class PlayerController : MonoBehaviour {
     private void CheckUsedBoxDisguise() {
         if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetKey("space")) {
             usingBox = true;
-            runSpeed = 0;
-            walkSpeed = 0;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;
         }
 		else {
             usingBox = false;
-            runSpeed = normalRunSpeed;
-            walkSpeed = normalWalkSpeed;
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
         }
