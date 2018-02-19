@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour {
 
+    public string displayName;
+
 	public static PickUpController pickUp;
 	private Rigidbody2D rb2d;
 	private BoxCollider2D boxCol2d;
@@ -30,4 +32,6 @@ public class PickUpController : MonoBehaviour {
 		boxCol2d.isTrigger = true;
 		rb2d.velocity = Vector2.zero;
 	}
+
+    public string getName() { return displayName; }
 }

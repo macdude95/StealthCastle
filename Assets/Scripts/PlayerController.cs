@@ -79,6 +79,21 @@ public class PlayerController : MonoBehaviour {
 		GameController.instance.ResetScene();
 	}
 
+    public void KillPlayer()
+    {
+        isDead = true;
+        if (usingBox)
+        {
+            GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
+            this.GetComponent<Animator>().enabled = true;
+        }
+        disguiseScript.SetAnimControlToOrig();
+        animationController.SetBool("IS_DEAD", true);
+
+        rb.velocity = Vector2.zero;
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "BasicTrap") {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
@@ -102,12 +117,7 @@ public class PlayerController : MonoBehaviour {
 				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
 		}
 		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
-			isDead = true;
-			disguiseScript.SetAnimControlToOrig();
-			animationController.SetBool("IS_DEAD", true);
-
-			rb.velocity = Vector2.zero;
-			GetComponent<BoxCollider2D>().enabled = false;
+            KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Finish")) {
 			SceneManager.LoadScene("Playtest01");
@@ -149,7 +159,7 @@ public class PlayerController : MonoBehaviour {
 
     //do not touch this unless you're adding a brand new interaction that HAS to behave differently
 	private void SetSpeed() {
-        isSprinting = Input.GetButton("Run");
+        isSprinting = (Input.GetAxis("Run") > 0);
 
         //check immediately for immobilization
         if (usingBox)
@@ -225,7 +235,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void CheckUsedBoxDisguise() {
-        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetKey("space")) {
+        if (isDead) return;
+
+        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetAxis("Interaction") > 0) {
             usingBox = true;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;

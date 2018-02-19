@@ -111,7 +111,17 @@ public class BasicEnemyController : MonoBehaviour {
         animationController.SetBool("IS_MOVING", true);
     }
 
-	void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && state == STATE_HUNTING)
+        {
+            a_found.Play();
+            animationController.SetBool("IS_ATTACKING", true);
+            collision.gameObject.GetComponent<PlayerController>().KillPlayer();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "SoundRing" &&
 			state == BasicEnemyController.STATE_PATHING) { 
 			//the guard just heard the player
@@ -120,7 +130,8 @@ public class BasicEnemyController : MonoBehaviour {
 			UpdateDestination(other.transform.position);
 		}
 
-        if (other.CompareTag("Player") && !((PlayerController)other.gameObject.GetComponent<PlayerController>()).UsingBox()) {
+        if (other.CompareTag("Player") && 
+            (state == STATE_HUNTING || !((PlayerController)other.gameObject.GetComponent<PlayerController>()).UsingBox())) {
 			a_found.Play();
 			animationController.SetBool("IS_ATTACKING", true);
 		}

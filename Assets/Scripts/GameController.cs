@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour {
 		itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
 		currItem = item;
 
-		itemText.text = currItem.name;
+		itemText.text = currItem.GetComponent<PickUpController>().getName();
 	}
 
 	public string getItemName() {
