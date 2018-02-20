@@ -14,7 +14,6 @@ public class BasicEnemyController : MonoBehaviour {
     public GameObject nextNode;
     public float huntingSpeedMult;
     private GameObject visionCone;
-    private GameObject lastNode;
     private AIPath pathController;
 
     private Animator animationController;
@@ -34,7 +33,6 @@ public class BasicEnemyController : MonoBehaviour {
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
 
-        //move to self, to kick off pathfinding
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
@@ -87,16 +85,15 @@ public class BasicEnemyController : MonoBehaviour {
 	}
 
 	private void ArrivedAtDestination() {
-        lastNode = nextNode;
         if (state == BasicEnemyController.STATE_PATHING) {
-            nextNode = lastNode.GetComponent<PathNodeController>().getNextNode();
+            nextNode = nextNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
         }
         else if (state == BasicEnemyController.STATE_HUNTING) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
 			pathController.slowdownDistance = 64;
-			UpdateDestination(lastNode.transform.position);
+            UpdateDestination(nextNode.transform.position);
         }
     }
 
