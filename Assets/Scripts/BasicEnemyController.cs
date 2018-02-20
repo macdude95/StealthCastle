@@ -51,7 +51,7 @@ public class BasicEnemyController : MonoBehaviour {
 
     private void checkStuck()
     {
-        if(pathController.velocity.magnitude < .2)
+        if(pathController.velocity.magnitude < .4)
         {
             stuckTimer++;
             if(stuckTimer > maxStuckTime)
