@@ -7,10 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
 	public Image itemDisplay;
+	public Image scoreDisplay;
 	public Text itemText;
+	public Text pointText;
 
 	public GameObject currItem;
 	public static GameController instance;
+
+	private int score;
 
 	private void Awake() {
 		if (instance == null) {
@@ -24,7 +28,9 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		score = 0;
 		itemText.text = "";
+		pointText.text = score.ToString();
 	}
 	
 	// Update is called once per frame
