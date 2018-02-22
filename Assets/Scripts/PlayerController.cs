@@ -97,22 +97,21 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "BasicTrap") {
-			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
-		}
-		else if (collision.gameObject.tag == "SpiderWeb") {
-			if (!GameController.instance.getItemName().Equals("WebCutter")) {
-                isSlowed = true;
+			(collision.gameObject.transform.GetChild (0)).SendMessage ("ActivateTrap");
+		} else if (collision.gameObject.tag == "SpiderWeb") {
+			if (!GameController.instance.getItemName ().Equals ("WebCutter")) {
+				isSlowed = true;
 			}
-		}
-		else if (collision.gameObject.CompareTag("Disguise")) {
+		} else if (collision.gameObject.CompareTag ("Disguise")) {
 			currentDisguise =
-				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
-		}
-		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
-             KillPlayer();
-		}
-		else if (collision.gameObject.CompareTag("Finish")) {
-			SceneManager.LoadScene("Playtest01");
+				collision.gameObject.GetComponent<DisguiseInformationContainer> ().disguiseName;
+		} else if (collision.gameObject.CompareTag ("Enemy") && !usingBox) {
+			KillPlayer ();
+		} else if (collision.gameObject.CompareTag ("Finish")) {
+			SceneManager.LoadScene ("Playtest01");
+		} else if (collision.gameObject.CompareTag ("Gem")) {
+			GameObject.Find ("GameController").GetComponent<GameController> ().score++;
+			GameController.instance.DisplayScore ();
 		}
 	}
 

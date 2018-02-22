@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 	public GameObject currItem;
 	public static GameController instance;
 
-	private int score;
+	public int score;
 
 	private void Awake() {
 		if (instance == null) {
@@ -44,6 +44,10 @@ public class GameController : MonoBehaviour {
 		currItem = item;
 
 		itemText.text = currItem.GetComponent<PickUpController>().getName();
+	}
+
+	public void DisplayScore() {
+		pointText.text = score.ToString ();
 	}
 
 	public string getItemName() {

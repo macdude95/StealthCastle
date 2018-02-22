@@ -23,7 +23,7 @@ public class PickUpController : MonoBehaviour {
 	}
 
 	private void OnTriggerStay2D(Collider2D collision) {
-        if (Input.GetButtonDown("PickUpItem") && collision.gameObject.tag == "Player") {
+		if ((Input.GetButtonDown("PickUpItem") || displayName.CompareTo("Gem") == 0) && collision.gameObject.tag == "Player") {
             gameObject.SetActive(false);
         }
 	}
