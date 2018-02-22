@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour {
     private bool isSprinting = false;
     private bool isSlowed = false;
 
+    private GameObject oldItem;
+
     void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
@@ -61,7 +63,6 @@ public class PlayerController : MonoBehaviour {
     void Update() {
 		if (!isDead) {
             CheckUsedBoxDisguise();
-
             //should always be the last two calls
             SetDir();
 			SetSpeed();
@@ -103,21 +104,12 @@ public class PlayerController : MonoBehaviour {
                 isSlowed = true;
 			}
 		}
-		else if (collision.gameObject.CompareTag("Gadget")) {
-			GameObject oldItem = GameController.instance.currItem;
-			if (oldItem != null) {
-				oldItem.SetActive(true);
-				oldItem.GetComponent<PickUpController>().DropItem(this.transform.position,
-					new Vector2(this.rb.velocity.x, this.rb.velocity.y));
-			}
-			GameController.instance.SetPlayerItem(collision.gameObject);
-		}
 		else if (collision.gameObject.CompareTag("Disguise")) {
 			currentDisguise =
 				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
 		}
 		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
-            KillPlayer();
+             KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Finish")) {
 			SceneManager.LoadScene("Playtest01");
@@ -131,10 +123,24 @@ public class PlayerController : MonoBehaviour {
 			//if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
-	}
+        else if (collision.gameObject.CompareTag("Gadget"))
+        {
+            if (Input.GetButtonDown("PickUpItem"))
+            {
+                oldItem = GameController.instance.currItem;
+                if (oldItem != null)
+                {
+                    oldItem.GetComponent<PickUpController>().DropItem(this.transform.position);
+                    oldItem.SetActive(true);
+                }
+                GameController.instance.SetPlayerItem(collision.gameObject);
+            }
+        }
+    }
 
 	private void OnTriggerExit2D(Collider2D collision) {
-		if (collision.gameObject.tag == "SpiderWeb") {
+        if (collision.gameObject.tag == "SpiderWeb")
+        {
             isSlowed = false;
         }
 	}
@@ -237,7 +243,7 @@ public class PlayerController : MonoBehaviour {
     private void CheckUsedBoxDisguise() {
         if (isDead) return;
 
-        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetAxis("Interaction") > 0) {
+        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetButton("Interaction")) {
             usingBox = true;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;

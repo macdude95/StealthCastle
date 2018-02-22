@@ -7,8 +7,10 @@ public class PickUpController : MonoBehaviour {
     public string displayName;
 
 	public static PickUpController pickUp;
+
 	private Rigidbody2D rb2d;
 	private BoxCollider2D boxCol2d;
+
 
 	// Use this for initialization
 	void Start () {
@@ -16,21 +18,14 @@ public class PickUpController : MonoBehaviour {
 		boxCol2d = GetComponent<BoxCollider2D>();
 	}
 
-	public void DropItem(Vector3 position, Vector2 direction) {
-		boxCol2d.isTrigger = false;
+	public void DropItem(Vector3 position) {
 		this.transform.position = position;
-		rb2d.AddForce(direction * 20);
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "Player") {
-			gameObject.SetActive (false);
-		} 
-	}
-
-	private void OnCollisionExit2D(Collision2D collision) {
-		boxCol2d.isTrigger = true;
-		rb2d.velocity = Vector2.zero;
+	private void OnTriggerStay2D(Collider2D collision) {
+        if (Input.GetButtonDown("PickUpItem") && collision.gameObject.tag == "Player") {
+            gameObject.SetActive(false);
+        }
 	}
 
     public string getName() { return displayName; }
