@@ -43,14 +43,14 @@ public class GameController : MonoBehaviour {
 		itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
 		currItem = item;
 
-		itemText.text = currItem.GetComponent<PickUpController>().getName();
+		itemText.text = currItem.GetComponent<PickUpController>().GetName();
 	}
 
 	public void DisplayScore() {
 		pointText.text = score.ToString ();
 	}
 
-	public string getItemName() {
+	public string GetItemName() {
 		return currItem == null ? "none" : currItem.name;
 	}
 

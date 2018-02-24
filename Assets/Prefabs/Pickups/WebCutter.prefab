@@ -9,66 +9,66 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1069376305676094}
+  m_RootGameObject: {fileID: 1057860547808470}
   m_IsPrefabParent: 1
---- !u!1 &1069376305676094
+--- !u!1 &1057860547808470
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4419755944267976}
-  - component: {fileID: 212597637680190484}
-  - component: {fileID: 50047980292343232}
-  - component: {fileID: 61615569499845718}
-  - component: {fileID: 114434543211203342}
+  - component: {fileID: 4500649562317102}
+  - component: {fileID: 212621088180046546}
+  - component: {fileID: 50242861735069008}
+  - component: {fileID: 61396082774266248}
+  - component: {fileID: 114424203544408290}
   m_Layer: 0
-  m_Name: HastyBoots
+  m_Name: WebCutter
   m_TagString: Gadget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4419755944267976
+--- !u!4 &4500649562317102
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069376305676094}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 176, y: 192, z: 0}
+  m_GameObject: {fileID: 1057860547808470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -174, y: -188, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50047980292343232
+--- !u!50 &50242861735069008
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069376305676094}
-  m_BodyType: 1
+  m_GameObject: {fileID: 1057860547808470}
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61615569499845718
+--- !u!61 &61396082774266248
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069376305676094}
+  m_GameObject: {fileID: 1057860547808470}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -88,24 +88,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 16}
   m_EdgeRadius: 0
---- !u!114 &114434543211203342
+--- !u!114 &114424203544408290
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069376305676094}
+  m_GameObject: {fileID: 1057860547808470}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69cdec87eb2e1425a8e37fb62ea51622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Silent Boots
---- !u!212 &212597637680190484
+  displayName: Web Cutter
+  itemIsDisguise: 0
+--- !u!212 &212621088180046546
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1069376305676094}
+  m_GameObject: {fileID: 1057860547808470}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 1774591371
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300072, guid: 9378aabece1f042138caba9d60e9eb77, type: 3}
+  m_Sprite: {fileID: 21300128, guid: 9378aabece1f042138caba9d60e9eb77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

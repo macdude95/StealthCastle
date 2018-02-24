@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114269306698637264}
   - component: {fileID: 50523043651146118}
   - component: {fileID: 60801742580094520}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VisionCone
   m_TagString: VisionDetector
   m_Icon: {fileID: 0}
@@ -41,13 +41,14 @@ GameObject:
   - component: {fileID: 212752189383699506}
   - component: {fileID: 50863930262421042}
   - component: {fileID: 61388849608226392}
+  - component: {fileID: 58262663026422658}
   - component: {fileID: 95616360203973830}
   - component: {fileID: 82857435182134778}
-  - component: {fileID: 114247810565549934}
   - component: {fileID: 114171513506802628}
   - component: {fileID: 114127262256537234}
-  - component: {fileID: 58262663026422658}
-  m_Layer: 0
+  - component: {fileID: 114601536005413220}
+  - component: {fileID: 114247810565549934}
+  m_Layer: 10
   m_Name: BasicGuardBlack
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -135,7 +136,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 9.5
+  m_Radius: 11
 --- !u!60 &60801742580094520
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -351,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd161662ee69594eb3cec3a318ee361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxStuckTime: 15
   nextNode: {fileID: 0}
   huntingSpeedMult: 3
 --- !u!114 &114269306698637264
@@ -365,6 +367,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seenDisguiseType: BasicGuardBlack
+--- !u!114 &114601536005413220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481640617090098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b090bec917bbe4c3bbc612ef13f7c4a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  useRaycasting: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 512
+  thickRaycast: 1
+  thickRaycastRadius: 8
+  use2DPhysics: 1
+  raycastOffset: {x: 0, y: 0, z: 0}
+  useGraphRaycasting: 0
+  quality: 0
 --- !u!212 &212444212650692938
 SpriteRenderer:
   m_ObjectHideFlags: 1

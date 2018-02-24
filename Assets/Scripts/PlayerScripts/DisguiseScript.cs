@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /*
@@ -8,9 +9,9 @@ using UnityEngine;
  * animation controllers, making it so that the player appears to disguise
  * themselves with the gear that they find.
  */
-public class EquipDisguise : MonoBehaviour {
+public class DisguiseScript : MonoBehaviour {
 
-	private GameObject gear;
+	private GameObject disguise;
 	private Animator playerAnim;
 	private AudioSource disguiseSound;
 
@@ -36,13 +37,11 @@ public class EquipDisguise : MonoBehaviour {
         playerAnim.runtimeAnimatorController = updatedAnimator;
     }
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("Disguise")) {
-			gear = collision.gameObject;
-            updatedAnimator = collision.GetComponent<DisguiseInformationContainer>().animator;
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.gameObject.CompareTag("Gadget") &&
+			Input.GetButtonDown("PickUpItem")) {
+            updatedAnimator = collision.GetComponent<DisguiseInfoContainer>().animator;
 			playerAnim.SetBool("IS_CHANGING", true);
-            collision.gameObject.SetActive(false);
 		}
 	}
-
 }
