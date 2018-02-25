@@ -68,8 +68,7 @@ public class VisionConeController : MonoBehaviour {
             angle += (transform.localRotation.eulerAngles.z - 90) * Mathf.Deg2Rad - (numPiRadiansOfCircle / 2 * Mathf.PI);
             Vector2 lDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
-
-            RaycastHit2D hit = (Physics2D.Raycast(transform.position, lDirection, lightRange));
+            RaycastHit2D hit = (Physics2D.Raycast(transform.position, lDirection, lightRange, LayerMask.GetMask("Walls")));
 
             if (hit)
             {
