@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisguiseInformationContainer : MonoBehaviour {
+public class DisguiseInfoContainer : MonoBehaviour {
 
     public RuntimeAnimatorController animator;
     public string disguiseName;

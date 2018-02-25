@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 95851891216048834}
   - component: {fileID: 50093990431750332}
   - component: {fileID: 61372721382437204}
+  - component: {fileID: 82648629051373336}
   - component: {fileID: 114464488587163002}
   - component: {fileID: 114271763970846292}
   - component: {fileID: 114643044395356632}
-  - component: {fileID: 82648629051373336}
   m_Layer: 10
   m_Name: Dog
   m_TagString: Enemy

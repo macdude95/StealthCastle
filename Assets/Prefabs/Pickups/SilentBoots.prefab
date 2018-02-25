@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61615569499845718}
   - component: {fileID: 114434543211203342}
   m_Layer: 0
-  m_Name: HastyBoots
+  m_Name: SilentBoots
   m_TagString: Gadget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069376305676094}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Silent Boots
+  itemIsDisguise: 0
 --- !u!212 &212597637680190484
 SpriteRenderer:
   m_ObjectHideFlags: 1

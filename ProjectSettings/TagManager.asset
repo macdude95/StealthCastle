@@ -12,9 +12,9 @@ TagManager:
   - SoundRing
   - Door
   - SpiderWeb
-  - Disguise
   - WebCutter
   - Gadget
+  - Gem
   layers:
   - Default
   - TransparentFX

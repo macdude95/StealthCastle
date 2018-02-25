@@ -19,19 +19,18 @@ public class PlayerController : MonoBehaviour {
 	private int framesSinceLastRing = 0;
 
 	private Rigidbody2D rb;
-	private Animator animationController;
+	private Animator animControl;
     private AudioSource audioSource;
-    public AudioClip loudStep;
 
 	//used when guard attacks player while player is disguised
-	private EquipDisguise disguiseScript;
+	private DisguiseScript disguiseScript;
+	private string currentDisguise = null;
 
-    public GameObject soundRingPrefab;
+	public AudioClip loudStep;
+	public GameObject soundRingPrefab;
     private GameObject[] soundRingPool;
     private int ringCount = 6;
     private int currentRing = 0;
-
-	private string currentDisguise = null;
 
     public AudioSource a_door;
     public GameObject doorOpenText;
@@ -52,16 +51,15 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
 		rb = GetComponent<Rigidbody2D>();
-        animationController = GetComponent<Animator>();
+        animControl = GetComponent<Animator>();
         savePlayerSprite = GetComponent<SpriteRenderer>().sprite;
-		disguiseScript = GetComponent<EquipDisguise>();
+		disguiseScript = GetComponent<DisguiseScript>();
         audioSource = GetComponent<AudioSource>();
     }
 
     void Update() {
 		if (!isDead) {
             CheckUsedBoxDisguise();
-
             //should always be the last two calls
             SetDir();
 			SetSpeed();
@@ -71,7 +69,8 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate() {
 		if (!isDead) {
 			rb.velocity =
-				new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
+				new Vector2(Input.GetAxis("Horizontal") * speed,
+							Input.GetAxis("Vertical") * speed);
 		}
 	}
 
@@ -79,48 +78,37 @@ public class PlayerController : MonoBehaviour {
 		GameController.instance.ResetScene();
 	}
 
-    public void KillPlayer()
-    {
+    public void KillPlayer() {
         isDead = true;
-        if (usingBox)
-        {
+        if (usingBox) {
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
         }
         disguiseScript.SetAnimControlToOrig();
-        animationController.SetBool("IS_DEAD", true);
+        animControl.SetBool("IS_DEAD", true);
 
         rb.velocity = Vector2.zero;
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.tag == "BasicTrap") {
+		if (collision.gameObject.CompareTag("BasicTrap")) {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
 		}
-		else if (collision.gameObject.tag == "SpiderWeb") {
-			if (!GameController.instance.getItemName().Equals("WebCutter")) {
-                isSlowed = true;
+		else if (collision.gameObject.CompareTag("SpiderWeb")) {
+			if (!GameController.instance.GetItemName().Equals("WebCutter")) {
+				isSlowed = true;
 			}
-		}
-		else if (collision.gameObject.CompareTag("Gadget")) {
-			GameObject oldItem = GameController.instance.currItem;
-			if (oldItem != null) {
-				oldItem.SetActive(true);
-				oldItem.GetComponent<PickUpController>().DropItem(this.transform.position,
-					new Vector2(this.rb.velocity.x, this.rb.velocity.y));
-			}
-			GameController.instance.SetPlayerItem(collision.gameObject);
-		}
-		else if (collision.gameObject.CompareTag("Disguise")) {
-			currentDisguise =
-				collision.gameObject.GetComponent<DisguiseInformationContainer>().disguiseName;
 		}
 		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
-            KillPlayer();
+			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Finish")) {
 			SceneManager.LoadScene("Playtest01");
+		}
+		else if (collision.gameObject.CompareTag("Gem")) {
+			GameController.instance.score++;
+			GameController.instance.DisplayScore();
 		}
 	}
 
@@ -131,12 +119,51 @@ public class PlayerController : MonoBehaviour {
 			//if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
-	}
+        else if (collision.gameObject.CompareTag("Gadget")) {
+            if (Input.GetButtonDown("PickUpItem")) {
+				PickUpGadget(collision.gameObject);
+            }
+        }
+    }
 
 	private void OnTriggerExit2D(Collider2D collision) {
-		if (collision.gameObject.tag == "SpiderWeb") {
+        if (collision.gameObject.tag == "SpiderWeb") {
             isSlowed = false;
         }
+	}
+
+	private void DropOldGadget(GameObject oldItem) {
+		PickUpController oldItemController =
+				oldItem.GetComponent<PickUpController>();
+
+		oldItemController.DropItem(this.transform.position);
+		if (oldItemController.itemIsDisguise) {
+			/*
+			 * Assuming that the player is disguised, setting the
+			 * 'IS_CHANGING' boolean to true will animate the player changing
+			 * back into normal. This will activate an event trigger in the
+			 * respective animation that will restore the player's original
+			 * animation controller.
+			 */
+			animControl.SetBool("IS_CHANGING", true);
+		}
+	}
+
+	private void PickUpGadget(GameObject newGadget) {
+		GameObject oldGadget = GameController.instance.currItem;
+		if (oldGadget != null) {
+			DropOldGadget(oldGadget);
+		}
+
+		GameObject newItem = newGadget;
+		PickUpController newItemController =
+			newItem.GetComponent<PickUpController>();
+
+		if (newItemController.itemIsDisguise) {
+			currentDisguise =
+				newItem.GetComponent<DisguiseInfoContainer>().disguiseName;
+		}
+		GameController.instance.SetPlayerItem(newGadget);
 	}
 
 	private void SoundRings() {
@@ -180,8 +207,7 @@ public class PlayerController : MonoBehaviour {
         }
 	}
 
-    public bool UsingBox()
-    {
+    public bool UsingBox() {
         return usingBox;
     }
 
@@ -189,28 +215,29 @@ public class PlayerController : MonoBehaviour {
     private void SetDir() {
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
         if (horizontal == 0 && vertical == 0) {
-            animationController.SetBool("IS_MOVING", false);
+            animControl.SetBool("IS_MOVING", false);
 			framesSinceLastRing = 0;
             return;
         }
         if (horizontal >= vertical) {
             if (horizontal > 0) {
-                animationController.SetInteger("DIR", 1);//right
+                animControl.SetInteger("DIR", 1); //right
             }
             else {
-                animationController.SetInteger("DIR", 2);//left
+                animControl.SetInteger("DIR", 2); //left
             }
         }
         else {
             if (vertical > 0) {
-                animationController.SetInteger("DIR", 0);//up
+                animControl.SetInteger("DIR", 0); //up
             }
             else {
-                animationController.SetInteger("DIR", 3);//down
+                animControl.SetInteger("DIR", 3); //down
             }
         }
-		animationController.SetBool("IS_MOVING", true);
-		if (speed == runSpeed && !GameController.instance.getItemName().Equals("HastyBoots")) {
+		animControl.SetBool("IS_MOVING", true);
+		if (speed == runSpeed &&
+			!GameController.instance.GetItemName().Equals("SilentBoots")) {
 			SoundRings();
 		}
     }
@@ -237,7 +264,7 @@ public class PlayerController : MonoBehaviour {
     private void CheckUsedBoxDisguise() {
         if (isDead) return;
 
-        if (GameController.instance.getItemName() == "BoxDisguise" && Input.GetAxis("Interaction") > 0) {
+        if (GameController.instance.GetItemName() == "BoxDisguise" && Input.GetButton("Interaction")) {
             usingBox = true;
             this.GetComponent<Animator>().enabled = false;
             this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;

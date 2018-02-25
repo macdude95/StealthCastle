@@ -7,10 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
 	public Image itemDisplay;
+	public Image scoreDisplay;
 	public Text itemText;
+	public Text pointText;
 
 	public GameObject currItem;
 	public static GameController instance;
+
+	public int score;
 
 	private void Awake() {
 		if (instance == null) {
@@ -24,7 +28,9 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		score = 0;
 		itemText.text = "";
+		pointText.text = score.ToString();
 	}
 	
 	// Update is called once per frame
@@ -33,14 +39,23 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SetPlayerItem(GameObject item) {
-		itemDisplay.enabled = true;
-		itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
 		currItem = item;
-
-		itemText.text = currItem.GetComponent<PickUpController>().getName();
+		if (currItem != null) {
+			itemDisplay.enabled = true;
+			itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
+			itemText.text = currItem.GetComponent<PickUpController>().GetName();
+		}
+		else {
+			itemDisplay.enabled = false;
+			itemText.text = "";
+		}
 	}
 
-	public string getItemName() {
+	public void DisplayScore() {
+		pointText.text = score.ToString ();
+	}
+
+	public string GetItemName() {
 		return currItem == null ? "none" : currItem.name;
 	}
 
