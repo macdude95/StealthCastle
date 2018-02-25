@@ -18,7 +18,8 @@ public class PickUpController : MonoBehaviour {
 	}
 
 	public void DropItem(Vector3 position) {
-		this.transform.position = position;
+		gameObject.transform.position = position;
+		gameObject.SetActive(true);
 	}
 
 	private void OnTriggerStay2D(Collider2D collision) {

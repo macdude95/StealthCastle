@@ -14,6 +14,7 @@ TagManager:
   - SpiderWeb
   - WebCutter
   - Gadget
+  - Gem
   layers:
   - Default
   - TransparentFX

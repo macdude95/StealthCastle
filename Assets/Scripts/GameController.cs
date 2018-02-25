@@ -39,11 +39,16 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SetPlayerItem(GameObject item) {
-		itemDisplay.enabled = true;
-		itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
 		currItem = item;
-
-		itemText.text = currItem.GetComponent<PickUpController>().GetName();
+		if (currItem != null) {
+			itemDisplay.enabled = true;
+			itemDisplay.sprite = item.GetComponent<SpriteRenderer>().sprite;
+			itemText.text = currItem.GetComponent<PickUpController>().GetName();
+		}
+		else {
+			itemDisplay.enabled = false;
+			itemText.text = "";
+		}
 	}
 
 	public void DisplayScore() {

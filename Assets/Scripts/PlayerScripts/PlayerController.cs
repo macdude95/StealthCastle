@@ -138,9 +138,15 @@ public class PlayerController : MonoBehaviour {
 
 		oldItemController.DropItem(this.transform.position);
 		if (oldItemController.itemIsDisguise) {
+			/*
+			 * Assuming that the player is disguised, setting the
+			 * 'IS_CHANGING' boolean to true will animate the player changing
+			 * back into normal. This will activate an event trigger in the
+			 * respective animation that will restore the player's original
+			 * animation controller.
+			 */
 			animControl.SetBool("IS_CHANGING", true);
 		}
-		oldItem.SetActive(true);
 	}
 
 	private void PickUpGadget(GameObject newGadget) {

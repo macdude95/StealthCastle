@@ -40,8 +40,15 @@ public class DisguiseScript : MonoBehaviour {
 	private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("Gadget") &&
 			Input.GetButtonDown("PickUpItem")) {
-            updatedAnimator = collision.GetComponent<DisguiseInfoContainer>().animator;
-			playerAnim.SetBool("IS_CHANGING", true);
+			GameObject newItem = collision.gameObject;
+			PickUpController newItemController =
+				newItem.GetComponent<PickUpController>();
+
+			if (newItemController.itemIsDisguise) {
+				updatedAnimator =
+					collision.GetComponent<DisguiseInfoContainer>().animator;
+				playerAnim.SetBool("IS_CHANGING", true);
+			}
 		}
 	}
 }
