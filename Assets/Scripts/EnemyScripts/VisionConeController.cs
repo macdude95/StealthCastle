@@ -52,13 +52,19 @@ public class VisionConeController : MonoBehaviour {
 
     private void Update()
     {
+        if (Time.frameCount % 2 == 0)
+        {
+            UpdateDynamicVisionCone();
+        }
+    }
 
+    void UpdateDynamicVisionCone() {
         List<Vector3> vertices = new List<Vector3>();
 
         vertices.Add(transform.InverseTransformPoint(transform.position));
         for (int i = 0; i < numOfRays; i++)
         {
-            float angle = i * (numPiRadiansOfCircle * Mathf.PI) / (numOfRays-1);
+            float angle = i * (numPiRadiansOfCircle * Mathf.PI) / (numOfRays - 1);
             angle += (transform.localRotation.eulerAngles.z - 90) * Mathf.Deg2Rad - (numPiRadiansOfCircle / 2 * Mathf.PI);
             Vector2 lDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
