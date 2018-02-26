@@ -79,7 +79,6 @@ public class DogController : MonoBehaviour {
                 speed = wanderSpeed;
                 break;
             case STATE_HEARD_PLAYER:
-                print("yay we finding player now");
                 pathFinding.target = player;
                 speed = runSpeed;
                 break;
