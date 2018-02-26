@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour {
     private bool isSprinting = false;
     private bool isSlowed = false;
 
+    private GameObject interactable = null;
+    private bool canPickUp = true;
+
     void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
 		if (!isDead) {
             CheckUsedBoxDisguise();
-            //should always be the last two calls
+            CheckInputs();
             SetDir();
 			SetSpeed();
 		}
@@ -73,6 +76,31 @@ public class PlayerController : MonoBehaviour {
 							Input.GetAxis("Vertical") * speed);
 		}
 	}
+
+    //handle any inputs here
+    void CheckInputs()
+    {
+        if (animControl.GetBool("IS_CHANGING"))
+            return;
+
+        if(Input.GetButtonDown("Interaction"))
+        {
+            //something to pick up
+            if(interactable != null)
+            {
+                PickUpGadget(interactable);
+            }
+            //something to drop
+            else if(GameController.instance.currItem != null)
+            {
+                DropOldGadget(GameController.instance.currItem);
+            }
+        }
+        else if(Input.GetButtonDown("UseItem"))
+        {
+            
+        }
+    }
 
 	public void ResetScene() {
 		GameController.instance.ResetScene();
@@ -110,7 +138,18 @@ public class PlayerController : MonoBehaviour {
 			GameController.instance.score++;
 			GameController.instance.DisplayScore();
 		}
-	}
+        else if (collision.gameObject.CompareTag("Gadget"))
+        {
+            if(interactable != null)
+            {
+                interactable.GetComponent<PickUpController>().pickupReady(false);
+                interactable = null;
+            }
+
+            collision.gameObject.GetComponent<PickUpController>().pickupReady(true);
+            interactable = collision.gameObject;
+        }
+    }
 
 	private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("VisionDetector") &&
@@ -119,10 +158,10 @@ public class PlayerController : MonoBehaviour {
 			//if disguised see if can see through
 			collision.gameObject.SendMessage("CheckVision", this.gameObject);
 		}
-        else if (collision.gameObject.CompareTag("Gadget")) {
-            if (Input.GetButtonDown("PickUpItem")) {
-				PickUpGadget(collision.gameObject);
-            }
+        if(collision.gameObject.CompareTag("Gadget") && interactable == null)
+        {
+            collision.gameObject.GetComponent<PickUpController>().pickupReady(true);
+            interactable = collision.gameObject;
         }
     }
 
@@ -130,7 +169,12 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "SpiderWeb") {
             isSlowed = false;
         }
-	}
+        else if (collision.gameObject.CompareTag("Gadget"))
+        {
+            collision.gameObject.GetComponent<PickUpController>().pickupReady(false);
+            interactable = null;
+        }
+    }
 
 	private void DropOldGadget(GameObject oldItem) {
 		PickUpController oldItemController =
@@ -147,6 +191,8 @@ public class PlayerController : MonoBehaviour {
 			 */
 			animControl.SetBool("IS_CHANGING", true);
 		}
+        oldItem.SetActive(true);
+        GameController.instance.SetPlayerItem(null);
 	}
 
 	private void PickUpGadget(GameObject newGadget) {
@@ -162,8 +208,10 @@ public class PlayerController : MonoBehaviour {
 		if (newItemController.itemIsDisguise) {
 			currentDisguise =
 				newItem.GetComponent<DisguiseInfoContainer>().disguiseName;
-		}
-		GameController.instance.SetPlayerItem(newGadget);
+            this.GetComponent<DisguiseScript>().DonDisguise(newGadget);
+        }
+        GameController.instance.SetPlayerItem(newGadget);
+        newGadget.SetActive(false);
 	}
 
 	private void SoundRings() {
@@ -242,28 +290,12 @@ public class PlayerController : MonoBehaviour {
 		}
     }
 
-   /* void DoorPlayerOpen() {
-        if (rb.IsTouching(GameObject.FindGameObjectWithTag("Door").GetComponent<BoxCollider2D>())) {
-            doorOpenText.SetActive(true);
-            if (Input.GetKeyDown("space")) {
-                a_door.Play();
-                LeverAnimation.instanceLever.ChangeLeverAnimation();
-                DoorAnimation.instanceDoor.ChangeDoorStatus();
-            }
-        }
-        else {
-            doorOpenText.SetActive(false);
-        }
-    }*/
-
     private bool CanBeSeen(string disguiseType) {
         if (usingBox) return false;
         return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
     }
 
     private void CheckUsedBoxDisguise() {
-        if (isDead) return;
-
         if (GameController.instance.GetItemName() == "BoxDisguise" && Input.GetButton("Interaction")) {
             usingBox = true;
             this.GetComponent<Animator>().enabled = false;

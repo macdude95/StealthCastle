@@ -7,6 +7,7 @@ public class PickUpController : MonoBehaviour {
     public string displayName;
 	public bool itemIsDisguise = false;
 
+    private GameObject indicator;
 	private Rigidbody2D rb2d;
 	private BoxCollider2D boxCol2d;
 
@@ -15,20 +16,25 @@ public class PickUpController : MonoBehaviour {
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
 		boxCol2d = GetComponent<BoxCollider2D>();
+        indicator = transform.GetChild(0).gameObject;
 	}
+
+    public void pickupReady(bool state)
+    {
+        indicator.SetActive(state);
+    }
 
 	public void DropItem(Vector3 position) {
 		gameObject.transform.position = position;
-		gameObject.SetActive(true);
 	}
 
-	private void OnTriggerStay2D(Collider2D collision) {
+    /*private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Player" &&
 			(Input.GetButtonDown("PickUpItem") ||
 			 displayName.Equals("Gem"))) {
             gameObject.SetActive(false);
         }
-	}
+	}*/
 
     public string GetName() { return displayName; }
 }
