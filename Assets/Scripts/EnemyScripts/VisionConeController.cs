@@ -5,15 +5,23 @@ using UnityEngine;
 public class VisionConeController : MonoBehaviour {
 
     public string seenDisguiseType;
-    [UnityEngine.Range(0,2)]
+    [UnityEngine.Range(0, 2)]
     public float numPiRadiansOfCircle = 0.25f;
     public int numOfRays = 50;
     public float lightRange = 50.0f;
     [UnityEngine.Range(1, 10)]
     public int raycastFrameDelay = 1;
     private Mesh coneMesh;
+    public bool ignoresDisguises;
+    public bool isRanged;
 
-    private void CheckVision(GameObject player) {
+
+    public void CheckVision(GameObject player, string curDisguise) {
+
+
+        if (curDisguise != null && !ignoresDisguises && !curDisguise.Equals(seenDisguiseType))
+            return;
+
         bool seen = false;
         Vector3 direction;
         Vector2 scale = player.GetComponent<BoxCollider2D>().size;
@@ -38,7 +46,14 @@ public class VisionConeController : MonoBehaviour {
             }
         }
         if (seen) {
-            this.SendMessageUpwards("PlayerInVision", player);
+            if (ignoresDisguises)
+            {
+                this.transform.parent.GetComponent<DogController>().PlayerInVision(player);
+            }
+            else
+            {
+                this.transform.parent.GetComponent<BasicEnemyController>().PlayerInVision(player, player.GetComponent<PlayerController>());
+            }
             RotateVision(player.transform.position);
         }            
     }

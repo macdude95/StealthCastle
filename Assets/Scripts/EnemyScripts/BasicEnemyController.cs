@@ -67,7 +67,9 @@ public class BasicEnemyController : MonoBehaviour {
     }
 
 	//called when a player is in direct LOS
-	public void PlayerInVision(GameObject player) {
+	public void PlayerInVision(GameObject player, PlayerController controller) {
+        if (controller.UsingBox())
+            return;
 		state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 		pathController.slowdownDistance = 0;

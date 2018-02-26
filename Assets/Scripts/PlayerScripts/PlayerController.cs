@@ -148,11 +148,10 @@ public class PlayerController : MonoBehaviour {
     }
 
 	private void OnTriggerStay2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("VisionDetector") &&
-			CanBeSeen(collision.gameObject.GetComponent<VisionConeController>().seenDisguiseType)) {
+		if (collision.gameObject.CompareTag("VisionDetector")) {
 
 			//if disguised see if can see through
-			collision.gameObject.SendMessage("CheckVision", this.gameObject);
+			collision.gameObject.GetComponent<VisionConeController>().CheckVision(this.gameObject,currentDisguise);
 		}
         if(collision.gameObject.CompareTag("Gadget") && interactable == null)
         {
@@ -186,6 +185,7 @@ public class PlayerController : MonoBehaviour {
 			 * animation controller.
 			 */
 			animControl.SetBool("IS_CHANGING", true);
+            currentDisguise = null;
 		}
         oldItem.SetActive(true);
         GameController.instance.SetPlayerItem(null);
