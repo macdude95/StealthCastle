@@ -308,7 +308,7 @@ Prefab:
       objectReference: {fileID: 111592257}
     - target: {fileID: 1219856217205272, guid: e1a17ea879f6d794fbc82fba07f87eb8, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e1a17ea879f6d794fbc82fba07f87eb8, type: 2}
@@ -918,7 +918,7 @@ Prefab:
       objectReference: {fileID: 111592257}
     - target: {fileID: 1887064797447788, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2e3d5fba14fe3548bde6191a82ea14a, type: 2}
@@ -1485,16 +1485,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1663280906}
-    - target: {fileID: 114800900674513118, guid: a4900e01b3f484e4f890b567bbebf76a,
-        type: 2}
-      propertyPath: lightRange
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 58054194424125946, guid: a4900e01b3f484e4f890b567bbebf76a,
-        type: 2}
-      propertyPath: m_Radius
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4900e01b3f484e4f890b567bbebf76a, type: 2}
   m_IsPrefabParent: 0

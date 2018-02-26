@@ -94,7 +94,7 @@ public class DogPathFinding : MonoBehaviour {
 		if (currentWaypoint >= path.vectorPath.Count) {
 			if (pathIsEnded)
 				return;
-			Debug.Log ("End of path reached.");
+			//Debug.Log ("End of path reached.");
 			pathIsEnded = true;
 			return;
 		}
