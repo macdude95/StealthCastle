@@ -9,11 +9,12 @@ public class DogController : MonoBehaviour {
     public float runSpeed = 300;
     public float wanderSpeed = 30;
     public Transform wanderNodes;
-    public Transform player;
+    //public Transform player;
     public GameObject soundRingPrefab;
     public float ringStartScale = 0f;
 
     //state machine states
+    private Transform noiseLocation;
     private int state;
     private GameObject[] soundRingPool;
     private int ringCount = 3;
@@ -79,7 +80,7 @@ public class DogController : MonoBehaviour {
                 speed = wanderSpeed;
                 break;
             case STATE_HEARD_PLAYER:
-                pathFinding.target = player;
+                pathFinding.target = noiseLocation;
                 speed = runSpeed;
                 break;
             case STATE_SEES_PLAYER:
@@ -151,6 +152,7 @@ public class DogController : MonoBehaviour {
         {
             //the guard just heard the player
             state = STATE_HEARD_PLAYER;
+            noiseLocation = other.gameObject.transform;
             barkingFrames = 0;
         }
     }
