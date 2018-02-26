@@ -339,7 +339,6 @@ MonoBehaviour:
   runSpeed: 300
   wanderSpeed: 50
   wanderNodes: {fileID: 0}
-  player: {fileID: 0}
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
   ringStartScale: 0
@@ -371,9 +370,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seenDisguiseType: Dog
   numPiRadiansOfCircle: 2
-  numOfRays: 20
+  numOfRays: 40
   lightRange: 50
   raycastFrameDelay: 2
+  ignoresDisguises: 1
+  isRanged: 0
 --- !u!212 &212074308559311786
 SpriteRenderer:
   m_ObjectHideFlags: 1
