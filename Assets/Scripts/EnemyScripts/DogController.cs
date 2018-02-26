@@ -24,6 +24,7 @@ public class DogController : MonoBehaviour {
     private AudioSource audioSource;
     private float speed;
     private Transform wanderTarget;
+    private int barkingFrames = 0;
 
     private void Start()
     {
@@ -78,15 +79,20 @@ public class DogController : MonoBehaviour {
                 speed = wanderSpeed;
                 break;
             case STATE_HEARD_PLAYER:
+                print("yay we finding player now");
                 pathFinding.target = player;
                 speed = runSpeed;
                 break;
             case STATE_SEES_PLAYER:
                 pathFinding.target = gameObject.transform;
+                barkingFrames++;
                 speed = 0;
                 break;
             default:
                 break;
+        }
+        if(barkingFrames > 200) {
+            state = STATE_PATHING;
         }
 
         SetDir();
@@ -137,6 +143,7 @@ public class DogController : MonoBehaviour {
     public void PlayerInVision(GameObject player)
     {
         state = STATE_SEES_PLAYER;
+        barkingFrames = 0;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -145,6 +152,7 @@ public class DogController : MonoBehaviour {
         {
             //the guard just heard the player
             state = STATE_HEARD_PLAYER;
+            barkingFrames = 0;
         }
     }
 }
