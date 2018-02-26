@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364988702075726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -196.74867, y: -200.66512, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 4409596076316858}
   m_Father: {fileID: 0}
@@ -87,14 +87,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.75
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58264015716824412
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -109,7 +109,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 20
 --- !u!95 &95581918498777796
 Animator:
   serializedVersion: 3
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13d578bffd43e749ac5585a261df550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAirTime: 50
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
 --- !u!114 &114986177192021532

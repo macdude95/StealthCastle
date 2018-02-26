@@ -89,7 +89,8 @@ public class BasicEnemyController : MonoBehaviour {
             nextNode = nextNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
         }
-        else if (state == BasicEnemyController.STATE_HUNTING) {
+        else if (state == BasicEnemyController.STATE_HUNTING ||
+				 state == BasicEnemyController.STATE_ALERT) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
 			pathController.slowdownDistance = 64;
