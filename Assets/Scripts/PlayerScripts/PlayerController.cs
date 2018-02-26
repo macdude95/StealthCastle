@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
 		if (!isDead) {
-            CheckUsedBoxDisguise();
             CheckInputs();
             SetDir();
 			SetSpeed();
@@ -83,23 +82,20 @@ public class PlayerController : MonoBehaviour {
         if (animControl.GetBool("IS_CHANGING"))
             return;
 
-        if(Input.GetButtonDown("Interaction"))
-        {
-            //something to pick up
-            if(interactable != null)
-            {
-                PickUpGadget(interactable);
-            }
+		if (Input.GetButtonDown ("Interaction") && (usingBox == false)) {
+			//something to pick up
+			if (interactable != null) {
+				PickUpGadget (interactable);
+			}
             //something to drop
-            else if(GameController.instance.currItem != null)
-            {
-                DropOldGadget(GameController.instance.currItem);
-            }
-        }
-        else if(Input.GetButtonDown("UseItem"))
-        {
-            
-        }
+            else if (GameController.instance.currItem != null) {
+				DropOldGadget (GameController.instance.currItem);
+			}
+		} else if (Input.GetButtonDown ("UseItem")) {
+			UseBoxDisguise();
+		} else if (Input.GetButtonUp ("UseItem")) {
+			StopBoxDisguise();
+		}
     }
 
 	public void ResetScene() {
@@ -295,13 +291,15 @@ public class PlayerController : MonoBehaviour {
         return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
     }
 
-    private void CheckUsedBoxDisguise() {
-        if (GameController.instance.GetItemName() == "BoxDisguise" && Input.GetButton("Interaction")) {
-            usingBox = true;
-            this.GetComponent<Animator>().enabled = false;
-            this.GetComponent<SpriteRenderer>().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer>().sprite;
-        }
-		else {
+    private void UseBoxDisguise() {
+		if (GameController.instance.GetItemName () == "BoxDisguise") {
+			usingBox = true;
+			this.GetComponent<Animator> ().enabled = false;
+			this.GetComponent<SpriteRenderer> ().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer> ().sprite;
+		}
+	}
+	private void StopBoxDisguise() {
+		if (GameController.instance.GetItemName () == "BoxDisguise") {
             usingBox = false;
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
