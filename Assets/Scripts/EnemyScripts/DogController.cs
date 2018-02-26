@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DogController : MonoBehaviour {
-    
+
+    public const int STATE_PATHING = 0, STATE_HEARD_PLAYER = 1, STATE_SEES_PLAYER = 2;
     public ForceMode2D fMode;
     public float runSpeed = 300;
     public float wanderSpeed = 30;
@@ -12,7 +13,8 @@ public class DogController : MonoBehaviour {
     public GameObject soundRingPrefab;
     public float ringStartScale = 0f;
 
-
+    //state machine states
+    private int state;
     private GameObject[] soundRingPool;
     private int ringCount = 3;
     private int currentRing = 0;
@@ -20,14 +22,12 @@ public class DogController : MonoBehaviour {
     private Rigidbody2D rb;
     private Animator animator;
     private AudioSource audioSource;
-    private bool awareOfPlayer;
     private float speed;
     private Transform wanderTarget;
 
-
-    private void Awake()
+    private void Start()
     {
-        awareOfPlayer = false;
+        state = STATE_PATHING;
         speed = wanderSpeed;
         pathFinding = GetComponent<DogPathFinding>();
         rb = GetComponent<Rigidbody2D>();
@@ -55,7 +55,7 @@ public class DogController : MonoBehaviour {
     }
 
     IEnumerator Bark() {
-        if (awareOfPlayer)
+        if (state == STATE_SEES_PLAYER)
         {
             audioSource.Play();
             soundRingPool[currentRing].transform.position = this.transform.position;
@@ -64,6 +64,7 @@ public class DogController : MonoBehaviour {
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
             soundRingPool[currentRing].SetActive(true);
             currentRing = (currentRing + 1) % ringCount;
+
         }
         yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
         StartCoroutine(Bark());
@@ -71,14 +72,23 @@ public class DogController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (awareOfPlayer)
-        {
-            pathFinding.target = player;
-            speed = runSpeed;
-        } else {
-            pathFinding.target = wanderTarget;
-            speed = wanderSpeed;
+        switch (state) {
+            case STATE_PATHING:
+                pathFinding.target = wanderTarget;
+                speed = wanderSpeed;
+                break;
+            case STATE_HEARD_PLAYER:
+                pathFinding.target = player;
+                speed = runSpeed;
+                break;
+            case STATE_SEES_PLAYER:
+                pathFinding.target = gameObject.transform;
+                speed = 0;
+                break;
+            default:
+                break;
         }
+
         SetDir();
 	}
 
@@ -123,12 +133,18 @@ public class DogController : MonoBehaviour {
         animator.SetBool("IS_MOVING", true);
     }
 
+    //called when a player is in direct LOS
+    public void PlayerInVision(GameObject player)
+    {
+        state = STATE_SEES_PLAYER;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "SoundRing" )
         {
             //the guard just heard the player
-            awareOfPlayer = true;
+            state = STATE_HEARD_PLAYER;
         }
     }
 }

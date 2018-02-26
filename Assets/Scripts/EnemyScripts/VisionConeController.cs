@@ -9,6 +9,8 @@ public class VisionConeController : MonoBehaviour {
     public float numPiRadiansOfCircle = 0.25f;
     public int numOfRays = 50;
     public float lightRange = 50.0f;
+    [UnityEngine.Range(1, 10)]
+    public int raycastFrameDelay = 1;
     private Mesh coneMesh;
 
     private void CheckVision(GameObject player) {
@@ -48,11 +50,9 @@ public class VisionConeController : MonoBehaviour {
 		transform.localRotation = Quaternion.Lerp(transform.localRotation, rot, 0.1f);
 	}
 
-    // dynamic vision cone
-
     private void Update()
     {
-        if (Time.frameCount % 2 == 0)
+        if (Time.frameCount % raycastFrameDelay == 0)
         {
             UpdateDynamicVisionCone();
         }
@@ -77,7 +77,6 @@ public class VisionConeController : MonoBehaviour {
             }
             else
             {
-                // try to make this never happen... drawing can mess up if it does
                 Debug.DrawRay(transform.position, lDirection);
                 vertices.Add(transform.InverseTransformPoint(new Vector3(transform.position.x + lDirection.x * lightRange, transform.position.y + lDirection.y * lightRange, -1)));
             }
@@ -115,6 +114,7 @@ public class VisionConeController : MonoBehaviour {
         coneMesh = GetComponent<MeshFilter>().mesh;
     }
 
+    // uncomment this line if you want to see vision cone in scene window
     //void OnDrawGizmos()
     //{
     //    Start();
