@@ -9,7 +9,6 @@ public class DogController : MonoBehaviour {
     public float runSpeed = 300;
     public float wanderSpeed = 30;
     public Transform wanderNodes;
-    //public Transform player;
     public GameObject soundRingPrefab;
     public float ringStartScale = 0f;
 
