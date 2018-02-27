@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DogController : MonoBehaviour {
 
-    public const int STATE_PATHING = 0, STATE_HEARD_PLAYER = 1, STATE_SEES_PLAYER = 2;
+    public const int STATE_WANDER = 0, STATE_GO_TO_NOISE = 1, STATE_STAND_AND_BARK = 2;
     public ForceMode2D fMode;
     public float runSpeed = 300;
     public float wanderSpeed = 30;
@@ -28,7 +28,7 @@ public class DogController : MonoBehaviour {
 
     private void Start()
     {
-        state = STATE_PATHING;
+        state = STATE_WANDER;
         speed = wanderSpeed;
         pathFinding = GetComponent<DogPathFinding>();
         rb = GetComponent<Rigidbody2D>();
@@ -56,7 +56,7 @@ public class DogController : MonoBehaviour {
     }
 
     IEnumerator Bark() {
-        if (state == STATE_SEES_PLAYER)
+        if (state == STATE_STAND_AND_BARK)
         {
             audioSource.Play();
             soundRingPool[currentRing].transform.position = this.transform.position;
@@ -73,16 +73,19 @@ public class DogController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (pathFinding.pathIsEnded && state == STATE_GO_TO_NOISE) {
+            state = STATE_STAND_AND_BARK;
+        }
         switch (state) {
-            case STATE_PATHING:
+            case STATE_WANDER:
                 pathFinding.target = wanderTarget;
                 speed = wanderSpeed;
                 break;
-            case STATE_HEARD_PLAYER:
+            case STATE_GO_TO_NOISE:
                 pathFinding.target = noiseLocation;
                 speed = runSpeed;
                 break;
-            case STATE_SEES_PLAYER:
+            case STATE_STAND_AND_BARK:
                 pathFinding.target = gameObject.transform;
                 barkingFrames++;
                 speed = 0;
@@ -91,7 +94,7 @@ public class DogController : MonoBehaviour {
                 break;
         }
         if(barkingFrames > 200) {
-            state = STATE_PATHING;
+            state = STATE_WANDER;
         }
 
         SetDir();
@@ -141,16 +144,16 @@ public class DogController : MonoBehaviour {
     //called when a player is in direct LOS
     public void PlayerInVision(GameObject player)
     {
-        state = STATE_SEES_PLAYER;
+        state = STATE_STAND_AND_BARK;
         barkingFrames = 0;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "SoundRing" && state == STATE_PATHING)
+        if (other.tag == "SoundRing" && state == STATE_WANDER)
         {
             //the guard just heard the player
-            state = STATE_HEARD_PLAYER;
+            state = STATE_GO_TO_NOISE;
             noiseLocation = other.gameObject.transform;
             barkingFrames = 0;
         }
