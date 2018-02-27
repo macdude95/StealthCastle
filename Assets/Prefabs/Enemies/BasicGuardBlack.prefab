@@ -42,12 +42,12 @@ GameObject:
   - component: {fileID: 212756215100554830}
   - component: {fileID: 50461430912676444}
   - component: {fileID: 61894473777205860}
+  - component: {fileID: 58382036016736278}
   - component: {fileID: 95950176719562918}
   - component: {fileID: 82773624453903860}
   - component: {fileID: 114980219469126658}
   - component: {fileID: 114984701481480560}
   - component: {fileID: 114791592533915146}
-  - component: {fileID: 58382036016736278}
   m_Layer: 10
   m_Name: BasicGuardBlack
   m_TagString: Enemy
@@ -373,6 +373,8 @@ MonoBehaviour:
   numOfRays: 10
   lightRange: 145
   raycastFrameDelay: 2
+  ignoresDisguises: 0
+  isRanged: 0
 --- !u!114 &114980219469126658
 MonoBehaviour:
   m_ObjectHideFlags: 1

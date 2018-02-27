@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinScript : MonoBehaviour {
+public class ThrowableScript : MonoBehaviour {
 
 	public float throwMultiplier = 1f;
 	public float throwPower = 0f;
 	public float maxPower = 17.5f;
 
-	public Slider coinAimSlider;
+	public Slider aimSlider;
 	private RectTransform aimRectTransform;
 
-	private GameObject coin;
-	private Rigidbody2D coinRb;
-	private CircleCollider2D coinCollider2D;
+	private GameObject throwable;
+	private Rigidbody2D throwableRB2D;
+	private CircleCollider2D throwableCollider2D;
+	private ThrowableBehavior throwableBehaviorScript;
 
 	private BoxCollider2D playerCollider2D;
 	private Animator playerAnim;
@@ -23,40 +24,46 @@ public class CoinScript : MonoBehaviour {
 		playerAnim = GetComponent<Animator>();
 		playerCollider2D = gameObject.GetComponent<BoxCollider2D>();
 
-		aimRectTransform = coinAimSlider.GetComponent<RectTransform>();
-		coinAimSlider.value = 0f;
-		coinAimSlider.enabled = false;
+		aimRectTransform = aimSlider.GetComponent<RectTransform>();
+		aimSlider.value = 0f;
+		aimSlider.enabled = false;
 	}
 
 	void FixedUpdate() {
-		if (GameController.instance.GetItemName().Equals("ThrowableCoin")) {
+		if (GameController.instance.GetItemName().Equals("ThrowableCoin") ||
+			GameController.instance.GetItemName().Equals("Caltrops")) {
 			int dirInt = playerAnim.GetInteger("DIR");
-			coinAimSlider.enabled = true;
+			aimSlider.enabled = true;
 
-			if (coin == null) {
-				coin = GameController.instance.currItem;
-				coinRb = coin.GetComponent<Rigidbody2D>();
-				coinCollider2D = coin.GetComponent<CircleCollider2D>();
+			if (throwable == null) {
+				throwable = GameController.instance.currItem;
+				throwableRB2D = throwable.GetComponent<Rigidbody2D>();
+				throwableCollider2D =
+					throwable.GetComponent<CircleCollider2D>();
+				throwableBehaviorScript =
+					throwable.GetComponent<ThrowableBehavior>();
 			}
 
 			SetAimDirection(dirInt);
 			if (Input.GetButton("UseItem")) {
 				throwPower += 0.25f;
-				coinAimSlider.value = throwPower;
+				aimSlider.value = throwPower;
 			}
 			if (Input.GetButtonUp("UseItem") || throwPower >= maxPower) {
-				Vector2 coinThrowVec = DirIntToVector(dirInt);
+				Vector2 throwVec = DirIntToVector(dirInt);
 				SetAimDirection(dirInt);
 
-				ThrowCoin(coinThrowVec, throwPower * throwMultiplier);
+				UseThrowable(throwVec, throwPower * throwMultiplier);
 				throwPower = 0;
-				coinAimSlider.value = throwPower;
+				aimSlider.value = throwPower;
 			}
 		}
 
-		if (coin != null && coinCollider2D.isTrigger) {
-			Physics2D.IgnoreCollision(coinCollider2D, playerCollider2D, false);
-			coin = null;
+		if (throwable != null && !throwableBehaviorScript.isBeingThrown) {
+			Physics2D.IgnoreCollision(throwableCollider2D,
+									  playerCollider2D,
+									  false);
+			throwable = null;
 		}
 	}
 
@@ -98,13 +105,13 @@ public class CoinScript : MonoBehaviour {
 		}
 	}
 
-	private void ThrowCoin(Vector2 dir, float power) {
-		coin.transform.position = this.transform.position;
-		coinCollider2D.isTrigger = false;
-		Physics2D.IgnoreCollision(coinCollider2D, playerCollider2D, true);
+	private void UseThrowable(Vector2 dir, float power) {
+		throwable.transform.position = this.transform.position;
+		Physics2D.IgnoreCollision(throwableCollider2D, playerCollider2D, true);
 
-		coin.SetActive(true);
-		coinRb.AddForce(dir * power, ForceMode2D.Impulse);
+		throwable.SetActive(true);
+		throwableRB2D.AddForce(dir * power, ForceMode2D.Impulse);
+		throwableBehaviorScript.isBeingThrown = true;
 		GameController.instance.SetPlayerItem(null);
 	}
 }

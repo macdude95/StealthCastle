@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinBehavior : MonoBehaviour {
+public class CoinBehavior : ThrowableBehavior {
 
-	public float maxAirTime = 10f;
 	public GameObject soundRingPrefab;
-
-	private float airTime;
 	private GameObject soundRing;
-	private Rigidbody2D rb2D;
-	private CircleCollider2D circCol;
 
 	void Awake() {
 		soundRing = Instantiate(soundRingPrefab,
@@ -19,31 +14,23 @@ public class CoinBehavior : MonoBehaviour {
 		soundRing.SetActive(false);
 	}
 
-	void Start() {
-		airTime = 0f;
-		rb2D = GetComponent<Rigidbody2D>();
-		circCol = GetComponent<CircleCollider2D>();
-	}
-
 	void FixedUpdate() {
-		if (rb2D.velocity == Vector2.zero) {
-			circCol.isTrigger = true;
-			airTime = 0f;
-		}
-		else {
+		if (isBeingThrown) {
 			airTime++;
+			SetUsable(false);
 		}
 
-		if (airTime >= maxAirTime) {
-			rb2D.velocity = Vector2.zero;
+		if (ThrownForMaxTime()) {
+			PutThrowableOnGround();
 			SoundRing();
+			SetUsable(true);
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision) {
-		rb2D.velocity = Vector2.zero;
-		circCol.isTrigger = true;
+		PutThrowableOnGround();
 		SoundRing();
+		SetUsable(true);
 	}
 
 	private void SoundRing() {
