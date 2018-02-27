@@ -1575,11 +1575,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114800900674513118, guid: a4900e01b3f484e4f890b567bbebf76a,
-        type: 2}
-      propertyPath: ignoresDisguises
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114518247794740214, guid: a4900e01b3f484e4f890b567bbebf76a,
         type: 2}
       propertyPath: wanderNodes
