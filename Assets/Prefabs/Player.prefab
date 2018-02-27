@@ -415,7 +415,7 @@ MonoBehaviour:
   throwMultiplier: 10
   throwPower: 0
   maxPower: 17.5
-  coinAimSlider: {fileID: 114474387411222550}
+  aimSlider: {fileID: 114474387411222550}
 --- !u!212 &212068994646694432
 SpriteRenderer:
   m_ObjectHideFlags: 1

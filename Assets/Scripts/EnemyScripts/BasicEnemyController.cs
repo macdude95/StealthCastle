@@ -44,32 +44,23 @@ public class BasicEnemyController : MonoBehaviour {
 			//Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
 		}
-        checkStuck();
+        CheckStuck();
 		visionCone.SendMessage("RotateVision", pathController.steeringTarget);
         SetDir();
     }
 
-    private void checkStuck()
-    {
-        if(pathController.velocity.magnitude < .4)
-        {
-            stuckTimer++;
-            if(stuckTimer > maxStuckTime)
-            {
-                ArrivedAtDestination();
-                stuckTimer = 0;
-            }
-        }
-        else
-        {
-            stuckTimer = 0;
-        }
-    }
+	public void SlowEnemy() {
+		float SLOW_MULTIPLIER = 0.5f;
+
+		baseSpeed *= SLOW_MULTIPLIER;
+		pathController.maxSpeed *= SLOW_MULTIPLIER;
+	}
 
 	//called when a player is in direct LOS
 	public void PlayerInVision(GameObject player, PlayerController controller) {
         if (controller.UsingBox())
             return;
+
 		state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 		pathController.slowdownDistance = 0;
@@ -131,29 +122,49 @@ public class BasicEnemyController : MonoBehaviour {
         animationController.SetBool("IS_MOVING", true);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Player") && state == STATE_HUNTING)
-        {
+	private void CheckStuck() {
+		if (pathController.velocity.magnitude < .4) {
+			stuckTimer++;
+			if (stuckTimer > maxStuckTime) {
+				ArrivedAtDestination();
+				stuckTimer = 0;
+			}
+		}
+		else {
+			stuckTimer = 0;
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision) {
+		GameObject entity = collision.gameObject;
+		/*
+        if(collision.gameObject.CompareTag("Player") && state == STATE_HUNTING) {
             a_found.Play();
             animationController.SetBool("IS_ATTACKING", true);
             collision.gameObject.GetComponent<PlayerController>().KillPlayer();
         }
+		*/
+		if (entity.CompareTag("Gadget")) {
+			UpdateDestination(entity.transform.position);
+		}
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "SoundRing" &&
+		if (other.CompareTag("SoundRing") &&
 			state == BasicEnemyController.STATE_PATHING) { 
-			//the guard just heard the player
+
+			//the guard just heard a sound
             state = BasicEnemyController.STATE_ALERT;
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
 		}
 
         if (other.CompareTag("Player") && 
-            (state == STATE_HUNTING || !((PlayerController)other.gameObject.GetComponent<PlayerController>()).UsingBox())) {
+            (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
+			state == STATE_HUNTING)) {
 			a_found.Play();
 			animationController.SetBool("IS_ATTACKING", true);
+			other.gameObject.GetComponent<PlayerController>().KillPlayer();
 		}
 	}
 }
