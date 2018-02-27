@@ -46,9 +46,14 @@ public class VisionConeController : MonoBehaviour {
             }
         }
         if (seen) {
+            //this whole thing is an awful hack but the real solution is even worse
             if (ignoresDisguises)
             {
                 this.transform.parent.GetComponent<DogController>().PlayerInVision(player);
+            }
+            else if(isRanged)
+            {
+                this.transform.parent.GetComponent<RangedEnemyController>().PlayerInVision(player, player.GetComponent<PlayerController>());
             }
             else
             {

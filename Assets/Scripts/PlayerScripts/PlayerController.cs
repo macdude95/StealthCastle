@@ -115,7 +115,17 @@ public class PlayerController : MonoBehaviour {
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
-	private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Arrow"))
+        {
+            KillPlayer();
+            collision.gameObject.GetComponent<ArrowController>().HitTarget(); ;
+
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("BasicTrap")) {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
 		}

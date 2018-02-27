@@ -9,6 +9,8 @@ public class RangedEnemyController : MonoBehaviour {
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
     public float maxStuckTime;
 
+    public float arrowSpeed;
+
     //pathfinding controller
     public GameObject nextNode;
     public float huntingSpeedMult;
@@ -20,6 +22,11 @@ public class RangedEnemyController : MonoBehaviour {
     private int state;
     private float baseSpeed;
     private float stuckTimer = 0;
+
+    public GameObject arrowProjectile;
+    private ArrowController arrowController;
+    private bool arrorwReady = true;
+    private Vector3 arrowTargetPosition;
 
     //collider used for attacking the player
     private CircleCollider2D attackCollider;
@@ -37,6 +44,9 @@ public class RangedEnemyController : MonoBehaviour {
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
         a_found = GetComponent<AudioSource>();
+
+        arrowController = arrowProjectile.GetComponent<ArrowController>();
+        arrowController.SetParent(this.GetComponent<RangedEnemyController>());
     }
 
     void Update()
@@ -62,8 +72,16 @@ public class RangedEnemyController : MonoBehaviour {
     //called when a player is in direct LOS
     public void PlayerInVision(GameObject player, PlayerController controller)
     {
-        if (controller.UsingBox())
+        if (controller.UsingBox() || animationController.GetBool("IS_ATTACKING"))
             return;
+
+        if(arrorwReady)
+        {
+            StartAttacking();
+            arrowTargetPosition = player.transform.position;
+            FireProjectile();
+        }
+
 
         state = BasicEnemyController.STATE_HUNTING;
         pathController.maxSpeed = baseSpeed * huntingSpeedMult;
@@ -77,9 +95,26 @@ public class RangedEnemyController : MonoBehaviour {
         UpdateDestination(playerPosition);
     }
 
+    public void StartAttacking()
+    {
+        animationController.SetBool("IS_ATTACKING", true);
+        pathController.maxSpeed = 0;
+    }
+
+    public void FireProjectile()
+    {
+        arrowProjectile.SetActive(true);
+        arrowProjectile.transform.position = this.transform.position;
+        Vector3 dir = Vector3.Normalize(arrowTargetPosition - this.transform.position) * arrowSpeed;
+        arrowProjectile.GetComponent<Rigidbody2D>().velocity = dir;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        arrowProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
     public void StopAttacking()
     {
         animationController.SetBool("IS_ATTACKING", false);
+        pathController.maxSpeed = baseSpeed;
     }
 
     private void ArrivedAtDestination()

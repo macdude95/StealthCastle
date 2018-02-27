@@ -15,6 +15,7 @@ TagManager:
   - WebCutter
   - Gadget
   - Gem
+  - Arrow
   layers:
   - Default
   - TransparentFX
