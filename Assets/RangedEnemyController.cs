@@ -82,23 +82,32 @@ public class RangedEnemyController : MonoBehaviour {
             FireProjectile();
         }
 
+        if(!animationController.GetBool("IS_ATTACKING"))
+        {
+            state = BasicEnemyController.STATE_HUNTING;
+            pathController.maxSpeed = baseSpeed * huntingSpeedMult;
+            pathController.slowdownDistance = 0;
 
-        state = BasicEnemyController.STATE_HUNTING;
-        pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-        pathController.slowdownDistance = 0;
+            Vector3 playerPosition = player.transform.position;
+            GraphNode nearestPlayerNode =
+                AstarPath.active.GetNearest(playerPosition).node;
+            playerPosition = (Vector3)nearestPlayerNode.position;
 
-        Vector3 playerPosition = player.transform.position;
-        GraphNode nearestPlayerNode =
-            AstarPath.active.GetNearest(playerPosition).node;
-        playerPosition = (Vector3)nearestPlayerNode.position;
+            UpdateDestination(playerPosition);
+        }
 
-        UpdateDestination(playerPosition);
     }
 
     public void StartAttacking()
     {
+        arrorwReady = false;
         animationController.SetBool("IS_ATTACKING", true);
         pathController.maxSpeed = 0;
+    }
+
+    public void ArrowHit()
+    {
+        arrorwReady = true;
     }
 
     public void FireProjectile()

@@ -32,7 +32,7 @@ public class ArrowController : MonoBehaviour {
 
     public void HitAnimComplete()
     {
-        parent.StopAttacking();
+        parent.ArrowHit();
         animator.ResetTrigger("ArrowHit");
         this.gameObject.SetActive(false);        
     }
