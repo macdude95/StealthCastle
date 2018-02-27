@@ -843,31 +843,15 @@ Prefab:
       propertyPath: a_door
       value: 
       objectReference: {fileID: 906824561}
-    - target: {fileID: 114555880878487098, guid: 37638f5dc4aeff3449f62219dfdad8f0,
-        type: 2}
-      propertyPath: doorOpenText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114555880878487098, guid: 37638f5dc4aeff3449f62219dfdad8f0,
-        type: 2}
-      propertyPath: currentDisguise
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 212068994646694432, guid: 37638f5dc4aeff3449f62219dfdad8f0,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300008, guid: 6758491ff7ce3af4b8010b22464e387e,
-        type: 3}
     - target: {fileID: 224090697790224918, guid: 37638f5dc4aeff3449f62219dfdad8f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224090697790224918, guid: 37638f5dc4aeff3449f62219dfdad8f0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37638f5dc4aeff3449f62219dfdad8f0, type: 2}
