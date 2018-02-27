@@ -137,13 +137,6 @@ public class BasicEnemyController : MonoBehaviour {
 
 	private void OnCollisionEnter2D(Collision2D collision) {
 		GameObject entity = collision.gameObject;
-		/*
-        if(collision.gameObject.CompareTag("Player") && state == STATE_HUNTING) {
-            a_found.Play();
-            animationController.SetBool("IS_ATTACKING", true);
-            collision.gameObject.GetComponent<PlayerController>().KillPlayer();
-        }
-		*/
 		if (entity.CompareTag("Gadget")) {
 			UpdateDestination(entity.transform.position);
 		}
