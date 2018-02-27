@@ -28,13 +28,12 @@ public class PickUpController : MonoBehaviour {
 		gameObject.transform.position = position;
 	}
 
-    /*private void OnTriggerStay2D(Collider2D collision) {
+    private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Player" &&
-			(Input.GetButtonDown("PickUpItem") ||
-			 displayName.Equals("Gem"))) {
+			 displayName.Equals("Gem")) {
             gameObject.SetActive(false);
         }
-	}*/
+	}
 
     public string GetName() { return displayName; }
 }
