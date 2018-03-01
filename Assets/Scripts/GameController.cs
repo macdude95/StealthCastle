@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour {
 	public Text itemText;
 	public Text pointText;
     public Text restartLevelText;
+    public Image fadeInOutImage;
+    public Animator fadeInOutAnimator;
+
 
 	public GameObject currItem;
 	public static GameController instance;
