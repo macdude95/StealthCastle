@@ -140,9 +140,9 @@ GameObject:
   - component: {fileID: 224939934414012818}
   - component: {fileID: 222232255208303064}
   - component: {fileID: 114165272347081954}
-  - component: {fileID: 95803341732154026}
+  - component: {fileID: 95548916352931612}
   m_Layer: 5
-  m_Name: Image
+  m_Name: FadeInOutImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95803341732154026
+--- !u!95 &95548916352931612
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -171,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 1991575521092796}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4a4c1217ecbad49a4b005b1b8ee9b8dc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 006f5a5b3274743eb8a6115adb783f0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -298,6 +298,8 @@ MonoBehaviour:
   itemText: {fileID: 114907725295001158}
   pointText: {fileID: 114841135433844250}
   restartLevelText: {fileID: 114542838998082706}
+  fadeInOutImage: {fileID: 114165272347081954}
+  fadeInOutAnimator: {fileID: 95548916352931612}
   currItem: {fileID: 0}
   score: 0
 --- !u!114 &114542838998082706

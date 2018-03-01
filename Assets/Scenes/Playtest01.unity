@@ -1934,36 +1934,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1991575521092796, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
-      propertyPath: m_Name
-      value: FadeInOutImage
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 95803341732154026, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1263464063 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1991575521092796, guid: e48f4f2bc2278164399456663f7e2a62,
-    type: 2}
-  m_PrefabInternal: {fileID: 1263464062}
---- !u!95 &1263464064
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1263464063}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 006f5a5b3274743eb8a6115adb783f0b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1276967005
 GameObject:
   m_ObjectHideFlags: 3

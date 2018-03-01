@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
     public Image fadeInOutImage;
     public Animator fadeInOutAnimator;
 
-
 	public GameObject currItem;
 	public static GameController instance;
 
@@ -45,12 +44,19 @@ public class GameController : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RespawnObjects();
+            StartCoroutine(FadingRespawn());
         }
 	}
 
     public void PlayerDied() {
         restartLevelText.gameObject.SetActive(true);
+    }
+
+    IEnumerator FadingRespawn() {
+        fadeInOutAnimator.SetBool("FADE", true);
+        yield return new WaitUntil(() => Mathf.Approximately(fadeInOutImage.color.a,1));
+        RespawnObjects();
+        fadeInOutAnimator.SetBool("FADE", false);
     }
 
     private void RespawnObjects() {
