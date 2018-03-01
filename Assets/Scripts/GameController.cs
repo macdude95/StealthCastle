@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
 
 	public int score;
 
+    private IList<Respawnable> respawnableObjects;
+
 	private void Awake() {
 		if (instance == null) {
 			instance = this;
@@ -23,7 +25,9 @@ public class GameController : MonoBehaviour {
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
-		//DontDestroyOnLoad(gameObject); breaks too much rn
+        //DontDestroyOnLoad(gameObject); breaks too much rn
+
+        respawnableObjects = InterfaceHelper.FindObjects<Respawnable>();
 	}
 
 	// Use this for initialization
@@ -35,8 +39,18 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            RespawnObjects();
+        }
 	}
+
+    private void RespawnObjects() {
+        SetPlayerItem(null);
+        foreach (Respawnable rc in respawnableObjects)
+        {
+            rc.Respawn();
+        }
+    }
 
 	public void SetPlayerItem(GameObject item) {
 		currItem = item;
