@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpController : MonoBehaviour {
+public class PickUpController : MonoBehaviour, Respawnable {
 
     public string displayName;
 	public bool itemIsDisguise = false;
@@ -11,12 +11,19 @@ public class PickUpController : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private BoxCollider2D boxCol2d;
 
+    //Respawnable
+    private Vector3 spawnPosition;
+    private bool isActiveOnSpawn;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
 		boxCol2d = GetComponent<BoxCollider2D>();
         indicator = transform.GetChild(0).gameObject;
+
+        //Respawnable
+        spawnPosition = transform.position;
+        isActiveOnSpawn = gameObject.activeSelf;
 	}
 
     public void pickupReady(bool state)
@@ -36,4 +43,11 @@ public class PickUpController : MonoBehaviour {
 	}
 
     public string GetName() { return displayName; }
+
+    public void Respawn()
+    {
+        rb2d.velocity = Vector2.zero;
+        transform.position = spawnPosition;
+        gameObject.SetActive(isActiveOnSpawn);
+    }
 }
