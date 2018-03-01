@@ -1647,7 +1647,6 @@ GameObject:
   - component: {fileID: 770431260}
   - component: {fileID: 770431259}
   - component: {fileID: 770431258}
-  - component: {fileID: 770431257}
   - component: {fileID: 770431262}
   m_Layer: 0
   m_Name: Main Camera
@@ -1656,18 +1655,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &770431257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 770431256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cb946a0c22e1e419713daeb7a08408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1535442186}
 --- !u!81 &770431258
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4561,11 +4548,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aef94906880674ca1adae3297a01a211, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1535442186 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1621537995879004, guid: 37638f5dc4aeff3449f62219dfdad8f0,
-    type: 2}
-  m_PrefabInternal: {fileID: 284598457}
 --- !u!1001 &1540452202
 Prefab:
   m_ObjectHideFlags: 0
