@@ -325,7 +325,6 @@ public class PlayerController : MonoBehaviour, Respawnable {
     }
 
     public void Respawn() {
-        rb.velocity = Vector2.zero;
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
 
@@ -342,5 +341,6 @@ public class PlayerController : MonoBehaviour, Respawnable {
         audioSource.Stop();
 
         GetComponent<BoxCollider2D>().enabled = true;
+        rb.velocity = Vector2.zero;
     }
 }
