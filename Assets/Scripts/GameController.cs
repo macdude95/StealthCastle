@@ -46,7 +46,10 @@ public class GameController : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(FadingRespawn());
+            StartCoroutine(FadeAndCompletion(() => {
+                RespawnObjects();
+                fadeInOutAnimator.SetBool("FADE", false);
+            }));
         }
 	}
 
@@ -54,11 +57,17 @@ public class GameController : MonoBehaviour {
         restartLevelText.gameObject.SetActive(true);
     }
 
-    IEnumerator FadingRespawn() {
+    public void LoadNewLevel(string sceneName) {
+        StartCoroutine(FadeAndCompletion(() =>
+        {
+            SceneManager.LoadScene(sceneName);
+        }));
+    }
+
+    private IEnumerator FadeAndCompletion(System.Action onFadeComplete) {
         fadeInOutAnimator.SetBool("FADE", true);
         yield return new WaitUntil(() => Mathf.Approximately(fadeInOutImage.color.a,1));
-        RespawnObjects();
-        fadeInOutAnimator.SetBool("FADE", false);
+        onFadeComplete();
     }
 
     private void RespawnObjects() {

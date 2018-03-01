@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour, Respawnable {
 			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Finish")) {
-			SceneManager.LoadScene("Playtest01");
+            GameController.instance.LoadNewLevel("Playtest01");
 		}
 		else if (collision.gameObject.CompareTag("Gem")) {
 			GameController.instance.score++;

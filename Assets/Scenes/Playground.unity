@@ -504,7 +504,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &568547269
 Prefab:
@@ -652,7 +652,6 @@ GameObject:
   - component: {fileID: 919395956}
   - component: {fileID: 919395955}
   - component: {fileID: 919395954}
-  - component: {fileID: 919395953}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -660,18 +659,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &919395953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 919395952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cb946a0c22e1e419713daeb7a08408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1128282838}
 --- !u!81 &919395954
 AudioListener:
   m_ObjectHideFlags: 0
@@ -777,11 +764,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2eee6fb29bd54bca90588a52c9a39c5, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1128282838 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1621537995879004, guid: 37638f5dc4aeff3449f62219dfdad8f0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1387858419}
 --- !u!1001 &1314273875
 Prefab:
   m_ObjectHideFlags: 0
