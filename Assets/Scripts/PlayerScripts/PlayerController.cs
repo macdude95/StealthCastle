@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour, Respawnable {
+public class PlayerController : MonoBehaviour {
 
 	public float runSpeed = 75;
 	public float walkSpeed = 45;	
@@ -43,10 +43,6 @@ public class PlayerController : MonoBehaviour, Respawnable {
     private GameObject interactable = null;
     private bool canPickUp = true;
 
-    //Respawnable
-    private Vector3 spawnPosition;
-    private bool isActiveOnSpawn;
-
     void Awake() {
         soundRingPool = new GameObject[ringCount];
         for(int i = 0; i < ringCount; i++) {
@@ -62,10 +58,6 @@ public class PlayerController : MonoBehaviour, Respawnable {
         savePlayerSprite = GetComponent<SpriteRenderer>().sprite;
 		disguiseScript = GetComponent<DisguiseScript>();
         audioSource = GetComponent<AudioSource>();
-
-        //Respawnable
-        spawnPosition = transform.position;
-        isActiveOnSpawn = gameObject.activeSelf;
     }
 
     void Update() {
@@ -322,21 +314,5 @@ public class PlayerController : MonoBehaviour, Respawnable {
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
         }
-    }
-
-    public void Respawn() {
-        rb.velocity = Vector2.zero;
-        transform.position = spawnPosition;
-        gameObject.SetActive(isActiveOnSpawn);
-
-        usingBox = false;
-        isSprinting = false;
-        isSlowed = false;
-
-        interactable = null;
-        canPickUp = true;
-        currentDisguise = null;
-        disguiseScript.SetAnimControlToOrig();
-        audioSource.Stop();
     }
 }

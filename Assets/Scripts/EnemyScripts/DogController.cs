@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogController : MonoBehaviour, Respawnable {
+public class DogController : MonoBehaviour {
 
     public const int STATE_WANDER = 0, STATE_GO_TO_NOISE = 1, STATE_STAND_AND_BARK = 2;
     public ForceMode2D fMode;
@@ -26,10 +26,6 @@ public class DogController : MonoBehaviour, Respawnable {
     private Transform wanderTarget;
     private int barkingFrames = 0;
 
-    //Respawnable
-    private Vector3 spawnPosition;
-    private bool isActiveOnSpawn;
-
     private void Start()
     {
         state = STATE_WANDER;
@@ -50,10 +46,6 @@ public class DogController : MonoBehaviour, Respawnable {
 
         StartCoroutine(ChooseNewWanderTarget());
         StartCoroutine(Bark());
-
-        //Respawnable
-        spawnPosition = transform.position;
-        isActiveOnSpawn = gameObject.activeSelf;
     }
 
     IEnumerator ChooseNewWanderTarget()
@@ -166,15 +158,4 @@ public class DogController : MonoBehaviour, Respawnable {
             barkingFrames = 0;
         }
     }
-
-    public void Respawn() {
-        state = STATE_WANDER;
-        speed = wanderSpeed;
-        pathFinding.target = wanderTarget;
-        rb.velocity = Vector2.zero;
-        transform.position = spawnPosition;
-        gameObject.SetActive(isActiveOnSpawn);
-        audioSource.Stop();
-    }
-
 }

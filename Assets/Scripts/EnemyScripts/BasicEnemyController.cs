@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class BasicEnemyController : MonoBehaviour, Respawnable {
+public class BasicEnemyController : MonoBehaviour {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
@@ -26,12 +26,7 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
 	private CircleCollider2D attackCollider;
 
     //Death Audio
-    private AudioSource audioSource;
-
-    //Respawnable
-    private Vector3 spawnPosition;
-    private bool isActiveOnSpawn;
-    private GameObject firstNode;
+    private AudioSource a_found;
 
     void Start() {
         visionCone = transform.GetChild(0).gameObject;
@@ -41,12 +36,7 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
-        audioSource = GetComponent<AudioSource>();
-
-        //Respawnable
-        spawnPosition = transform.position;
-        isActiveOnSpawn = gameObject.activeSelf;
-        firstNode = nextNode;
+        a_found = GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -165,21 +155,9 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
         if (other.CompareTag("Player") && 
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
 			state == STATE_HUNTING)) {
-			audioSource.Play();
+			a_found.Play();
 			animationController.SetBool("IS_ATTACKING", true);
 			other.gameObject.GetComponent<PlayerController>().KillPlayer();
 		}
 	}
-
-    public void Respawn()
-    {
-        transform.position = spawnPosition;
-        gameObject.SetActive(isActiveOnSpawn);
-        state = BasicEnemyController.STATE_PATHING;
-        pathController.maxSpeed = baseSpeed;
-        StopAttacking();
-        nextNode = firstNode;
-        UpdateDestination(nextNode.transform.position);
-        audioSource.Stop();
-    }
 }

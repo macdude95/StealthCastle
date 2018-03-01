@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemyController : MonoBehaviour, Respawnable {
+public class RangedEnemyController : MonoBehaviour {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
@@ -32,12 +32,7 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
     private CircleCollider2D attackCollider;
 
     //Death Audio
-    private AudioSource audioSource;
-
-    //Respawnable
-    private Vector3 spawnPosition;
-    private bool isActiveOnSpawn;
-    private GameObject firstNode;
+    private AudioSource a_found;
 
     void Start()
     {
@@ -48,15 +43,10 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
         UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
-        audioSource = GetComponent<AudioSource>();
+        a_found = GetComponent<AudioSource>();
 
         arrowController = arrowProjectile.GetComponent<ArrowController>();
         arrowController.SetParent(this.GetComponent<RangedEnemyController>());
-
-        //Respawnable
-        spawnPosition = transform.position;
-        isActiveOnSpawn = gameObject.activeSelf;
-        firstNode = nextNode;
     }
 
     void Update()
@@ -235,24 +225,9 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
             state == STATE_HUNTING))
         {
-            audioSource.Play();
+            a_found.Play();
             animationController.SetBool("IS_ATTACKING", true);
             other.gameObject.GetComponent<PlayerController>().KillPlayer();
         }
-    }
-
-    public void Respawn()
-    {
-        transform.position = spawnPosition;
-        gameObject.SetActive(isActiveOnSpawn);
-        state = BasicEnemyController.STATE_PATHING;
-        StopAttacking();
-        nextNode = firstNode;
-        UpdateDestination(nextNode.transform.position);
-
-        //projectile stuff
-        arrowProjectile.SetActive(false);
-        arrorwReady = true;
-        audioSource.Stop();
     }
 }
