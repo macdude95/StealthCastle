@@ -32,7 +32,7 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
     private CircleCollider2D attackCollider;
 
     //Death Audio
-    private AudioSource a_found;
+    private AudioSource audioSource;
 
     //Respawnable
     private Vector3 spawnPosition;
@@ -48,7 +48,7 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
         UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
-        a_found = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         arrowController = arrowProjectile.GetComponent<ArrowController>();
         arrowController.SetParent(this.GetComponent<RangedEnemyController>());
@@ -235,7 +235,7 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
             state == STATE_HUNTING))
         {
-            a_found.Play();
+            audioSource.Play();
             animationController.SetBool("IS_ATTACKING", true);
             other.gameObject.GetComponent<PlayerController>().KillPlayer();
         }
@@ -253,5 +253,6 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
         //projectile stuff
         arrowProjectile.SetActive(false);
         arrorwReady = true;
+        audioSource.Stop();
     }
 }

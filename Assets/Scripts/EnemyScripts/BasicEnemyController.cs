@@ -26,7 +26,7 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
 	private CircleCollider2D attackCollider;
 
     //Death Audio
-    private AudioSource a_found;
+    private AudioSource audioSource;
 
     //Respawnable
     private Vector3 spawnPosition;
@@ -41,7 +41,7 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
 		UpdateDestination(nextNode.transform.position);
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
-        a_found = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         //Respawnable
         spawnPosition = transform.position;
@@ -165,7 +165,7 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
         if (other.CompareTag("Player") && 
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
 			state == STATE_HUNTING)) {
-			a_found.Play();
+			audioSource.Play();
 			animationController.SetBool("IS_ATTACKING", true);
 			other.gameObject.GetComponent<PlayerController>().KillPlayer();
 		}
@@ -180,5 +180,6 @@ public class BasicEnemyController : MonoBehaviour, Respawnable {
         StopAttacking();
         nextNode = firstNode;
         UpdateDestination(nextNode.transform.position);
+        audioSource.Stop();
     }
 }

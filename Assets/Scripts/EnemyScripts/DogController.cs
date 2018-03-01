@@ -174,6 +174,7 @@ public class DogController : MonoBehaviour, Respawnable {
         rb.velocity = Vector2.zero;
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
+        audioSource.Stop();
     }
 
 }
