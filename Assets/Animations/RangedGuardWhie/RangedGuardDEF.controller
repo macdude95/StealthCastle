@@ -189,6 +189,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+--- !u!1101 &1101543077829612608
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IS_ATTACKING
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: DIR
+    m_EventTreshold: 1
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102507462489369488}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 0
 --- !u!1101 &1101705569013088176
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -249,7 +276,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
---- !u!1101 &1101813957323740112
+--- !u!1101 &1101789333764224588
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -259,8 +286,11 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IS_ATTACKING
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: DIR
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102872726782601688}
+  m_DstState: {fileID: 1102440935707239554}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -671,13 +701,12 @@ AnimatorStateMachine:
     m_Position: {x: 564, y: 588, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102507462489369488}
-    m_Position: {x: 348, y: 588, z: 0}
+    m_Position: {x: 360, y: 588, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102440935707239554}
     m_Position: {x: 564, y: 540, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
-  - {fileID: 1101813957323740112}
   - {fileID: 1101380135259770738}
   - {fileID: 1101436121330515384}
   - {fileID: 1101915167487734928}
@@ -686,6 +715,8 @@ AnimatorStateMachine:
   - {fileID: 1101787098862807560}
   - {fileID: 1101225745808924500}
   - {fileID: 1101060439908255376}
+  - {fileID: 1101789333764224588}
+  - {fileID: 1101543077829612608}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

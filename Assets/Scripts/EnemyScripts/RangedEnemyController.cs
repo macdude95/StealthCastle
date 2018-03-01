@@ -89,7 +89,6 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
         {
             StartAttacking();
             arrowTargetPosition = player.transform.position;
-            FireProjectile();
         }
 
         if(!animationController.GetBool("IS_ATTACKING"))

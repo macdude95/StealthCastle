@@ -1,17 +1,21 @@
 fileFormatVersion: 2
-guid: 08af5f3b3a527214d8cf4bd29d87aaad
-timeCreated: 1519869221
+guid: dbfa487995279654aa60825074f94c4c
+timeCreated: 1519935608
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Archer_0
-    21300002: Archer_1
-    21300004: Archer_2
-    21300006: Archer_3
-    21300008: Archer_4
-    21300010: Archer_5
-    21300012: Archer_6
-    21300014: Archer_7
+    21300000: ArcherAttackSide_0
+    21300002: ArcherAttackSide_1
+    21300004: ArcherAttackSide_2
+    21300006: ArcherAttackSide_3
+    21300008: ArcherAttackSide_4
+    21300010: ArcherAttackSide_5
+    21300012: ArcherAttackSide_6
+    21300014: ArcherAttackSide_7
+    21300016: ArcherAttackSide_8
+    21300018: ArcherAttackSide_9
+    21300020: ArcherAttackSide_10
+    21300022: ArcherAttackSide_11
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -88,7 +92,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Archer_0
+      name: ArcherAttackSide_0
       rect:
         serializedVersion: 2
         x: 0
@@ -102,7 +106,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Archer_1
+      name: ArcherAttackSide_1
       rect:
         serializedVersion: 2
         x: 16
@@ -116,7 +120,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Archer_2
+      name: ArcherAttackSide_2
       rect:
         serializedVersion: 2
         x: 32
@@ -130,35 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Archer_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Archer_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Archer_5
+      name: ArcherAttackSide_3
       rect:
         serializedVersion: 2
         x: 0
@@ -172,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Archer_6
+      name: ArcherAttackSide_4
       rect:
         serializedVersion: 2
         x: 16
@@ -186,11 +162,95 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Archer_7
+      name: ArcherAttackSide_5
       rect:
         serializedVersion: 2
         x: 32
         y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArcherAttackSide_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
         width: 16
         height: 16
       alignment: 0
