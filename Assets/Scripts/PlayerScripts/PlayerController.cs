@@ -106,15 +106,15 @@ public class PlayerController : MonoBehaviour, Respawnable {
 		}
     }
 
-	public void ResetScene() {
-		GameController.instance.ResetScene();
+    public void DidFinishDying() {
+        GameController.instance.PlayerDied();
 	}
 
     public void KillPlayer() {
         isDead = true;
         if (usingBox) {
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
-            this.GetComponent<Animator>().enabled = true;
+            animControl.enabled = true;
         }
         disguiseScript.SetAnimControlToOrig();
         animControl.SetBool("IS_DEAD", true);
@@ -329,6 +329,7 @@ public class PlayerController : MonoBehaviour, Respawnable {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
 
+        isDead = false;
         usingBox = false;
         isSprinting = false;
         isSlowed = false;
@@ -337,6 +338,7 @@ public class PlayerController : MonoBehaviour, Respawnable {
         canPickUp = true;
         currentDisguise = null;
         disguiseScript.SetAnimControlToOrig();
+        animControl.SetBool("IS_DEAD", false);
         audioSource.Stop();
     }
 }

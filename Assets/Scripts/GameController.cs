@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 	public Image scoreDisplay;
 	public Text itemText;
 	public Text pointText;
+    public Text restartLevelText;
 
 	public GameObject currItem;
 	public static GameController instance;
@@ -39,11 +40,15 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             RespawnObjects();
         }
 	}
+
+    public void PlayerDied() {
+        restartLevelText.gameObject.SetActive(true);
+    }
 
     private void RespawnObjects() {
         SetPlayerItem(null);
@@ -51,6 +56,7 @@ public class GameController : MonoBehaviour {
         {
             rc.Respawn();
         }
+        restartLevelText.gameObject.SetActive(false);
     }
 
 	public void SetPlayerItem(GameObject item) {
@@ -74,8 +80,4 @@ public class GameController : MonoBehaviour {
 		return currItem == null ? "none" : currItem.name;
 	}
 
-	public void ResetScene() {
-		string sceneName = SceneManager.GetActiveScene().name;
-		SceneManager.LoadScene(sceneName);
-	}
 }
