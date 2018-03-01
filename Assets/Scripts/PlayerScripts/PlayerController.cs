@@ -340,5 +340,7 @@ public class PlayerController : MonoBehaviour, Respawnable {
         disguiseScript.SetAnimControlToOrig();
         animControl.SetBool("IS_DEAD", false);
         audioSource.Stop();
+
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 }
