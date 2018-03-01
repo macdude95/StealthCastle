@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour {
 		}
         //DontDestroyOnLoad(gameObject); breaks too much rn
 
+        fadeInOutImage.gameObject.SetActive(true);
+
         respawnableObjects = InterfaceHelper.FindObjects<Respawnable>();
 	}
 
