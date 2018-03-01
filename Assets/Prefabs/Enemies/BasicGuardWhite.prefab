@@ -343,6 +343,8 @@ MonoBehaviour:
   numOfRays: 10
   lightRange: 145
   raycastFrameDelay: 2
+  ignoresDisguises: 0
+  isRanged: 0
 --- !u!114 &114442404158131718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,6 +370,7 @@ MonoBehaviour:
     useGraphRaycasting: 0
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114764108850263034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +394,7 @@ MonoBehaviour:
   centerOffset: 1
   rotationIn2D: 1
   targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
   rotationSpeed: 2560
   slowdownDistance: 0
   pickNextWaypointDist: 32

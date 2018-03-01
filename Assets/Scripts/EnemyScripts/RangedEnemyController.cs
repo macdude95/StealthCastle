@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemyController : MonoBehaviour {
+public class RangedEnemyController : MonoBehaviour, Respawnable {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
@@ -34,6 +34,11 @@ public class RangedEnemyController : MonoBehaviour {
     //Death Audio
     private AudioSource a_found;
 
+    //Respawnable
+    private Vector3 spawnPosition;
+    private bool isActiveOnSpawn;
+    private GameObject firstNode;
+
     void Start()
     {
         visionCone = transform.GetChild(0).gameObject;
@@ -47,6 +52,11 @@ public class RangedEnemyController : MonoBehaviour {
 
         arrowController = arrowProjectile.GetComponent<ArrowController>();
         arrowController.SetParent(this.GetComponent<RangedEnemyController>());
+
+        //Respawnable
+        spawnPosition = transform.position;
+        isActiveOnSpawn = gameObject.activeSelf;
+        firstNode = nextNode;
     }
 
     void Update()
@@ -229,5 +239,19 @@ public class RangedEnemyController : MonoBehaviour {
             animationController.SetBool("IS_ATTACKING", true);
             other.gameObject.GetComponent<PlayerController>().KillPlayer();
         }
+    }
+
+    public void Respawn()
+    {
+        transform.position = spawnPosition;
+        gameObject.SetActive(isActiveOnSpawn);
+        state = BasicEnemyController.STATE_PATHING;
+        StopAttacking();
+        nextNode = firstNode;
+        UpdateDestination(nextNode.transform.position);
+
+        //projectile stuff
+        arrowProjectile.SetActive(false);
+        arrorwReady = true;
     }
 }

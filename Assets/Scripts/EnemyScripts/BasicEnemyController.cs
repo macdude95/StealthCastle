@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class BasicEnemyController : MonoBehaviour {
+public class BasicEnemyController : MonoBehaviour, Respawnable {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
@@ -28,6 +28,11 @@ public class BasicEnemyController : MonoBehaviour {
     //Death Audio
     private AudioSource a_found;
 
+    //Respawnable
+    private Vector3 spawnPosition;
+    private bool isActiveOnSpawn;
+    private GameObject firstNode;
+
     void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
@@ -37,6 +42,11 @@ public class BasicEnemyController : MonoBehaviour {
         state = BasicEnemyController.STATE_PATHING;
         baseSpeed = pathController.maxSpeed;
         a_found = GetComponent<AudioSource>();
+
+        //Respawnable
+        spawnPosition = transform.position;
+        isActiveOnSpawn = gameObject.activeSelf;
+        firstNode = nextNode;
     }
 
     void Update() {
@@ -160,4 +170,15 @@ public class BasicEnemyController : MonoBehaviour {
 			other.gameObject.GetComponent<PlayerController>().KillPlayer();
 		}
 	}
+
+    public void Respawn()
+    {
+        transform.position = spawnPosition;
+        gameObject.SetActive(isActiveOnSpawn);
+        state = BasicEnemyController.STATE_PATHING;
+        pathController.maxSpeed = baseSpeed;
+        StopAttacking();
+        nextNode = firstNode;
+        UpdateDestination(nextNode.transform.position);
+    }
 }
