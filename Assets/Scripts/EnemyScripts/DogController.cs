@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/* DogController.cs
+ * Created by Michael Cantrell
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -167,6 +171,10 @@ public class DogController : MonoBehaviour, IRespawnable {
         }
     }
 
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn() {
         state = STATE_WANDER;
         speed = wanderSpeed;

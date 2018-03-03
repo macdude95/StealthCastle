@@ -78,6 +78,11 @@ public class VisionConeController : MonoBehaviour {
         }
     }
 
+    /* UpdateDynamicVisionCone
+    * Created by Michael Cantrell
+    * Is called every "raycastFrameDelay" frames in order to dynamically create
+    * the mesh that is the dynamically shaping vision cone
+    */
     void UpdateDynamicVisionCone() {
         List<Vector3> vertices = new List<Vector3>();
 
@@ -107,6 +112,11 @@ public class VisionConeController : MonoBehaviour {
         }
     }
 
+    /* drawTriangles
+    * Created by Michael Cantrell
+    * Take the verticies calculated using raycasts and draw triangles to 
+    * create the mesh
+    */
     private void drawTriangles(List<Vector3> vertices)
     {
         List<int> triangles = new List<int>();
@@ -124,6 +134,10 @@ public class VisionConeController : MonoBehaviour {
         coneMesh.triangles = triangles.ToArray();
     }
 
+    /* getV3fromV2
+    * Created by Michael Cantrell
+    * Turn a Vector3 into a Vector2 by disregaurding the z component
+    */
     private static Vector2 getV3fromV2(Vector3 v3)
     {
         return new Vector2(v3.x, v3.y);
@@ -134,7 +148,10 @@ public class VisionConeController : MonoBehaviour {
         coneMesh = GetComponent<MeshFilter>().mesh;
     }
 
-    // uncomment this line if you want to see vision cone in scene window
+    /* OnDrawGizmos
+    * Created by Michael Cantrell
+    * uncomment this line if you want to see vision cone in scene window
+    */
     //void OnDrawGizmos()
     //{
     //    Start();

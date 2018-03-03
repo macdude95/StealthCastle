@@ -324,6 +324,10 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         }
     }
 
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn() {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);

@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿/* SoundRingController.cs
+ * Created by Michael Cantrell
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingBehavior : MonoBehaviour {
+public class SoundRingController : MonoBehaviour {
 
 	public float endScale = 0.5f;
 	public float smoothTime = 0.3F;
