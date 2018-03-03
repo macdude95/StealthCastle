@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/* DogPathFinding.cs
+ * Created by Michael Cantrell
+ */
+
+using UnityEngine;
 using Pathfinding;
 using System.Collections;
 

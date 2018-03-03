@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class BasicEnemyController : MonoBehaviour, Respawnable {
+public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;

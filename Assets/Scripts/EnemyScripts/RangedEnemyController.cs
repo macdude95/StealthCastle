@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemyController : MonoBehaviour, Respawnable {
+public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour, Respawnable {
+public class PlayerController : MonoBehaviour, IRespawnable {
 
 	public float runSpeed = 75;
 	public float walkSpeed = 45;	

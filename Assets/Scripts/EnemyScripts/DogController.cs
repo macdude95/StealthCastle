@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogController : MonoBehaviour, Respawnable {
+public class DogController : MonoBehaviour, IRespawnable {
 
     public const int STATE_WANDER = 0, STATE_GO_TO_NOISE = 1, STATE_STAND_AND_BARK = 2;
     public ForceMode2D fMode;

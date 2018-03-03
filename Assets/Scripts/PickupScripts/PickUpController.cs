@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpController : MonoBehaviour, Respawnable {
+public class PickUpController : MonoBehaviour, IRespawnable {
 
     public string displayName;
 	public bool itemIsDisguise = false;
