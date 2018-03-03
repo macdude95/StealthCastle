@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public static GameController instance;
 
 	public int score;
+    private bool isDead = false;
 
     private IList<IRespawnable> respawnableObjects;
 
@@ -44,17 +45,21 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.anyKeyDown && isDead)
         {
             StartCoroutine(FadeAndCompletion(() => {
-                RespawnObjects();
-                fadeInOutAnimator.SetBool("FADE", false);
+            RespawnObjects();
+            fadeInOutAnimator.SetBool("FADE", false);
+                isDead = false;
             }));
         }
 	}
 
     public void PlayerDied() {
+        restartLevelText.text = "You Died\n" + "Press any key to Restart";
         restartLevelText.gameObject.SetActive(true);
+        isDead = true;
+        Input.ResetInputAxes();
     }
 
     /* LoadNewLevel
