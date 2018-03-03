@@ -29,12 +29,12 @@ GameObject:
   - component: {fileID: 114217110245491752}
   - component: {fileID: 82328589451509828}
   m_Layer: 0
-  m_Name: RangedGuardDEF
+  m_Name: RangedGuardWhite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1590622029345794
 GameObject:
   m_ObjectHideFlags: 0

@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 
         rb.velocity = Vector2.zero;
         GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().sortingLayerName = "Environment";
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -351,5 +352,6 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 
         GetComponent<BoxCollider2D>().enabled = true;
         rb.velocity = Vector2.zero;
+        GetComponent<SpriteRenderer>().sortingLayerName = "Player";
     }
 }

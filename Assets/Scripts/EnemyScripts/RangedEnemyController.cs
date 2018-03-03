@@ -98,7 +98,6 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         {
             state = BasicEnemyController.STATE_HUNTING;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-            pathController.slowdownDistance = 0;
 
             Vector3 playerPosition = player.transform.position;
             GraphNode nearestPlayerNode =
@@ -150,7 +149,6 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
-            pathController.slowdownDistance = 64;
             UpdateDestination(nextNode.transform.position);
         }
     }
