@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* PathNodeController.cs
+ * Created by Daniel Anderson
+ */
+
 public class PathNodeController : MonoBehaviour {
 
     public GameObject nextNode;

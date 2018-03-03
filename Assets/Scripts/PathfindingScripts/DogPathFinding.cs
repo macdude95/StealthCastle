@@ -1,10 +1,10 @@
-﻿/* DogPathFinding.cs
- * Created by Michael Cantrell
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 using Pathfinding;
 using System.Collections;
+
+/* DogPathFinding.cs
+ * Created by Michael Cantrell
+ */
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Seeker))]

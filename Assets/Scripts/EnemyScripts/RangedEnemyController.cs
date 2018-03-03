@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* RangedEnemyController.cs
+ * Created by Daniel Anderson
+ */
 public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
     //state machine states

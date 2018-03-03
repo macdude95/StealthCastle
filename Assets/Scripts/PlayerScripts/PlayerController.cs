@@ -228,6 +228,11 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         newGadget.SetActive(false);
 	}
 
+    /* SoundRings
+    * Created by Michael Cantrell
+    * Every "framesBetweenRings", this method creates a new SoundRing
+    * and plays the associated sound
+    */
 	private void SoundRings() {
 		if (framesSinceLastRing < framesBetweenRings) {
 			framesSinceLastRing++;

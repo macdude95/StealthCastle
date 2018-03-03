@@ -1,10 +1,10 @@
-﻿/* SoundRingController.cs
- * Created by Michael Cantrell
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/* SoundRingController.cs
+ * Created by Michael Cantrell
+ */
 
 public class SoundRingController : MonoBehaviour {
 

@@ -1,10 +1,10 @@
-﻿/* DogController.cs
- * Created by Michael Cantrell
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/* DogController.cs
+ * Created by Michael Cantrell
+ */
 
 public class DogController : MonoBehaviour, IRespawnable {
 
