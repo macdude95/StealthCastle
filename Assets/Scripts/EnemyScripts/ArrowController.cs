@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* ArrowController.cs
+ * Created by Daniel Anderson
+ */
+
 public class ArrowController : MonoBehaviour {
 
     private RangedEnemyController parent;

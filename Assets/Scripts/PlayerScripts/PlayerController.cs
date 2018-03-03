@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour, Respawnable {
+public class PlayerController : MonoBehaviour, IRespawnable {
 
 	public float runSpeed = 75;
 	public float walkSpeed = 45;	
@@ -228,6 +228,11 @@ public class PlayerController : MonoBehaviour, Respawnable {
         newGadget.SetActive(false);
 	}
 
+    /* SoundRings
+    * Created by Michael Cantrell
+    * Every "framesBetweenRings", this method creates a new SoundRing
+    * and plays the associated sound
+    */
 	private void SoundRings() {
 		if (framesSinceLastRing < framesBetweenRings) {
 			framesSinceLastRing++;
@@ -324,6 +329,10 @@ public class PlayerController : MonoBehaviour, Respawnable {
         }
     }
 
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn() {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);

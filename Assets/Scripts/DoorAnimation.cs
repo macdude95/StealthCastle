@@ -33,8 +33,6 @@ public class DoorAnimation : MonoBehaviour
             door_anim.ResetTrigger("DoorOpen");
             GetComponent<BoxCollider2D>().enabled = true;
         }
-
-
     }
 
     public void ChangeDoorStatus()

@@ -1,14 +1,14 @@
-﻿/* Retrieved from http://wiki.unity3d.com/index.php/Interface_Finder
- * on Feb 28th, 2018
- * by Michael Cantrell
- * 
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Component = UnityEngine.Component;
 using Object = UnityEngine.Object;
+
+/* Retrieved from http://wiki.unity3d.com/index.php/Interface_Finder
+ * on Feb 28th, 2018
+ * by Michael Cantrell
+ * 
+ */
 
 public static class InterfaceHelper
 {

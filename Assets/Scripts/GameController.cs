@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
 
 	public int score;
 
-    private IList<Respawnable> respawnableObjects;
+    private IList<IRespawnable> respawnableObjects;
 
 	private void Awake() {
 		if (instance == null) {
@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 
         fadeInOutImage.gameObject.SetActive(true);
 
-        respawnableObjects = InterfaceHelper.FindObjects<Respawnable>();
+        respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
 	}
 
 	// Use this for initialization
@@ -57,6 +57,11 @@ public class GameController : MonoBehaviour {
         restartLevelText.gameObject.SetActive(true);
     }
 
+    /* LoadNewLevel
+    * Created by Michael Cantrell
+    * Takes in a string that is the name of the scene to load
+    * then performs a fade before loading the new scene with SceneManager
+    */
     public void LoadNewLevel(string sceneName) {
         StartCoroutine(FadeAndCompletion(() =>
         {
@@ -64,15 +69,26 @@ public class GameController : MonoBehaviour {
         }));
     }
 
+    /* FadeAndCompletion
+    * Created by Michael Cantrell
+    * A coroutine that fades the scene to black and then
+    * performs a specified action after the fade is complete
+    */
     private IEnumerator FadeAndCompletion(System.Action onFadeComplete) {
         fadeInOutAnimator.SetBool("FADE", true);
         yield return new WaitUntil(() => Mathf.Approximately(fadeInOutImage.color.a,1));
         onFadeComplete();
     }
 
+    /* RespawnObjects
+    * Created by Michael Cantrell
+    * Takes all of the objects in the scene
+    * of type "IRespawnable" and calls their "Respawn" methods
+    * in order to reset the scene.
+    */
     private void RespawnObjects() {
         SetPlayerItem(null);
-        foreach (Respawnable rc in respawnableObjects)
+        foreach (IRespawnable rc in respawnableObjects)
         {
             rc.Respawn();
         }

@@ -2,6 +2,10 @@
 using Pathfinding;
 using System.Collections;
 
+/* DogPathFinding.cs
+ * Created by Michael Cantrell
+ */
+
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(Seeker))]
 public class DogPathFinding : MonoBehaviour {

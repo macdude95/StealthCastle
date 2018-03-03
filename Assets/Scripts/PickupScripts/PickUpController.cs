@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpController : MonoBehaviour, Respawnable {
+public class PickUpController : MonoBehaviour, IRespawnable {
 
     public string displayName;
 	public bool itemIsDisguise = false;
@@ -44,6 +44,11 @@ public class PickUpController : MonoBehaviour, Respawnable {
 
     public string GetName() { return displayName; }
 
+
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn()
     {
         transform.position = spawnPosition;

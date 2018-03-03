@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogController : MonoBehaviour, Respawnable {
+/* DogController.cs
+ * Created by Michael Cantrell
+ */
+
+public class DogController : MonoBehaviour, IRespawnable {
 
     public const int STATE_WANDER = 0, STATE_GO_TO_NOISE = 1, STATE_STAND_AND_BARK = 2;
     public ForceMode2D fMode;
@@ -167,6 +171,10 @@ public class DogController : MonoBehaviour, Respawnable {
         }
     }
 
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn() {
         state = STATE_WANDER;
         speed = wanderSpeed;

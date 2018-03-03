@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemyController : MonoBehaviour, Respawnable {
+/* RangedEnemyController.cs
+ * Created by Daniel Anderson
+ */
+public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
@@ -240,6 +243,11 @@ public class RangedEnemyController : MonoBehaviour, Respawnable {
         }
     }
 
+
+    /* Respawn
+    * Created by Michael Cantrell
+    * Resets this class's attributes to their original states
+    */
     public void Respawn()
     {
         transform.position = spawnPosition;
