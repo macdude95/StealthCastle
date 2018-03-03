@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212302802224443550}
   - component: {fileID: 50955862402714096}
   - component: {fileID: 58938360359511612}
-  - component: {fileID: 114302998226396692}
+  - component: {fileID: 114469519267747952}
   m_Layer: 0
   m_Name: soundRing
   m_TagString: SoundRing
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -3.5022278}
   serializedVersion: 2
   m_Radius: 299.0829
---- !u!114 &114302998226396692
+--- !u!114 &114469519267747952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -86,10 +86,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493550792977570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc83434c570d488f82298d751e51ad9, type: 3}
+  m_Script: {fileID: 11500000, guid: 933a6d20ffa76ef428bd5edf467d1a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endScale: 0.7
+  endScale: 0.5
   smoothTime: 0.3
   fadeSpeed: 50
 --- !u!212 &212302802224443550
