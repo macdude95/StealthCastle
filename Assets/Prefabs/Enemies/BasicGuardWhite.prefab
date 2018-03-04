@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStuckTime: 60
   nextNode: {fileID: 0}
-  huntingSpeedMult: 3
+  huntingSpeedMult: 4
 --- !u!212 &212970902996263962
 SpriteRenderer:
   m_ObjectHideFlags: 1

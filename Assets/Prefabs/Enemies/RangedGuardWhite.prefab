@@ -364,7 +364,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -388,7 +388,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95135537241485006
 Animator:
   serializedVersion: 3
@@ -523,7 +523,7 @@ MonoBehaviour:
   maxStuckTime: 60
   arrowSpeed: 200
   nextNode: {fileID: 0}
-  huntingSpeedMult: 3
+  huntingSpeedMult: 4
   arrowProjectile: {fileID: 1939716107612452}
 --- !u!212 &212044592271358234
 SpriteRenderer:
