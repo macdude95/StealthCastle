@@ -98,12 +98,12 @@ public class VisionConeController : MonoBehaviour {
             if (hit)
             {
                 Debug.DrawLine(transform.position, hit.point);
-                vertices.Add(transform.InverseTransformPoint(new Vector3(hit.point.x, hit.point.y, -1)));
+                vertices.Add(transform.InverseTransformPoint(new Vector3(hit.point.x, hit.point.y, 0)));
             }
             else
             {
                 Debug.DrawRay(transform.position, lDirection);
-                vertices.Add(transform.InverseTransformPoint(new Vector3(transform.position.x + lDirection.x * lightRange, transform.position.y + lDirection.y * lightRange, -1)));
+                vertices.Add(transform.InverseTransformPoint(new Vector3(transform.position.x + lDirection.x * lightRange, transform.position.y + lDirection.y * lightRange, 0)));
             }
         }
         if (vertices.Count > 2)

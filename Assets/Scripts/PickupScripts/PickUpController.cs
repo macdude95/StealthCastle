@@ -39,6 +39,7 @@ public class PickUpController : MonoBehaviour, IRespawnable {
 		if (collision.gameObject.tag == "Player" &&
 			 displayName.Equals("Gem")) {
             gameObject.SetActive(false);
+            isActiveOnSpawn = false;
         }
 	}
 

@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStuckTime: 60
   nextNode: {fileID: 0}
-  huntingSpeedMult: 3
+  huntingSpeedMult: 4
 --- !u!114 &114984701481480560
 MonoBehaviour:
   m_ObjectHideFlags: 1
