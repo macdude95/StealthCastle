@@ -28,14 +28,12 @@ public class CoinBehavior : ThrowableBehavior {
 	void FixedUpdate() {
 		if (isBeingThrown) {
             audioSource.PlayOneShot(coinToss);
-            print("is being thrown");
 			airTime++;
 			SetUsable(false);
 		}
 
 		if (ThrownForMaxTime()) {
             audioSource.PlayOneShot(coinHitConcrete);
-            print("max time");
 			PutThrowableOnGround();
 			SoundRing();
 			SetUsable(true);
@@ -47,7 +45,6 @@ public class CoinBehavior : ThrowableBehavior {
 		if (collision.gameObject.layer == WALL_LAYER ||
 			!collision.gameObject.CompareTag("Enemy")) {
             audioSource.PlayOneShot(coinHitConcrete);
-            print("hitting wall play sound");
 		}
 		PutThrowableOnGround();
 		SoundRing();
