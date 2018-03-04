@@ -11,6 +11,25 @@ using UnityEngine;
  */
 public class CaltropsBehavior : ThrowableBehavior {
 
+	public AudioClip setCaltrops;
+	private AudioSource audioSource;
+
+	void Awake() {
+		audioSource = GetComponent<AudioSource>();
+	}
+
+	void FixedUpdate() {
+		if (isBeingThrown) {
+			airTime++;
+			SetUsable(false);
+
+			if (ThrownForMaxTime()) {
+				audioSource.PlayOneShot(setCaltrops);
+				PutThrowableOnGround();
+			}
+		}
+	}
+
 	private void OnCollisionEnter2D(Collision2D collision) {
 		rb2D.velocity = Vector2.zero;
 		GameObject entity = collision.gameObject;
@@ -18,10 +37,14 @@ public class CaltropsBehavior : ThrowableBehavior {
 			PutThrowableOnGround();
 			SetUsable(true);
 		}
-		if (entity.CompareTag("Enemy")) {
+		else if (entity.CompareTag("Enemy")) {
 			entity.SendMessage("SlowEnemy");
 			isBeingThrown = false;
 			gameObject.SetActive(false);
+		}
+		else {
+			audioSource.PlayOneShot(setCaltrops);
+			PutThrowableOnGround();
 		}
 	}
 

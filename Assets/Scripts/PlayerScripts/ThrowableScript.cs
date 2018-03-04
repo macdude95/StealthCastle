@@ -36,7 +36,7 @@ public class ThrowableScript : MonoBehaviour {
 		aimSlider.enabled = false;
 	}
 
-	void FixedUpdate() {
+	void Update() {
 		if (GameController.instance.GetItemName().Equals("ThrowableCoin") ||
 			GameController.instance.GetItemName().Equals("Caltrops")) {
 			int dirInt = playerAnim.GetInteger("DIR");
@@ -58,12 +58,15 @@ public class ThrowableScript : MonoBehaviour {
 			}
 			if (Input.GetButtonUp("UseItem") || throwPower >= maxPower) {
 				Vector2 throwVec = DirIntToVector(dirInt);
-				SetAimDirection(dirInt);
-
 				UseThrowable(throwVec, throwPower * throwMultiplier);
 				throwPower = 0;
 				aimSlider.value = throwPower;
 			}
+		}
+		else {
+			throwPower = 0f;
+			aimSlider.value = 0;
+			aimSlider.enabled = false;
 		}
 
 		if (throwable != null && !throwableBehaviorScript.isBeingThrown) {
@@ -113,7 +116,7 @@ public class ThrowableScript : MonoBehaviour {
 	}
 
 	private void UseThrowable(Vector2 dir, float power) {
-		throwable.transform.position = this.transform.position;
+		throwable.transform.position = gameObject.transform.position;
 		Physics2D.IgnoreCollision(throwableCollider2D, playerCollider2D, true);
 
 		throwable.SetActive(true);
