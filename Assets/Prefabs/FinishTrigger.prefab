@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4215427005313754}
   - component: {fileID: 61502561829259872}
-  - component: {fileID: 114499814026430840}
   m_Layer: 9
   m_Name: FinishTrigger
   m_TagString: Finish
@@ -53,7 +52,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 30.8, y: 334.82}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -66,15 +65,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 51.5, y: 8}
   m_EdgeRadius: 0
---- !u!114 &114499814026430840
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642487238405532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e38e1cf1346ba94eafad7c4a8049f56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneName: 
