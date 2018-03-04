@@ -10,35 +10,32 @@ using UnityEngine;
  */
 public class CoinBehavior : ThrowableBehavior {
 
-	public AudioSource coinToss;
-	public AudioSource coinHitConcrete;
-	private bool coinTossHasPlayed = false;
+    public AudioClip coinToss;
+    public AudioClip coinHitConcrete;
 
 	public GameObject soundRingPrefab;
 	private GameObject soundRing;
+    private AudioSource audioSource;
 
 	void Awake() {
 		soundRing = Instantiate(soundRingPrefab,
 								transform.position,
 								new Quaternion());
 		soundRing.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void FixedUpdate() {
 		if (isBeingThrown) {
-			if (!coinTossHasPlayed) {
-				coinToss.Play();
-				coinTossHasPlayed = true;
-			}
+            audioSource.PlayOneShot(coinToss);
+            print("is being thrown");
 			airTime++;
 			SetUsable(false);
 		}
 
 		if (ThrownForMaxTime()) {
-			if (!coinHitConcrete.isPlaying) {
-				coinHitConcrete.Play();
-			}
-			coinTossHasPlayed = false;
+            audioSource.PlayOneShot(coinHitConcrete);
+            print("max time");
 			PutThrowableOnGround();
 			SoundRing();
 			SetUsable(true);
@@ -49,11 +46,9 @@ public class CoinBehavior : ThrowableBehavior {
 		int WALL_LAYER = 9;
 		if (collision.gameObject.layer == WALL_LAYER ||
 			!collision.gameObject.CompareTag("Enemy")) {
-			if (!coinHitConcrete.isPlaying) {
-				coinHitConcrete.Play();
-			}
+            audioSource.PlayOneShot(coinHitConcrete);
+            print("hitting wall play sound");
 		}
-		coinTossHasPlayed = false;
 		PutThrowableOnGround();
 		SoundRing();
 		SetUsable(true);
