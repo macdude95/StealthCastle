@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour, IRespawnable {
     private int ringCount = 6;
     private int currentRing = 0;
 
-    public AudioSource a_door;
-    public GameObject doorOpenText;
-
     private Sprite savePlayerSprite;
     private bool usingBox = false;
     private bool isSprinting = false;
