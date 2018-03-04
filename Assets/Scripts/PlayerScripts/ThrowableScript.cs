@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * Created by Brian Egana
+ * This script implements the behavior for when the player throws an item.
+ * To adjust throw strength, the player must hold down the "UseItem" key,
+ * where the longer the key is held, the farther the item will be thrown.
+ * When the key is released, the item is thrown.
+ */
 public class ThrowableScript : MonoBehaviour {
 
 	public float throwMultiplier = 1f;

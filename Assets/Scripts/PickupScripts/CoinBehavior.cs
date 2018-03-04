@@ -2,7 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Created by Brian Egana
+ * This script provides behavior for a throwable coin. When the coin hits a
+ * surface, or is thrown far enough that it "hits the ground", it makes a
+ * sound that attracts any enemies nearby.
+ */
 public class CoinBehavior : ThrowableBehavior {
+
+	public AudioSource coinToss;
+	public AudioSource coinHitConcrete;
+	private bool coinTossHasPlayed = false;
 
 	public GameObject soundRingPrefab;
 	private GameObject soundRing;
@@ -16,11 +26,19 @@ public class CoinBehavior : ThrowableBehavior {
 
 	void FixedUpdate() {
 		if (isBeingThrown) {
+			if (!coinTossHasPlayed) {
+				coinToss.Play();
+				coinTossHasPlayed = true;
+			}
 			airTime++;
 			SetUsable(false);
 		}
 
 		if (ThrownForMaxTime()) {
+			if (!coinHitConcrete.isPlaying) {
+				coinHitConcrete.Play();
+			}
+			coinTossHasPlayed = false;
 			PutThrowableOnGround();
 			SoundRing();
 			SetUsable(true);
@@ -28,6 +46,14 @@ public class CoinBehavior : ThrowableBehavior {
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision) {
+		int WALL_LAYER = 9;
+		if (collision.gameObject.layer == WALL_LAYER ||
+			!collision.gameObject.CompareTag("Enemy")) {
+			if (!coinHitConcrete.isPlaying) {
+				coinHitConcrete.Play();
+			}
+		}
+		coinTossHasPlayed = false;
 		PutThrowableOnGround();
 		SoundRing();
 		SetUsable(true);
