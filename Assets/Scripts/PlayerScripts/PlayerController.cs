@@ -146,9 +146,9 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
 			KillPlayer();
 		}
-		else if (collision.gameObject.CompareTag("Finish")) {
+		/*else if (collision.gameObject.CompareTag("Finish")) {
             GameController.instance.LoadNewLevel("Playtest01");
-		}
+		}*/
 		else if (collision.gameObject.CompareTag("Gem")) {
 			GameController.instance.score++;
 			GameController.instance.DisplayScore();
