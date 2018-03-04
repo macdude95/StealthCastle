@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 /*
- * Created by: Brian Egana
+ * Created by Brian Egana
  * The script uses the animator of the player game object to switch runtime
  * animation controllers, making it so that the player appears to disguise
  * themselves with the gear that they find.
@@ -37,8 +37,7 @@ public class DisguiseScript : MonoBehaviour {
         playerAnim.runtimeAnimatorController = updatedAnimator;
     }
 
-    public void DonDisguise(GameObject item)
-    {
+    public void DonDisguise(GameObject item) {
         updatedAnimator = item.GetComponent<DisguiseInfoContainer>().animator;
         playerAnim.SetBool("IS_CHANGING", true);
     }
