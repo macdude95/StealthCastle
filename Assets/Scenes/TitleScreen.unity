@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 685705759}
   - component: {fileID: 685705758}
   - component: {fileID: 685705761}
+  - component: {fileID: 685705762}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -654,6 +655,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &685705762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 685705756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81665145890c587448cdf39cb7ddc1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &722365393
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +826,7 @@ GameObject:
   - component: {fileID: 770220592}
   - component: {fileID: 770220591}
   - component: {fileID: 770220594}
+  - component: {fileID: 770220595}
   m_Layer: 5
   m_Name: GameControlsButton
   m_TagString: Untagged
@@ -955,6 +968,17 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &770220595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770220589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81665145890c587448cdf39cb7ddc1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &862854798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1361,7 @@ GameObject:
   - component: {fileID: 2033347337}
   - component: {fileID: 2033347336}
   - component: {fileID: 2033347339}
+  - component: {fileID: 2033347340}
   m_Layer: 5
   m_Name: EnterButton
   m_TagString: Untagged
@@ -1404,13 +1429,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2064555904}
         m_MethodName: SceneLoader
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: WebCutterTutorial
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -1466,18 +1491,29 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2064555904}
           m_MethodName: SceneLoader
-          m_Mode: 3
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 1
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: WebCutterTutorial
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &2033347340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2033347334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81665145890c587448cdf39cb7ddc1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064555903
 GameObject:
   m_ObjectHideFlags: 0
