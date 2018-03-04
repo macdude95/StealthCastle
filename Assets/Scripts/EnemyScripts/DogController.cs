@@ -128,7 +128,7 @@ public class DogController : MonoBehaviour, IRespawnable {
             animator.SetBool("IS_MOVING", false);
             return;
         }
-        if (horizontal >= vertical)
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
         {
             if (horizontal > 0)
             {
@@ -136,7 +136,7 @@ public class DogController : MonoBehaviour, IRespawnable {
             }
             else
             {
-                animator.SetInteger("DIR", 2);//left
+                animator.SetInteger("DIR", 3);//left
             }
         }
         else
@@ -147,7 +147,7 @@ public class DogController : MonoBehaviour, IRespawnable {
             }
             else
             {
-                animator.SetInteger("DIR", 3);//down
+                animator.SetInteger("DIR", 2);//down
             }
         }
         animator.SetBool("IS_MOVING", true);

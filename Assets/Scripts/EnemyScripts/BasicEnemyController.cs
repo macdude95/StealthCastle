@@ -113,12 +113,13 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             animationController.SetBool("IS_MOVING", false);
             return;
         }
-        if (horizontal >= vertical) {
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
+        {
             if (horizontal > 0) {
                 animationController.SetInteger("DIR", 1);//right
             }
             else {
-                animationController.SetInteger("DIR", 2);//left
+                animationController.SetInteger("DIR", 3);//left
             }
         }
         else {
@@ -126,7 +127,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
                 animationController.SetInteger("DIR", 0);//up
             }
             else {
-                animationController.SetInteger("DIR", 3);//down
+                animationController.SetInteger("DIR", 2);//down
             }
         }
         animationController.SetBool("IS_MOVING", true);

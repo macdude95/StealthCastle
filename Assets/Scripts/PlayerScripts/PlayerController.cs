@@ -287,12 +287,12 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 			framesSinceLastRing = 0;
             return;
         }
-        if (horizontal >= vertical) {
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical)) {
             if (horizontal > 0) {
                 animControl.SetInteger("DIR", 1); //right
             }
             else {
-                animControl.SetInteger("DIR", 2); //left
+                animControl.SetInteger("DIR", 3); //left
             }
         }
         else {
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
                 animControl.SetInteger("DIR", 0); //up
             }
             else {
-                animControl.SetInteger("DIR", 3); //down
+                animControl.SetInteger("DIR", 2); //down
             }
         }
 		animControl.SetBool("IS_MOVING", true);

@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114301289711147862}
   - component: {fileID: 114217110245491752}
   - component: {fileID: 82328589451509828}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RangedGuardWhite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 61573602538226788}
   - component: {fileID: 114063938943081562}
   - component: {fileID: 95135537241485006}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1391653626468252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -85.3, y: -69, z: 0}
+  m_LocalPosition: {x: -167.1, y: 85.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4387043030326120}
@@ -268,7 +268,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

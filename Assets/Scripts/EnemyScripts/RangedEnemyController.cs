@@ -168,7 +168,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
             animationController.SetBool("IS_MOVING", false);
             return;
         }
-        if (horizontal >= vertical)
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
         {
             if (horizontal > 0)
             {
@@ -176,7 +176,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
             }
             else
             {
-                animationController.SetInteger("DIR", 2);//left
+                animationController.SetInteger("DIR", 3);//left
             }
         }
         else
@@ -187,7 +187,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
             }
             else
             {
-                animationController.SetInteger("DIR", 3);//down
+                animationController.SetInteger("DIR", 2);//down
             }
         }
         animationController.SetBool("IS_MOVING", true);
