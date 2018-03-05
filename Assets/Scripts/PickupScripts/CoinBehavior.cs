@@ -11,11 +11,12 @@ using UnityEngine;
 public class CoinBehavior : ThrowableBehavior {
 
     public AudioClip coinToss;
-    public AudioClip coinHitConcrete;
+    public AudioClip coinHitHardSurface;
+	private AudioSource audioSource;
 
 	public GameObject soundRingPrefab;
 	private GameObject soundRing;
-    private AudioSource audioSource;
+	private bool coinTossHasPlayed = false;
 
 	void Awake() {
 		soundRing = Instantiate(soundRingPrefab,
@@ -27,13 +28,18 @@ public class CoinBehavior : ThrowableBehavior {
 
 	void FixedUpdate() {
 		if (isBeingThrown) {
-            audioSource.PlayOneShot(coinToss);
+			if (!coinTossHasPlayed) {
+				audioSource.PlayOneShot(coinToss);
+				coinTossHasPlayed = true;
+			}
 			airTime++;
 			SetUsable(false);
 		}
 
 		if (ThrownForMaxTime()) {
-            audioSource.PlayOneShot(coinHitConcrete);
+			audioSource.PlayOneShot(coinHitHardSurface);
+			coinTossHasPlayed = false;
+
 			PutThrowableOnGround();
 			SoundRing();
 			SetUsable(true);
@@ -44,8 +50,10 @@ public class CoinBehavior : ThrowableBehavior {
 		int WALL_LAYER = 9;
 		if (collision.gameObject.layer == WALL_LAYER ||
 			!collision.gameObject.CompareTag("Enemy")) {
-            audioSource.PlayOneShot(coinHitConcrete);
+            audioSource.PlayOneShot(coinHitHardSurface);
 		}
+		coinTossHasPlayed = false;
+
 		PutThrowableOnGround();
 		SoundRing();
 		SetUsable(true);
