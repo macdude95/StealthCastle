@@ -54,5 +54,6 @@ public class PickUpController : MonoBehaviour, IRespawnable {
     {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
+        indicator.SetActive(false);
     }
 }
