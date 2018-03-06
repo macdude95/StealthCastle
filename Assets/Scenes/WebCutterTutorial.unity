@@ -521,7 +521,7 @@ Prefab:
     - target: {fileID: 224090697790224918, guid: 37638f5dc4aeff3449f62219dfdad8f0,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37638f5dc4aeff3449f62219dfdad8f0, type: 2}
@@ -1105,7 +1105,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 770431256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.999992, y: -256, z: -10}
+  m_LocalPosition: {x: 32, y: -256, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2317,12 +2317,6 @@ Prefab:
       propertyPath: nextNode
       value: 
       objectReference: {fileID: 1211334328}
-    - target: {fileID: 212044592271358234, guid: edaaa06292e7fdf4fa70ce91855af7d3,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300008, guid: 08af5f3b3a527214d8cf4bd29d87aaad,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edaaa06292e7fdf4fa70ce91855af7d3, type: 2}
   m_IsPrefabParent: 0
