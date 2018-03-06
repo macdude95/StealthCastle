@@ -163,14 +163,32 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 			UpdateDestination(other.transform.position);
 		}
 
-        if (other.CompareTag("Player") && 
+        if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-			state == STATE_HUNTING)) {
-			audioSource.Play();
-			animationController.SetBool("IS_ATTACKING", true);
-			other.gameObject.GetComponent<PlayerController>().KillPlayer();
-		}
+            state == STATE_HUNTING))
+        {
+            print("enter");
+            AttackPlayer(other.gameObject);
+        }
 	}
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") &&
+            (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
+            state == STATE_HUNTING))
+        {
+            AttackPlayer(other.gameObject);
+            print("stay");
+        }
+    }
+
+    private void AttackPlayer(GameObject player)
+    {
+        audioSource.Play();
+        animationController.SetBool("IS_ATTACKING", true);
+        player.GetComponent<PlayerController>().KillPlayer();
+    }
 
     /* Respawn
     * Created by Michael Cantrell
