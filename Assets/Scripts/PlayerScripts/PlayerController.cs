@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 				isSlowed = true;
 			}
 		}
-		else if (collision.gameObject.CompareTag("Enemy") && !usingBox) {
+		else if (collision.gameObject.CompareTag("Enemy") && !usingBox && (collision.gameObject.GetComponent<BasicEnemyController>() != null)) {
 			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Finish")) {
