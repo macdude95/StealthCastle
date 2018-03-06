@@ -9,6 +9,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
     //state machine states
     public static readonly int STATE_PATHING = 0, STATE_ALERT = 1, STATE_HUNTING = 2;
     public float maxStuckTime;
+    private bool canAttack = true;
 
     //pathfinding controller
     public GameObject nextNode;
@@ -73,7 +74,6 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
 		state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-		pathController.slowdownDistance = 0;
 
 		Vector3 playerPosition = player.transform.position;
 		GraphNode nearestPlayerNode =
@@ -96,7 +96,6 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 				 state == BasicEnemyController.STATE_ALERT) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
-			pathController.slowdownDistance = 64;
             UpdateDestination(nextNode.transform.position);
         }
     }
@@ -165,9 +164,8 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
         if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-            state == STATE_HUNTING))
+            state == STATE_HUNTING) && canAttack)
         {
-            print("enter");
             AttackPlayer(other.gameObject);
         }
 	}
@@ -176,10 +174,9 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
     {
         if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-            state == STATE_HUNTING))
+            state == STATE_HUNTING) && canAttack)
         {
             AttackPlayer(other.gameObject);
-            print("stay");
         }
     }
 
@@ -188,6 +185,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         audioSource.Play();
         animationController.SetBool("IS_ATTACKING", true);
         player.GetComponent<PlayerController>().KillPlayer();
+        canAttack = false;
     }
 
     /* Respawn
@@ -204,5 +202,6 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         nextNode = firstNode;
         UpdateDestination(nextNode.transform.position);
         audioSource.Stop();
+        canAttack = true;
     }
 }
