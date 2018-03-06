@@ -113,6 +113,11 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	/* DisplayScore
+	 * Created by Mitchell Keller
+	 * Updates the score for the player
+	 */
+
 	public void DisplayScore() {
 		pointText.text = score.ToString ();
 	}

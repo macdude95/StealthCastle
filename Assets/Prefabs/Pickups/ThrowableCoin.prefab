@@ -166,7 +166,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -190,7 +190,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!95 &95581918498777796
 Animator:
   serializedVersion: 3
@@ -222,8 +222,8 @@ MonoBehaviour:
   isBeingThrown: 0
   airTime: 0
   maxAirTime: 50
-  coinToss: {fileID: 8300000, guid: 4eed1957f3dd7c74985c347bd6b97f08, type: 3}
-  coinHitHardSurface: {fileID: 8300000, guid: 6989a3633c5b7b848aae1ecc7bc9740b, type: 3}
+  coinToss: {fileID: 0}
+  coinHitHardSurface: {fileID: 0}
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
 --- !u!114 &114986177192021532

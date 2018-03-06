@@ -35,6 +35,11 @@ public class PickUpController : MonoBehaviour, IRespawnable {
 		gameObject.transform.position = position;
 	}
 
+	/* Created by Mitchell Keller
+	 * Checks triggers to see if player 
+	 * has picked up a gem.
+	 */
+
     private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Player" &&
 			 displayName.Equals("Gem")) {

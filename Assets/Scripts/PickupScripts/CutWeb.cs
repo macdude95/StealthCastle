@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CutWeb : MonoBehaviour {
 
+	/* 
+	 * Created by Mitchell Keller
+	 * If the player is holding the gadget to cut webs,
+	 * then remove it from the scene.
+	 */
+
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.tag == "Player") {
 			if (GameController.instance.GetItemName().Equals("WebCutter")) {

@@ -131,6 +131,11 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         }
     }
 
+	/*
+	 * Created by Mitchell Keller & 
+	 * Checks to see if player has collided with any outside triggers
+	 */
+
     private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("BasicTrap")) {
 			(collision.gameObject.transform.GetChild(0)).SendMessage("ActivateTrap");
@@ -175,6 +180,12 @@ public class PlayerController : MonoBehaviour, IRespawnable {
             interactable = collision.gameObject;
         }
     }
+
+	/* 
+	 * Created by Mitchell Keller
+	 * Checks to see if the player has collided with a 
+	 * gadget of spiderweb
+	 */
 
 	private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.tag == "SpiderWeb") {
@@ -248,6 +259,12 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         currentRing++;
         audioSource.PlayOneShot(loudStep);
 	}
+
+	/* SetSpeed
+	 * Created by Mitchell Keller & 
+	 * Checks and adjusts speed if player is 
+	 * sprinting or slowed
+	 */
 
     //do not touch this unless you're adding a brand new interaction that HAS to behave differently
 	private void SetSpeed() {
