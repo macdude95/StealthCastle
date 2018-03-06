@@ -224,20 +224,25 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         if (other.CompareTag("SoundRing") &&
             state == BasicEnemyController.STATE_PATHING)
         {
-
             //the guard just heard a sound
             state = BasicEnemyController.STATE_ALERT;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
             UpdateDestination(other.transform.position);
         }
 
-        if (other.CompareTag("Player") &&
-            (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-            state == STATE_HUNTING))
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") &&
+    (!(collision.gameObject.gameObject.GetComponent<PlayerController>()).UsingBox() ||
+    state == STATE_HUNTING))
         {
-            audioSource.Play();
-            animationController.SetBool("IS_ATTACKING", true);
-            other.gameObject.GetComponent<PlayerController>().KillPlayer();
+            if(arrorwReady) {
+                StartAttacking();
+                arrowTargetPosition = collision.gameObject.transform.position;
+                PlayerInVision(collision.gameObject, collision.gameObject.GetComponent<PlayerController>());
+            }
         }
     }
 
