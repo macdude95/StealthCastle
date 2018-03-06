@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2113883506564010094}
   - component: {fileID: 50606989418598626}
   - component: {fileID: 66662694392374694}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,11 +181,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
+    - - {x: -159.89488, y: -80.62881}
+      - {x: -157.67204, y: 83.13371}
+      - {x: 146.05136, y: 73.765144}
+      - {x: 165.09067, y: -89.879}
 --- !u!66 &66662694392374694
 CompositeCollider2D:
   m_ObjectHideFlags: 1
@@ -265,7 +264,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -304,7 +303,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -371,29 +370,29 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 1e-45
-      e01: 3.190947e-39
-      e02: 130.63062
-      e03: 1e-45
-      e10: 0
-      e11: 0
-      e12: 1e-45
-      e13: 0
-      e20: NaN
-      e21: 0
-      e22: 7.83e-43
-      e23: 2.447679
-      e30: NaN
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 2.5e-44
+      e11: 1
+      e12: 0
+      e13: 6.495e-41
+      e20: 0
+      e21: 9.8e-44
+      e22: 1
+      e23: 0
+      e30: 0
       e31: 0
-      e32: 1e-45
-      e33: 1e-45
+      e32: 0
+      e33: 1
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 2.2e-44, g: 0, b: 0, a: NaN}
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -13, y: 0, z: 0}
-  m_Size: {x: 13, y: 7, z: 1}
+  m_Origin: {x: -13, y: -5, z: 0}
+  m_Size: {x: 23, y: 15, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -444,29 +443,29 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 9.8e-44
+      e00: 1
       e01: 0
       e02: 0
-      e03: 4.7332387e+30
-      e10: 2.7e-44
-      e11: NaN
+      e03: 0
+      e10: 0
+      e11: 1
       e12: 0
-      e13: 6.4905e-41
-      e20: NaN
-      e21: 9.8e-44
-      e22: 0
-      e23: 4.7332338e+30
-      e30: NaN
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
       e31: 0
       e32: 0
-      e33: 6.4905e-41
+      e33: 1
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: NaN, g: NaN, b: 0, a: NaN}
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -20, y: -11, z: 0}
-  m_Size: {x: 20, y: 19, z: 1}
+  m_Size: {x: 35, y: 23, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -511,29 +510,29 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 1e-45
-      e01: 3.190947e-39
-      e02: 130.63062
-      e03: 1e-45
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
       e10: 0
-      e11: 0
-      e12: 1e-45
+      e11: 1
+      e12: 0
       e13: 0
-      e20: NaN
+      e20: 0
       e21: 0
-      e22: 7.83e-43
-      e23: 2.447679
-      e30: NaN
+      e22: 1
+      e23: 0
+      e30: 0
       e31: 0
-      e32: 1e-45
-      e33: 1e-45
+      e32: 0
+      e33: 1
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 2.2e-44, g: 0, b: 0, a: NaN}
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -22, y: -6, z: 0}
-  m_Size: {x: 25, y: 19, z: 1}
+  m_Size: {x: 30, y: 19, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
