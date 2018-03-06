@@ -56,7 +56,6 @@ public class GameController : MonoBehaviour {
 	}
 
     public void PlayerDied() {
-        restartLevelText.text = "You Died\n" + "Press any key to Restart";
         restartLevelText.gameObject.SetActive(true);
         isDead = true;
         Input.ResetInputAxes();

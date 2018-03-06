@@ -380,7 +380,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'You Died
 
-    (press ''r'' to restart)'
+    Press any key to Restart'
 --- !u!114 &114704392587250814
 MonoBehaviour:
   m_ObjectHideFlags: 1
