@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 4db03a92b7d924dc2b88acfc7755626e
-timeCreated: 1520366772
+guid: 51b567d531070324b84d7d23a36d1236
+timeCreated: 1520403696
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: king_0
-    21300002: king_1
-    21300004: king_2
-    21300006: king_3
-    21300008: king_4
-    21300010: king_5
-    21300012: king_6
-    21300014: king_7
+    21300000: Bad King_0
+    21300002: Bad King_1
+    21300004: Bad King_2
+    21300006: Bad King_3
+    21300008: Bad King_4
+    21300010: Bad King_5
+    21300012: Bad King_6
+    21300014: Bad King_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -68,7 +68,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -78,17 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +88,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: king_0
+      name: Bad King_0
       rect:
         serializedVersion: 2
         x: 195
@@ -112,7 +102,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_1
+      name: Bad King_1
       rect:
         serializedVersion: 2
         x: 211
@@ -126,7 +116,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_2
+      name: Bad King_2
       rect:
         serializedVersion: 2
         x: 226
@@ -140,7 +130,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_3
+      name: Bad King_3
       rect:
         serializedVersion: 2
         x: 241
@@ -154,7 +144,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_4
+      name: Bad King_4
       rect:
         serializedVersion: 2
         x: 195
@@ -168,7 +158,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_5
+      name: Bad King_5
       rect:
         serializedVersion: 2
         x: 211
@@ -182,7 +172,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_6
+      name: Bad King_6
       rect:
         serializedVersion: 2
         x: 226
@@ -196,7 +186,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: king_7
+      name: Bad King_7
       rect:
         serializedVersion: 2
         x: 241
