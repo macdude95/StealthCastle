@@ -16,6 +16,10 @@ TagManager:
   - Gadget
   - Gem
   - Arrow
+  - Gem2
+  - Gem3
+  - Gem4
+  - Gem5
   layers:
   - Default
   - TransparentFX

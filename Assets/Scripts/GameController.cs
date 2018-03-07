@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public static GameController instance;
 
 	public int score;
+	public int displayedScore;
     private bool isDead = false;
 
     private IList<IRespawnable> respawnableObjects;
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		score = 0;
+		displayedScore = 0;
 		itemText.text = "";
 		pointText.text = score.ToString();
 	}
@@ -53,6 +55,12 @@ public class GameController : MonoBehaviour {
                 isDead = false;
             }));
         }
+
+		if (displayedScore < score) {
+			displayedScore += 5;
+		}
+		pointText.text = displayedScore.ToString ();
+
 	}
 
     public void PlayerDied() {
@@ -117,9 +125,9 @@ public class GameController : MonoBehaviour {
 	 * Updates the score for the player
 	 */
 
-	public void DisplayScore() {
-		pointText.text = score.ToString ();
-	}
+	/*public void DisplayScore() {
+		pointText.text = displayedScore.ToString ();
+	}*/
 
 	public string GetItemName() {
 		return currItem == null ? "none" : currItem.name;
