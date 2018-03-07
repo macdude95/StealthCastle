@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class ButtonSelection : MonoBehaviour, IPointerEnterHandler, IDeselectHandler
 {
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!EventSystem.current.alreadySelecting)
