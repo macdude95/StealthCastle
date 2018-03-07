@@ -10,18 +10,28 @@ using UnityEngine.UI;
 public class IntroSceneController : MonoBehaviour {
 
     public Animator goodKingAnimator;
-    public GameObject finishTrigger;
     public Text dialogueText;
     public static IntroSceneController instance;
     public GameObject lockCharacterObject;
+    public Animator evilKingAnimator;
+    public GameObject evilGuard1;
+    public GameObject evilGuard2;
+    public Collider2D PlayerCollider;
 
     private int dialogueIndex = 0;
+    private static readonly string pressSpaceToAdvance = "\n(Press Space To Advance)";
+    private static readonly string goodKingName = "King Balthazar";
     private static readonly string[] dialogue = { 
-        "Good King: I'm about to go and meet with the bad king.", 
+        goodKingName + ": Hark!", 
+        goodKingName + ": I venture off to meetheth\nwith the evil king to facilitateth peace!" + pressSpaceToAdvance, 
+        goodKingName + ": We both know how\nthis encounter might endeth up." + pressSpaceToAdvance, 
+        goodKingName + ": Remember thy mission\nif something goeth wrong." + pressSpaceToAdvance, 
+        goodKingName + ": Thee wilt doeth whatever it takes\nto protecteth our beloved kingdom." + pressSpaceToAdvance, 
         "",
-        "???: *screams*", 
-        "Corrects", 
-        "Wrongs" };
+        "???: *screams*"
+    };
+
+    private BoxCollider2D moveEnemiesCollider;
 
     private void Awake()
     {
@@ -35,22 +45,28 @@ public class IntroSceneController : MonoBehaviour {
         }
     }
 
-
 	void Start () {
         // don't let the player leave until the cutscene is finished
-        //finishTrigger.SetActive(false);
         NextDialogue();
+        moveEnemiesCollider = GetComponent<BoxCollider2D>();
 	}
 	
 	void Update () {
         goodKingAnimator.ResetTrigger("NEXT");
         if (Input.GetKeyDown(KeyCode.Space)) {
-            goodKingAnimator.SetTrigger("NEXT");
+            if (dialogueIndex == 5)
+            {
+                goodKingAnimator.SetTrigger("NEXT");
+                lockCharacterObject.SetActive(false);
+            }
+            else if (dialogueIndex < 5)
+            {
+                NextDialogue();
+            }
 
         }
-        if (dialogueIndex > 1)
-        {
-            lockCharacterObject.SetActive(false);
+        if (moveEnemiesCollider.IsTouching(PlayerCollider)) {
+            EnemiesLeave();
         }
 	}
 
@@ -61,7 +77,16 @@ public class IntroSceneController : MonoBehaviour {
             dialogueText.text = "";
             dialogueIndex++;
         } else {
-            dialogueText.text = dialogue[dialogueIndex++] + "\n(Press Space To Advance)";
+            dialogueText.text = dialogue[dialogueIndex++];
         }
+    }
+
+    private void EnemiesLeave() {
+        dialogueText.text = "";
+        evilKingAnimator.SetTrigger("MOVE");
+        evilGuard1.GetComponent<Animator>().SetTrigger("MOVE");
+        evilGuard2.GetComponent<Animator>().SetTrigger("MOVE");
+        evilGuard1.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-100);
+        evilGuard2.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -100);
     }
 }

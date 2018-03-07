@@ -8,8 +8,11 @@ using UnityEngine;
 
 public class GoodKingController : MonoBehaviour {
 
-    private void DidFinishWalking() {
+    public AudioClip scream;
+
+    private void DidDie() {
         IntroSceneController.instance.NextDialogue();
+        GetComponent<AudioSource>().PlayOneShot(scream);
     }
 
     private void DidStartWalking()

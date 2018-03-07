@@ -123,6 +123,8 @@ GameObject:
   m_Component:
   - component: {fileID: 121312700}
   - component: {fileID: 121312701}
+  - component: {fileID: 121312702}
+  - component: {fileID: 121312703}
   m_Layer: 10
   m_Name: RangedGuardBlack (1)
   m_TagString: Enemy
@@ -189,6 +191,43 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &121312702
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 121312699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c083ca937e7d54c8cb07e30c42123ade, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!50 &121312703
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 121312699}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &304259788
 Prefab:
   m_ObjectHideFlags: 0
@@ -249,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 382776172}
   - component: {fileID: 382776171}
+  - component: {fileID: 382776170}
   m_Layer: 0
   m_Name: EvilKing
   m_TagString: Untagged
@@ -256,6 +296,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &382776170
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 382776169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b1ec8e42d093440ca06fc66853389bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &382776171
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -307,17 +364,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 382776169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.6, y: -88.9, z: 0}
+  m_LocalPosition: {x: 20, y: -89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &519464654 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1642487238405532, guid: 8ec6754468f214a2c841bebf408a0d86,
-    type: 2}
-  m_PrefabInternal: {fileID: 921219990}
 --- !u!60 &559076589 stripped
 PolygonCollider2D:
   m_PrefabParentObject: {fileID: 60547467682484238, guid: 08810019e1537f64c88f0ad30771e440,
@@ -373,6 +425,11 @@ Prefab:
 --- !u!4 &600288630 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4245603642870614, guid: 37638f5dc4aeff3449f62219dfdad8f0,
+    type: 2}
+  m_PrefabInternal: {fileID: 600288629}
+--- !u!61 &636033075 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61581526241406126, guid: 37638f5dc4aeff3449f62219dfdad8f0,
     type: 2}
   m_PrefabInternal: {fileID: 600288629}
 --- !u!1001 &838023503
@@ -524,11 +581,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4950067802692650, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -218.56854
+      value: -231
       objectReference: {fileID: 0}
     - target: {fileID: 4950067802692650, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -265.07413
+      value: -309
       objectReference: {fileID: 0}
     - target: {fileID: 4950067802692650, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
       propertyPath: m_LocalRotation.x
@@ -586,6 +643,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1092541124}
   - component: {fileID: 1092541123}
+  - component: {fileID: 1092541115}
+  - component: {fileID: 1092541116}
   m_Layer: 10
   m_Name: RangedGuardBlack
   m_TagString: Enemy
@@ -593,6 +652,43 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &1092541115
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092541114}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c083ca937e7d54c8cb07e30c42123ade, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!50 &1092541116
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092541114}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &1092541123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -663,6 +759,7 @@ GameObject:
   - component: {fileID: 1092725048}
   - component: {fileID: 1092725046}
   - component: {fileID: 1092725047}
+  - component: {fileID: 1092725050}
   m_Layer: 0
   m_Name: GoodKing
   m_TagString: Untagged
@@ -698,6 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6447fac2662b4ee3a522afdb3f2c946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scream: {fileID: 8300000, guid: 7b0b04af17d51487c88c9ac5f16eff11, type: 3}
 --- !u!212 &1092725048
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -755,6 +853,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1092725050
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092725045}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &1147209985
 Prefab:
   m_ObjectHideFlags: 0
@@ -48722,6 +48900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560799692}
   - component: {fileID: 1560799691}
+  - component: {fileID: 1560799693}
   m_Layer: 0
   m_Name: IntroSceneController
   m_TagString: Untagged
@@ -48741,9 +48920,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodKingAnimator: {fileID: 1092725046}
-  finishTrigger: {fileID: 519464654}
   dialogueText: {fileID: 1175767834}
   lockCharacterObject: {fileID: 1803383025}
+  evilKingAnimator: {fileID: 382776170}
+  evilGuard1: {fileID: 1092541114}
+  evilGuard2: {fileID: 121312699}
+  PlayerCollider: {fileID: 636033075}
 --- !u!4 &1560799692
 Transform:
   m_ObjectHideFlags: 0
@@ -48757,6 +48939,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1560799693
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1560799690}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 16, y: 32}
+  m_EdgeRadius: 0
 --- !u!1 &1574840841
 GameObject:
   m_ObjectHideFlags: 0
