@@ -27,6 +27,7 @@ public class IntroSceneController : MonoBehaviour {
         goodKingName + ": We both know how\nthis encounter might endeth up." + pressSpaceToAdvance, 
         goodKingName + ": Remember thy mission\nif something goeth wrong." + pressSpaceToAdvance, 
         goodKingName + ": Thee wilt doeth whatever it takes\nto protecteth our beloved kingdom." + pressSpaceToAdvance, 
+        goodKingName + ": Taketh the path to thy left in order to stayeth safe." + pressSpaceToAdvance, 
         "",
         "???: *screams*"
     };
@@ -54,12 +55,12 @@ public class IntroSceneController : MonoBehaviour {
 	void Update () {
         goodKingAnimator.ResetTrigger("NEXT");
         if (Input.GetKeyDown(KeyCode.Space)) {
-            if (dialogueIndex == 5)
+            if (dialogueIndex == 6)
             {
                 goodKingAnimator.SetTrigger("NEXT");
                 lockCharacterObject.SetActive(false);
             }
-            else if (dialogueIndex < 5)
+            else if (dialogueIndex < 6)
             {
                 NextDialogue();
             }
