@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1b (Boots).unity
     guid: eb6cc2464720d5c4c92ffea19cea513b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WebCutterTutorial.unity
     guid: 82343e8f436a54ac9bd7f62a7fae2f95
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Playtest01.unity
     guid: b7ccde2523468439089b3ad0d5dc514a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EndScene.unity
     guid: 7a68d647c7413bf49b79dd06782627a6
   - enabled: 1
@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level0a.unity
     guid: 06b5461bcc9db44dc912a31dca3a7fb6
+  - enabled: 1
+    path: Assets/Scenes/Level2b.unity
+    guid: 6093ee8e184f44db190efb4d7c750c2e
