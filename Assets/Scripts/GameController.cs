@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour {
 	private int displayedScore;
     private bool isDead = false;
     private bool actionBGMOn = false;
+    public int actionBGMTime;
+    private int currentActionBGMTime = -1;
 
     private IList<IRespawnable> respawnableObjects;
 
@@ -48,7 +50,6 @@ public class GameController : MonoBehaviour {
 		displayedScore = 0;
 		itemText.text = "";
 		pointText.text = score.ToString();
-        audioSource.CrossFade(calmBgm, 100, 0);
 	}
 	
 	// Update is called once per frame
@@ -60,6 +61,8 @@ public class GameController : MonoBehaviour {
             fadeInOutAnimator.SetBool("FADE", false);
                 isDead = false;
             }));
+            audioSource.CrossFade(calmBgm, 100, 1);
+            actionBGMOn = false;
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -96,12 +99,37 @@ public class GameController : MonoBehaviour {
         }
 		pointText.text = displayedScore.ToString ();
 
+        if(actionBGMOn)
+        {
+            currentActionBGMTime--;
+            if(currentActionBGMTime <= 0)
+            {
+                audioSource.CrossFade(calmBgm, 100, 1);
+                actionBGMOn = false;
+            }
+        }
 	}
+
+    public void LevelMusicChanged()
+    {
+        audioSource.CrossFade(calmBgm, 100, 0);
+    }
+
+    public void PlayActionMusic()
+    {
+        if(!actionBGMOn)
+        {
+            actionBGMOn = true;
+            audioSource.CrossFade(actionBGM, 100, .2f);
+        }
+        currentActionBGMTime = actionBGMTime;
+    }
 
     public void PlayerDied() {
         restartLevelText.gameObject.SetActive(true);
         isDead = true;
         Input.ResetInputAxes();
+
     }
 
     /* LoadNewLevel

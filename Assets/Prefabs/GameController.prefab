@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 82476951293899088}
   - component: {fileID: 82058016198771838}
   - component: {fileID: 114130686647254928}
+  - component: {fileID: 114960350401896212}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -504,6 +505,7 @@ MonoBehaviour:
   actionBGM: {fileID: 0}
   currItem: {fileID: 0}
   score: 0
+  actionBGMTime: 1800
 --- !u!114 &114542838998082706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,6 +657,19 @@ MonoBehaviour:
   m_Text: 'ITEM NAME
 
 '
+--- !u!114 &114960350401896212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325322084485898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2acd0246776ae746a8f38e248da166a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calmBGM: {fileID: 0}
+  actionBGM: {fileID: 0}
 --- !u!222 &222080232455703742
 CanvasRenderer:
   m_ObjectHideFlags: 1

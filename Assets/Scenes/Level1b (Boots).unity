@@ -1040,6 +1040,11 @@ Prefab:
       propertyPath: orthographic size
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 20142364630125190, guid: c3e06802ef72f4a56aaee01975b3eda6,
+        type: 2}
+      propertyPath: m_OcclusionCulling
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
   m_IsPrefabParent: 0
@@ -2789,6 +2794,16 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 74df90835e3cce84e9254dee079091ce,
         type: 3}
+    - target: {fileID: 114960350401896212, guid: e48f4f2bc2278164399456663f7e2a62,
+        type: 2}
+      propertyPath: calmBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 6730cbd60169b5a4caf773f306d2e9bf, type: 3}
+    - target: {fileID: 114960350401896212, guid: e48f4f2bc2278164399456663f7e2a62,
+        type: 2}
+      propertyPath: actionBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: df3c6045c9c9b4e4b8f0cfc9d0ad533f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
   m_IsPrefabParent: 0
@@ -2901,7 +2916,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f06046ef445d4c04581e00bf1edbcac1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18374,6 +18389,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4981768515388246, guid: c2e3d5fba14fe3548bde6191a82ea14a,
     type: 2}
   m_PrefabInternal: {fileID: 1646291178}
+--- !u!1 &1699188612 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1092511598894670, guid: c3e06802ef72f4a56aaee01975b3eda6,
+    type: 2}
+  m_PrefabInternal: {fileID: 460906092}
+--- !u!114 &1699188618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1699188612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d05ad04ace5c3b499e1b91f65f983f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1754456832
 Prefab:
   m_ObjectHideFlags: 0
@@ -18497,7 +18528,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f06046ef445d4c04581e00bf1edbcac1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19502,7 +19533,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f06046ef445d4c04581e00bf1edbcac1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27758,3 +27789,19 @@ Transform:
   m_PrefabParentObject: {fileID: 4517211366139522, guid: 62a168ea2853d43479213fb5c4bd8940,
     type: 2}
   m_PrefabInternal: {fileID: 2092918196}
+--- !u!1 &2116460724 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1564700448667530, guid: c3e06802ef72f4a56aaee01975b3eda6,
+    type: 2}
+  m_PrefabInternal: {fileID: 460906092}
+--- !u!114 &2116460728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116460724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d05ad04ace5c3b499e1b91f65f983f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

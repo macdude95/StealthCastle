@@ -85,8 +85,10 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     //called when a player is in direct LOS
     public void PlayerInVision(GameObject player, PlayerController controller)
     {
-        if (controller.UsingBox() || animationController.GetBool("IS_ATTACKING"))
+        if (controller.UsingBox())
             return;
+
+        GameController.instance.PlayActionMusic();
 
         if(arrorwReady)
         {

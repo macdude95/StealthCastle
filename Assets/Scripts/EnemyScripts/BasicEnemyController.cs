@@ -72,7 +72,8 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         if (controller.UsingBox())
             return;
 
-		state = BasicEnemyController.STATE_HUNTING;
+        GameController.instance.PlayActionMusic();
+        state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 
 		Vector3 playerPosition = player.transform.position;
