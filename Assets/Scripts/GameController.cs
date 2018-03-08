@@ -32,7 +32,9 @@ public class GameController : MonoBehaviour {
 	private void Awake() {
 		if (instance == null) {
 			instance = this;
-		}
+            audioSource = this.GetComponent<DoubleAudioSource>();
+            LevelMusicChanged();
+        }
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
@@ -41,7 +43,7 @@ public class GameController : MonoBehaviour {
         fadeInOutImage.gameObject.SetActive(true);
 
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
-        audioSource = this.GetComponent<DoubleAudioSource>();
+        
 	}
 
 	// Use this for initialization
