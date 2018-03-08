@@ -56,9 +56,15 @@ public class GameController : MonoBehaviour {
             }));
         }
 
-		if (displayedScore < score) {
-			displayedScore += 5;
-		}
+        int scoreDelta = score - displayedScore ;
+		if (scoreDelta != 0) {
+            if(scoreDelta > 1000 && scoreDelta != 0)
+			    displayedScore += 100;
+            if (scoreDelta > 100 && scoreDelta != 0)
+                displayedScore += 10;
+            if (scoreDelta != 0)
+                displayedScore += 1;
+        }
 		pointText.text = displayedScore.ToString ();
 
 	}
