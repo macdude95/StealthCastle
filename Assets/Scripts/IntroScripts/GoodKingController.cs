@@ -9,14 +9,15 @@ using UnityEngine;
 public class GoodKingController : MonoBehaviour {
 
     public AudioClip scream;
+    public Collider2D PlayerCollider;
+    public Collider2D playScreamCollider;
 
-    private void DidDie() {
-        IntroSceneController.instance.NextDialogue();
-        GetComponent<AudioSource>().PlayOneShot(scream);
-    }
-
-    private void DidStartWalking()
-    {
-        IntroSceneController.instance.NextDialogue();
-    }
+	private void Update()
+	{
+        if (playScreamCollider.IsTouching(PlayerCollider))
+        {
+            GetComponent<AudioSource>().PlayOneShot(scream);
+            playScreamCollider.gameObject.SetActive(false);
+        }
+	}
 }
