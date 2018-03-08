@@ -13,13 +13,17 @@ public class GameController : MonoBehaviour {
     public Text restartLevelText;
     public Image fadeInOutImage;
     public Animator fadeInOutAnimator;
+    public AudioClip calmBgm, actionBGM;
 
 	public GameObject currItem;
 	public static GameController instance;
 
+    private DoubleAudioSource audioSource;
+
 	public int score;
-	public int displayedScore;
+	private int displayedScore;
     private bool isDead = false;
+    private bool actionBGMOn = false;
 
     private IList<IRespawnable> respawnableObjects;
 
@@ -35,6 +39,7 @@ public class GameController : MonoBehaviour {
         fadeInOutImage.gameObject.SetActive(true);
 
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
+        audioSource = this.GetComponent<DoubleAudioSource>();
 	}
 
 	// Use this for initialization
@@ -43,6 +48,7 @@ public class GameController : MonoBehaviour {
 		displayedScore = 0;
 		itemText.text = "";
 		pointText.text = score.ToString();
+        audioSource.CrossFade(calmBgm, 100, 0);
 	}
 	
 	// Update is called once per frame
@@ -56,14 +62,37 @@ public class GameController : MonoBehaviour {
             }));
         }
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            audioSource.CrossFade(actionBGM, 100, 2);
+        }
+
         int scoreDelta = score - displayedScore ;
 		if (scoreDelta != 0) {
-            if(scoreDelta > 1000 && scoreDelta != 0)
-			    displayedScore += 100;
-            if (scoreDelta > 100 && scoreDelta != 0)
+            if (scoreDelta > 1000 && scoreDelta != 0)
+            {
+                displayedScore += 500;
+                scoreDelta -= 500;
+            }
+		    
+            if (scoreDelta > 250 && scoreDelta != 0)
+            {
+                displayedScore += 100;
+                scoreDelta -= 100;
+
+            }
+            if (scoreDelta > 30 && scoreDelta != 0)
+            {
                 displayedScore += 10;
+                scoreDelta -= 10;
+            }
+
             if (scoreDelta != 0)
+            {
                 displayedScore += 1;
+                scoreDelta -= 1;
+            }
+                
         }
 		pointText.text = displayedScore.ToString ();
 
