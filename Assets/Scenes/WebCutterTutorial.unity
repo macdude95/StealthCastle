@@ -2434,6 +2434,11 @@ Prefab:
       propertyPath: m_Offset.y
       value: 334.82
       objectReference: {fileID: 0}
+    - target: {fileID: 114469609201311920, guid: 8ec6754468f214a2c841bebf408a0d86,
+        type: 2}
+      propertyPath: SceneName
+      value: EndScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ec6754468f214a2c841bebf408a0d86, type: 2}
   m_IsPrefabParent: 0

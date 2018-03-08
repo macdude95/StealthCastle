@@ -340,9 +340,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seenDisguiseType: BasicGuardWhite
   numPiRadiansOfCircle: 0.25
-  numOfRays: 10
+  numOfRays: 15
   lightRange: 145
-  raycastFrameDelay: 2
+  raycastFrameDelay: 1
   ignoresDisguises: 0
   isRanged: 0
 --- !u!114 &114442404158131718
