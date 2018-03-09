@@ -161,6 +161,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             state = BasicEnemyController.STATE_ALERT;
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
+            GameController.instance.PlayActionMusic();
 		}
 
         if (other.CompareTag("Player") &&

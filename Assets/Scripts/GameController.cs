@@ -32,8 +32,8 @@ public class GameController : MonoBehaviour {
 	private void Awake() {
 		if (instance == null) {
 			instance = this;
-            audioSource = this.GetComponent<DoubleAudioSource>();
-            LevelMusicChanged();
+
+
         }
 		else if (instance != this) {
 			Destroy(gameObject);
@@ -41,10 +41,11 @@ public class GameController : MonoBehaviour {
         //DontDestroyOnLoad(gameObject); breaks too much rn
 
         fadeInOutImage.gameObject.SetActive(true);
-
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
-        
-	}
+
+        audioSource = this.GetComponent<DoubleAudioSource>();
+
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -52,7 +53,8 @@ public class GameController : MonoBehaviour {
 		displayedScore = 0;
 		itemText.text = "";
 		pointText.text = score.ToString();
-	}
+     
+    }
 	
 	// Update is called once per frame
 	void Update () {
