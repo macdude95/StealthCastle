@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CutWeb : MonoBehaviour {
+public class CutWeb : MonoBehaviour, IRespawnable {
 
 	/* 
 	 * Created by Mitchell Keller
@@ -16,5 +16,9 @@ public class CutWeb : MonoBehaviour {
 				gameObject.SetActive (false);
 			}
 		} 
+	}
+
+	public void Respawn() {
+		gameObject.SetActive (true);	
 	}
 }
