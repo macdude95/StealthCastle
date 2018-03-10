@@ -29,7 +29,7 @@ public class CoinBehavior : ThrowableBehavior {
 	void FixedUpdate() {
 		if (isBeingThrown) {
 			if (!coinTossHasPlayed) {
-				audioSource.PlayOneShot(coinToss);
+				audioSource.PlayOneShot(coinToss,.5f);
 				coinTossHasPlayed = true;
 			}
 			airTime++;
@@ -37,7 +37,7 @@ public class CoinBehavior : ThrowableBehavior {
 		}
 
 		if (ThrownForMaxTime()) {
-			audioSource.PlayOneShot(coinHitHardSurface);
+			audioSource.PlayOneShot(coinHitHardSurface,.7f);
 			coinTossHasPlayed = false;
 
 			PutThrowableOnGround();
