@@ -13,29 +13,39 @@ public class GameController : MonoBehaviour {
     public Text restartLevelText;
     public Image fadeInOutImage;
     public Animator fadeInOutAnimator;
+    public AudioClip calmBgm, actionBGM;
 
 	public GameObject currItem;
 	public static GameController instance;
 
+    private DoubleAudioSource audioSource;
+
 	public int score;
-	public int displayedScore;
+	private int displayedScore;
     private bool isDead = false;
+    private bool actionBGMOn = false;
+    public int actionBGMTime;
+    private int currentActionBGMTime = -1;
 
     private IList<IRespawnable> respawnableObjects;
 
 	private void Awake() {
 		if (instance == null) {
 			instance = this;
-		}
+
+
+        }
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
         //DontDestroyOnLoad(gameObject); breaks too much rn
 
         fadeInOutImage.gameObject.SetActive(true);
-
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
-	}
+
+        audioSource = this.GetComponent<DoubleAudioSource>();
+
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +53,8 @@ public class GameController : MonoBehaviour {
 		displayedScore = 0;
 		itemText.text = "";
 		pointText.text = score.ToString();
-	}
+     
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -54,25 +65,75 @@ public class GameController : MonoBehaviour {
             fadeInOutAnimator.SetBool("FADE", false);
                 isDead = false;
             }));
+            audioSource.CrossFade(calmBgm, 100, 1);
+            actionBGMOn = false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            audioSource.CrossFade(actionBGM, 100, 2);
         }
 
         int scoreDelta = score - displayedScore ;
 		if (scoreDelta != 0) {
-            if(scoreDelta > 1000 && scoreDelta != 0)
-			    displayedScore += 100;
-            if (scoreDelta > 100 && scoreDelta != 0)
+            if (scoreDelta > 1000 && scoreDelta != 0)
+            {
+                displayedScore += 500;
+                scoreDelta -= 500;
+            }
+		    
+            if (scoreDelta > 250 && scoreDelta != 0)
+            {
+                displayedScore += 100;
+                scoreDelta -= 100;
+
+            }
+            if (scoreDelta > 30 && scoreDelta != 0)
+            {
                 displayedScore += 10;
+                scoreDelta -= 10;
+            }
+
             if (scoreDelta != 0)
+            {
                 displayedScore += 1;
+                scoreDelta -= 1;
+            }
+                
         }
 		pointText.text = displayedScore.ToString ();
 
+        if(actionBGMOn)
+        {
+            currentActionBGMTime--;
+            if(currentActionBGMTime <= 0)
+            {
+                audioSource.CrossFade(calmBgm, 100, 1);
+                actionBGMOn = false;
+            }
+        }
 	}
+
+    public void LevelMusicChanged()
+    {
+        audioSource.CrossFade(calmBgm, 100, 0);
+    }
+
+    public void PlayActionMusic()
+    {
+        if(!actionBGMOn)
+        {
+            actionBGMOn = true;
+            audioSource.CrossFade(actionBGM, 100, .2f);
+        }
+        currentActionBGMTime = actionBGMTime;
+    }
 
     public void PlayerDied() {
         restartLevelText.gameObject.SetActive(true);
         isDead = true;
         Input.ResetInputAxes();
+
     }
 
     /* LoadNewLevel

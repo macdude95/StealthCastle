@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 	private DisguiseScript disguiseScript;
 	private string currentDisguise = null;
 
-	public AudioClip loudStep;
+	
 	public GameObject soundRingPrefab;
     private GameObject[] soundRingPool;
     private int ringCount = 6;
@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour, IRespawnable {
     //Respawnable
     private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
+
+
+    //sounds
+    public AudioClip loudStep, throwObject, useBox, releaseBox, webCut, itemPickup, webEnter, gemPickup;
 
     void Awake() {
         soundRingPool = new GameObject[ringCount];
@@ -142,27 +146,39 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 		}
 		else if (collision.gameObject.CompareTag("SpiderWeb")) {
 			if (!GameController.instance.GetItemName().Equals("WebCutter")) {
-				isSlowed = true;
-			}
+                if (!isSlowed)
+                    audioSource.PlayOneShot(webEnter);
+                isSlowed = true;
+                
+            }
+            else
+            {
+                audioSource.PlayOneShot(webCut);
+            }
 		}
 		else if (collision.gameObject.CompareTag("Enemy") && !usingBox && (collision.gameObject.GetComponent<BasicEnemyController>() != null)) {
 			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Gem")) {
 			GameController.instance.score += 100;
-		}
+            audioSource.PlayOneShot(gemPickup);
+        }
 		else if (collision.gameObject.CompareTag("Gem2")) {
 			GameController.instance.score += 500;
-		}
+            audioSource.PlayOneShot(gemPickup);
+        }
 		else if (collision.gameObject.CompareTag("Gem3")) {
 			GameController.instance.score += 1000;
-		}
+            audioSource.PlayOneShot(gemPickup);
+        }
 		else if (collision.gameObject.CompareTag("Gem4")) {
 			GameController.instance.score += 2500;
-		}
+            audioSource.PlayOneShot(gemPickup);
+        }
 		else if (collision.gameObject.CompareTag("Gem5")) {
 			GameController.instance.score += 5000;
-		}
+            audioSource.PlayOneShot(gemPickup);
+        }
         else if (collision.gameObject.CompareTag("Gadget"))
         {
             if(interactable != null)
@@ -227,6 +243,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 	}
 
 	private void PickUpGadget(GameObject newGadget) {
+        
 		GameObject oldGadget = GameController.instance.currItem;
 		if (oldGadget != null) {
 			DropOldGadget(oldGadget);
@@ -243,7 +260,8 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         }
         GameController.instance.SetPlayerItem(newGadget);
         newGadget.SetActive(false);
-	}
+        audioSource.PlayOneShot(gemPickup);
+    }
 
     /* SoundRings
     * Created by Michael Cantrell
@@ -342,14 +360,24 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 			usingBox = true;
 			this.GetComponent<Animator> ().enabled = false;
 			this.GetComponent<SpriteRenderer> ().sprite = GameController.instance.currItem.GetComponent<SpriteRenderer> ().sprite;
-		}
+            audioSource.Stop();
+            audioSource.PlayOneShot(useBox);
+        }
 	}
 	private void StopBoxDisguise() {
 		if (GameController.instance.GetItemName () == "BoxDisguise") {
             usingBox = false;
             GetComponent<SpriteRenderer>().sprite = savePlayerSprite;
             this.GetComponent<Animator>().enabled = true;
+            audioSource.Stop();
+            audioSource.PlayOneShot(releaseBox);
         }
+    }
+
+    public void PlayFootstep()
+    {
+        if(!isSprinting)
+            audioSource.PlayOneShot(loudStep, .3f);
     }
 
     /* Respawn

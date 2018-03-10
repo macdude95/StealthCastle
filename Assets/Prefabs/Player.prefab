@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 82309190446036846}
   - component: {fileID: 114555880878487098}
   - component: {fileID: 114740694097702684}
-  - component: {fileID: 114882250166799590}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -107,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621537995879004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224248610245948570}
@@ -364,9 +363,16 @@ MonoBehaviour:
   slowRun: 30
   framesBetweenRings: 20
   ringStartScale: 0
-  loudStep: {fileID: 8300000, guid: 064bb4f8c7ece4a278e860054d83e9f1, type: 3}
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
     type: 2}
+  loudStep: {fileID: 8300000, guid: 4a9e0f2ed7c6cef4d95d1625fd098514, type: 3}
+  throwObject: {fileID: 8300000, guid: 23407481046dbb149afb05c95ac65f58, type: 3}
+  useBox: {fileID: 8300000, guid: ab8648ed756b29d4c9c96355fe2459cb, type: 3}
+  releaseBox: {fileID: 8300000, guid: 80e9f5a9a7cce9a43a6ea90c860bde55, type: 3}
+  webCut: {fileID: 8300000, guid: 669519bb0dc8d9643805c4eebecca9a7, type: 3}
+  itemPickup: {fileID: 8300000, guid: c4077d8a0125d4649b4b3d01cd466311, type: 3}
+  webEnter: {fileID: 8300000, guid: 77129052dda3c444f97d034014feccd4, type: 3}
+  gemPickup: {fileID: 8300000, guid: c4077d8a0125d4649b4b3d01cd466311, type: 3}
 --- !u!114 &114690136648520410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,21 +405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d41a8ce11e0ce48af73db68a0a648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114882250166799590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1621537995879004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dd6f3a7b4adb8c4d833ecc60b79e139, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwMultiplier: 10
-  throwPower: 0
-  maxPower: 17.5
-  aimSlider: {fileID: 114474387411222550}
 --- !u!212 &212068994646694432
 SpriteRenderer:
   m_ObjectHideFlags: 1
