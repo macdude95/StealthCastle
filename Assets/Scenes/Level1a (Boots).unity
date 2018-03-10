@@ -590,14 +590,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: actionBGM
-      value: 
-      objectReference: {fileID: 8300000, guid: df3c6045c9c9b4e4b8f0cfc9d0ad533f, type: 3}
-    - target: {fileID: 0}
-      propertyPath: calmBGM
-      value: 
-      objectReference: {fileID: 8300000, guid: 6730cbd60169b5a4caf773f306d2e9bf, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58dd351c90f02e04181540b796512b20, type: 2}
   m_IsPrefabParent: 0
@@ -3863,6 +3855,16 @@ Prefab:
       value: 
       objectReference: {fileID: 8300000, guid: df3c6045c9c9b4e4b8f0cfc9d0ad533f, type: 3}
     - target: {fileID: 114960350401896212, guid: e48f4f2bc2278164399456663f7e2a62,
+        type: 2}
+      propertyPath: calmBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 6730cbd60169b5a4caf773f306d2e9bf, type: 3}
+    - target: {fileID: 114971941544487908, guid: e48f4f2bc2278164399456663f7e2a62,
+        type: 2}
+      propertyPath: actionBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: df3c6045c9c9b4e4b8f0cfc9d0ad533f, type: 3}
+    - target: {fileID: 114971941544487908, guid: e48f4f2bc2278164399456663f7e2a62,
         type: 2}
       propertyPath: calmBGM
       value: 

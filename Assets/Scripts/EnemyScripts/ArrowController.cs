@@ -30,13 +30,14 @@ public class ArrowController : MonoBehaviour {
 
     public void HitTarget()
     {
+        parent.ArrowImpact();
         animator.SetTrigger("ArrowHit");
         rb.velocity = Vector2.zero;
     }
 
     public void HitAnimComplete()
     {
-        parent.ArrowHit();
+        parent.ArrowFinished();
         animator.ResetTrigger("ArrowHit");
         this.gameObject.SetActive(false);        
     }

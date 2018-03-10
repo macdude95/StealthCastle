@@ -126,10 +126,14 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         pathController.maxSpeed = 0;
     }
 
-    public void ArrowHit()
+    public void ArrowImpact()
+    {
+        audioSource.PlayOneShot(arrowHit);
+    }
+
+    public void ArrowFinished()
     {
         arrorwReady = true;
-        audioSource.PlayOneShot(arrowHit);
     }
 
     public void FireProjectile()

@@ -444,6 +444,11 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   huntingSpeedMult: 3
   arrowProjectile: {fileID: 1939716107612452}
+  arrowHit: {fileID: 8300000, guid: 5903e2d496785de41a7ef56e80ac9af6, type: 3}
+  shootArrow: {fileID: 8300000, guid: d35697353fd41ed48b733342efe9b361, type: 3}
+  attentionLost: {fileID: 8300000, guid: 15eda85a7b8ef2a4b867cd8e93d4055a, type: 3}
+  soundHeard: {fileID: 8300000, guid: 771e57cb0ccee244789de0cb0bec02bc, type: 3}
+  playerSeen: {fileID: 8300000, guid: 127bbdc81249a0842b6d5068f8639c2b, type: 3}
 --- !u!212 &212044592271358234
 SpriteRenderer:
   m_ObjectHideFlags: 1
