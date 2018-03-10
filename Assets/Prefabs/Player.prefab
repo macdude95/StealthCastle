@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 82309190446036846}
   - component: {fileID: 114555880878487098}
   - component: {fileID: 114740694097702684}
+  - component: {fileID: 114773055409947674}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -106,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621537995879004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224248610245948570}
@@ -406,6 +407,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d41a8ce11e0ce48af73db68a0a648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114773055409947674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621537995879004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd6f3a7b4adb8c4d833ecc60b79e139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwMultiplier: 1
+  throwPower: 10
+  maxPower: 17.5
+  aimSlider: {fileID: 114474387411222550}
 --- !u!212 &212068994646694432
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -28,10 +28,12 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
     //Death Audio
     private AudioSource audioSource;
+    public AudioClip attentionLost, soundHeard, playerSeen;
 
     //Respawnable
     private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
+	private float initSpeed;
     private GameObject firstNode;
 
     void Start() {
@@ -47,8 +49,9 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         //Respawnable
         spawnPosition = transform.position;
         isActiveOnSpawn = gameObject.activeSelf;
-        firstNode = nextNode;
-    }
+		initSpeed = baseSpeed;
+		firstNode = nextNode;
+	}
 
     void Update() {
         if (!pathController.pathPending && pathController.reachedEndOfPath) {
@@ -72,6 +75,9 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         if (controller.UsingBox())
             return;
 
+        if (state != BasicEnemyController.STATE_HUNTING)
+            audioSource.PlayOneShot(playerSeen);
+
         BGMPlayer.instance.PlayActionMusic();
         state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
@@ -82,7 +88,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 		playerPosition = (Vector3)nearestPlayerNode.position;
 
 		UpdateDestination(playerPosition);
-	}
+    }
 
 	public void StopAttacking() {
 		animationController.SetBool("IS_ATTACKING", false);
@@ -98,6 +104,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(nextNode.transform.position);
+            audioSource.PlayOneShot(attentionLost);
         }
     }
 
@@ -113,8 +120,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             animationController.SetBool("IS_MOVING", false);
             return;
         }
-        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
-        {
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical)) {
             if (horizontal > 0) {
                 animationController.SetInteger("DIR", 1);//right
             }
@@ -162,18 +168,17 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
             BGMPlayer.instance.PlayActionMusic();
-		}
+            audioSource.PlayOneShot(soundHeard);
+        }
 
         if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-            state == STATE_HUNTING) && canAttack)
-        {
+            state == STATE_HUNTING) && canAttack) {
             AttackPlayer(other.gameObject);
         }
 	}
 
-    void OnTriggerStay2D(Collider2D other)
-    {
+    void OnTriggerStay2D(Collider2D other) {
         if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||
             state == STATE_HUNTING) && canAttack)
@@ -182,8 +187,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         }
     }
 
-    private void AttackPlayer(GameObject player)
-    {
+    private void AttackPlayer(GameObject player) {
         audioSource.Play();
         animationController.SetBool("IS_ATTACKING", true);
         player.GetComponent<PlayerController>().KillPlayer();
@@ -194,12 +198,14 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
     * Created by Michael Cantrell
     * Resets this class's attributes to their original states
     */
-    public void Respawn()
-    {
+    public void Respawn() {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
+
         state = BasicEnemyController.STATE_PATHING;
-        pathController.maxSpeed = baseSpeed;
+		baseSpeed = initSpeed;
+		pathController.maxSpeed = baseSpeed;
+
         StopAttacking();
         nextNode = firstNode;
         UpdateDestination(nextNode.transform.position);

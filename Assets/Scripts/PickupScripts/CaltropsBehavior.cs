@@ -11,8 +11,9 @@ using UnityEngine;
  */
 public class CaltropsBehavior : ThrowableBehavior {
 
-	public AudioClip setCaltrops;
+	public AudioClip setCaltrops, throwCaltrops;
 	private AudioSource audioSource;
+    private bool caltropsTossPlayed = false;
 
 	void Awake() {
 		audioSource = GetComponent<AudioSource>();
@@ -22,8 +23,13 @@ public class CaltropsBehavior : ThrowableBehavior {
 		if (isBeingThrown) {
 			airTime++;
 			SetUsable(false);
+            if (!caltropsTossPlayed)
+            {
+                audioSource.PlayOneShot(throwCaltrops, .5f);
+                caltropsTossPlayed = true;
+            }
 
-			if (ThrownForMaxTime()) {
+            if (ThrownForMaxTime()) {
 				audioSource.PlayOneShot(setCaltrops);
 				PutThrowableOnGround();
 			}
@@ -46,7 +52,8 @@ public class CaltropsBehavior : ThrowableBehavior {
 			audioSource.PlayOneShot(setCaltrops);
 			PutThrowableOnGround();
 		}
-	}
+        caltropsTossPlayed = false;
+    }
 
 	private void OnTriggerExit2D(Collider2D collision) {
 	GameObject entity = collision.gameObject;

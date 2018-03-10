@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1699120251814664}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.122034, y: -15.721756, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4432579336818864}
@@ -105,12 +105,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 6
 --- !u!82 &82937833977357250
 AudioSource:
   m_ObjectHideFlags: 1
@@ -236,6 +236,7 @@ MonoBehaviour:
   airTime: 0
   maxAirTime: 50
   setCaltrops: {fileID: 8300000, guid: 74d830c8311c73947866fe1929105ab5, type: 3}
+  throwCaltrops: {fileID: 8300000, guid: 23407481046dbb149afb05c95ac65f58, type: 3}
 --- !u!212 &212216331211092608
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -270,7 +271,7 @@ SpriteRenderer:
   m_SortingLayerID: 1774591371
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300296, guid: 3ffad59abb191d7468a9e1da4eb9314d, type: 3}
+  m_Sprite: {fileID: 21300326, guid: 3ffad59abb191d7468a9e1da4eb9314d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -19,9 +19,14 @@ public class CoinBehavior : ThrowableBehavior {
 	private bool coinTossHasPlayed = false;
 
 	void Awake() {
+		/*
+		 * The sound ring must be instantiated as a child to the coin to
+		 * simplify item persistence and item destruction.
+		 */
 		soundRing = Instantiate(soundRingPrefab,
 								transform.position,
-								new Quaternion());
+								new Quaternion(),
+								gameObject.transform);
 		soundRing.SetActive(false);
         audioSource = GetComponent<AudioSource>();
 	}
@@ -29,7 +34,7 @@ public class CoinBehavior : ThrowableBehavior {
 	void FixedUpdate() {
 		if (isBeingThrown) {
 			if (!coinTossHasPlayed) {
-				audioSource.PlayOneShot(coinToss);
+				audioSource.PlayOneShot(coinToss,.5f);
 				coinTossHasPlayed = true;
 			}
 			airTime++;
@@ -37,7 +42,7 @@ public class CoinBehavior : ThrowableBehavior {
 		}
 
 		if (ThrownForMaxTime()) {
-			audioSource.PlayOneShot(coinHitHardSurface);
+			audioSource.PlayOneShot(coinHitHardSurface,.7f);
 			coinTossHasPlayed = false;
 
 			PutThrowableOnGround();
