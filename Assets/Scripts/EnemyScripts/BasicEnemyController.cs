@@ -28,6 +28,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
     //Death Audio
     private AudioSource audioSource;
+    public AudioClip attentionLost, soundHeard, playerSeen;
 
     //Respawnable
     private Vector3 spawnPosition;
@@ -72,6 +73,10 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         if (controller.UsingBox())
             return;
 
+
+        if(state != BasicEnemyController.STATE_HUNTING)
+            audioSource.PlayOneShot(playerSeen);
+
         BGMPlayer.instance.PlayActionMusic();
         state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
@@ -82,7 +87,8 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 		playerPosition = (Vector3)nearestPlayerNode.position;
 
 		UpdateDestination(playerPosition);
-	}
+       
+    }
 
 	public void StopAttacking() {
 		animationController.SetBool("IS_ATTACKING", false);
@@ -98,6 +104,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(nextNode.transform.position);
+            audioSource.PlayOneShot(attentionLost);
         }
     }
 
@@ -162,7 +169,8 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
             BGMPlayer.instance.PlayActionMusic();
-		}
+            audioSource.PlayOneShot(soundHeard);
+        }
 
         if (other.CompareTag("Player") &&
             (!(other.gameObject.GetComponent<PlayerController>()).UsingBox() ||

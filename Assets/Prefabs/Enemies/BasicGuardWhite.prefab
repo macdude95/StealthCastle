@@ -416,6 +416,9 @@ MonoBehaviour:
   maxStuckTime: 60
   nextNode: {fileID: 0}
   huntingSpeedMult: 4
+  attentionLost: {fileID: 8300000, guid: 15eda85a7b8ef2a4b867cd8e93d4055a, type: 3}
+  soundHeard: {fileID: 8300000, guid: 771e57cb0ccee244789de0cb0bec02bc, type: 3}
+  playerSeen: {fileID: 8300000, guid: 127bbdc81249a0842b6d5068f8639c2b, type: 3}
 --- !u!212 &212970902996263962
 SpriteRenderer:
   m_ObjectHideFlags: 1
