@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
     public AudioClip calmBgm, actionBGM;
 
 	public GameObject currItem;
+	private GameObject startItem;
 	public static GameController instance;
 
     private bool isDead = false;
@@ -23,38 +24,37 @@ public class GameController : MonoBehaviour {
     public int actionBGMTime;
     private int currentActionBGMTime = -1;
 
-    private IList<IRespawnable> respawnableObjects;
+    private static IList<IRespawnable> respawnableObjects;
 
 	private void Awake() {
 		if (instance == null) {
 			instance = this;
-
-
         }
 		else if (instance != this) {
 			Destroy(gameObject);
 		}
-        //DontDestroyOnLoad(gameObject); breaks too much rn
+        DontDestroyOnLoad(gameObject);
 
         fadeInOutImage.gameObject.SetActive(true);
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
-
     }
 
 	// Use this for initialization
 	void Start () {
 		itemText.text = "";
 		pointText.text = ScoreScript.instance.score.ToString();
-     
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.anyKeyDown && isDead)
-        {
+        if (Input.anyKeyDown && isDead) {
             StartCoroutine(FadeAndCompletion(() => {
-            RespawnObjects();
-            fadeInOutAnimator.SetBool("FADE", false);
+				RespawnObjects();
+				if (startItem != null) {
+					startItem.SetActive(false);
+					SetPlayerItem(startItem);
+				}
+				fadeInOutAnimator.SetBool("FADE", false);
                 isDead = false;
             }));
             BGMPlayer.instance.LevelMusicChanged();
@@ -62,41 +62,30 @@ public class GameController : MonoBehaviour {
         }
 		int scoreDelta = ScoreScript.instance.score - ScoreScript.instance.displayedScore;
 		if (scoreDelta != 0) {
-            if (scoreDelta > 1000 && scoreDelta != 0)
-            {
+            if (scoreDelta > 1000 && scoreDelta != 0) {
 				ScoreScript.instance.displayedScore += 500;
                 scoreDelta -= 500;
             }
-		    
-            if (scoreDelta > 250 && scoreDelta != 0)
-            {
+            if (scoreDelta > 250 && scoreDelta != 0) {
 				ScoreScript.instance.displayedScore += 100;
                 scoreDelta -= 100;
-
             }
-            if (scoreDelta > 30 && scoreDelta != 0)
-            {
+            if (scoreDelta > 30 && scoreDelta != 0) {
 				ScoreScript.instance.displayedScore += 10;
                 scoreDelta -= 10;
             }
-
-            if (scoreDelta != 0)
-            {
+            if (scoreDelta != 0) {
 				ScoreScript.instance.displayedScore += 1;
                 scoreDelta -= 1;
             }
-                
         }
 		pointText.text = ScoreScript.instance.displayedScore.ToString ();
-
-
 	}
 
     public void PlayerDied() {
         restartLevelText.gameObject.SetActive(true);
         isDead = true;
         Input.ResetInputAxes();
-
     }
 
     /* LoadNewLevel
@@ -107,8 +96,18 @@ public class GameController : MonoBehaviour {
     public void LoadNewLevel(string sceneName) {
         StartCoroutine(FadeAndCompletion(() =>
         {
+			if (startItem != currItem) {
+				Destroy(startItem);
+			}
+			if (currItem != null) {
+				DontDestroyOnLoad(currItem);
+			}
             SceneManager.LoadScene(sceneName);
-        }));
+
+			startItem = currItem;
+			fadeInOutAnimator.SetBool("FADE", false);
+			respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
+		}));
     }
 
     /* FadeAndCompletion
@@ -130,8 +129,7 @@ public class GameController : MonoBehaviour {
     */
     private void RespawnObjects() {
         SetPlayerItem(null);
-        foreach (IRespawnable rc in respawnableObjects)
-        {
+        foreach (IRespawnable rc in respawnableObjects) {
             rc.Respawn();
         }
         restartLevelText.gameObject.SetActive(false);

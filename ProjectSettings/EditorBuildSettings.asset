@@ -9,11 +9,26 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 1b15f73f1f5943441995662930859991
   - enabled: 1
-    path: Assets/Scenes/Level1a (Boots).unity
+    path: Assets/Scenes/Level0a.unity
+    guid: 06b5461bcc9db44dc912a31dca3a7fb6
+  - enabled: 1
+    path: Assets/Scenes/Level0b.unity
+    guid: 2ad93388e9bdf4e3cb035da96d2bd1b1
+  - enabled: 1
+    path: Assets/Scenes/Level0c.unity
+    guid: c8b1479ca3f3440acb03f4a8a6e91245
+  - enabled: 1
+    path: Assets/Scenes/Level1a.unity
     guid: 7f23162e33c676b4c96d28482d9779f0
   - enabled: 1
-    path: Assets/Scenes/Level1b (Boots).unity
+    path: Assets/Scenes/Level1b.unity
     guid: eb6cc2464720d5c4c92ffea19cea513b
+  - enabled: 1
+    path: Assets/Scenes/Level2a.unity
+    guid: 501cc9c94d7b142a5b74f4c5051dbf6f
+  - enabled: 1
+    path: Assets/Scenes/Level2b.unity
+    guid: 6093ee8e184f44db190efb4d7c750c2e
   - enabled: 0
     path: Assets/Scenes/WebCutterTutorial.unity
     guid: 82343e8f436a54ac9bd7f62a7fae2f95
@@ -23,15 +38,3 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EndScene.unity
     guid: 7a68d647c7413bf49b79dd06782627a6
-  - enabled: 1
-    path: Assets/Scenes/Level0b.unity
-    guid: 2ad93388e9bdf4e3cb035da96d2bd1b1
-  - enabled: 1
-    path: Assets/Scenes/Level0c.unity
-    guid: c8b1479ca3f3440acb03f4a8a6e91245
-  - enabled: 1
-    path: Assets/Scenes/Level0a.unity
-    guid: 06b5461bcc9db44dc912a31dca3a7fb6
-  - enabled: 1
-    path: Assets/Scenes/Level2b.unity
-    guid: 6093ee8e184f44db190efb4d7c750c2e
