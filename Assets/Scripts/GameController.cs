@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour {
 				fadeInOutAnimator.SetBool("FADE", false);
                 isDead = false;
             }));
-            BGMPlayer.instance.LevelMusicChanged();
+            BGMPlayer.instance.ResetTimer();
 
         }
 		int scoreDelta = ScoreScript.instance.score - ScoreScript.instance.displayedScore;
