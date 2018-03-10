@@ -25,10 +25,17 @@ public class BGMPlayer : MonoBehaviour {
             currentActionBGMTime--;
             if (currentActionBGMTime <= 0)
             {
-                player.CrossFade(calmBGM, 100, 1);
+                player.CrossFade(calmBGM, 100, 0);
                 actionBGMOn = false;
             }
         }
+    }
+
+    public void ResetTimer()
+    {
+        currentActionBGMTime = 0;
+        actionBGMOn = false;
+        player.CrossFade(calmBGM, 100, 0);
     }
 
     public void PlayActionMusic()
@@ -36,7 +43,7 @@ public class BGMPlayer : MonoBehaviour {
         if (!actionBGMOn)
         {
             actionBGMOn = true;
-            player.CrossFade(actionBGM, 100, .2f);
+            player.CrossFade(actionBGM, 100, 0);
         }
         currentActionBGMTime = actionBGMTime;
     }
