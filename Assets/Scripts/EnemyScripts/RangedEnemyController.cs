@@ -36,6 +36,8 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
     //Death Audio
     private AudioSource audioSource;
+    public AudioClip arrowHit, shootArrow, attentionLost, soundHeard, playerSeen;
+    private bool playedSeenSound = false;
 
     //Respawnable
     private Vector3 spawnPosition;
@@ -88,7 +90,13 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         if (controller.UsingBox())
             return;
 
-        GameController.instance.PlayActionMusic();
+        BGMPlayer.instance.PlayActionMusic();
+        if(!playedSeenSound)
+        {
+            audioSource.PlayOneShot(playerSeen);
+            playedSeenSound = true;
+        }
+
 
         if(arrorwReady)
         {
@@ -121,6 +129,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     public void ArrowHit()
     {
         arrorwReady = true;
+        audioSource.PlayOneShot(arrowHit);
     }
 
     public void FireProjectile()
@@ -131,6 +140,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         arrowProjectile.GetComponent<Rigidbody2D>().velocity = dir;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         arrowProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        audioSource.PlayOneShot(shootArrow);
     }
 
     public void StopAttacking()
@@ -152,6 +162,8 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(nextNode.transform.position);
+            audioSource.PlayOneShot(attentionLost);
+            playedSeenSound = false;
         }
     }
 
@@ -230,6 +242,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
             state = BasicEnemyController.STATE_ALERT;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
             UpdateDestination(other.transform.position);
+            audioSource.PlayOneShot(soundHeard);
         }
 
     }

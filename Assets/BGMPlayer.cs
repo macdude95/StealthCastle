@@ -1,0 +1,69 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BGMPlayer : MonoBehaviour {
+
+    public int actionBGMTime;
+    private int currentActionBGMTime;
+
+    public static BGMPlayer instance;
+    private DoubleAudioSource player;
+    private AudioClip calmBGM, actionBGM;
+
+    private bool actionBGMOn = false;
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+        if (actionBGMOn)
+        {
+            currentActionBGMTime--;
+            if (currentActionBGMTime <= 0)
+            {
+                player.CrossFade(calmBGM, 100, 1);
+                actionBGMOn = false;
+            }
+        }
+    }
+
+    public void PlayActionMusic()
+    {
+        if (!actionBGMOn)
+        {
+            actionBGMOn = true;
+            player.CrossFade(actionBGM, 100, .2f);
+        }
+        currentActionBGMTime = actionBGMTime;
+    }
+
+    public void LevelMusicChanged()
+    {
+        player.CrossFade(calmBGM, 100, 0);
+    }
+
+    public void LoadNewMusic(AudioClip calm, AudioClip action)
+    {
+        calmBGM = calm;
+        actionBGM = action;
+    }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            player = this.GetComponent<DoubleAudioSource>();
+
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+    }
+}

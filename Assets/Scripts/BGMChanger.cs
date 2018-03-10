@@ -10,9 +10,8 @@ public class BGMChanger : MonoBehaviour {
     void Start() {
         if (calmBGM != null && actionBGM != null)
         {
-            GameController.instance.calmBgm = this.calmBGM;
-            GameController.instance.actionBGM = this.actionBGM;
-            GameController.instance.LevelMusicChanged();
+            BGMPlayer.instance.LoadNewMusic(calmBGM, actionBGM);
+            BGMPlayer.instance.LevelMusicChanged();
         }
 	}
 }

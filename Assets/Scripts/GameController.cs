@@ -18,8 +18,6 @@ public class GameController : MonoBehaviour {
 	public GameObject currItem;
 	public static GameController instance;
 
-    private DoubleAudioSource audioSource;
-
     private bool isDead = false;
     private bool actionBGMOn = false;
     public int actionBGMTime;
@@ -41,8 +39,6 @@ public class GameController : MonoBehaviour {
         fadeInOutImage.gameObject.SetActive(true);
         respawnableObjects = InterfaceHelper.FindObjects<IRespawnable>();
 
-        audioSource = this.GetComponent<DoubleAudioSource>();
-
     }
 
 	// Use this for initialization
@@ -61,15 +57,9 @@ public class GameController : MonoBehaviour {
             fadeInOutAnimator.SetBool("FADE", false);
                 isDead = false;
             }));
-            audioSource.CrossFade(calmBgm, 100, 1);
-            actionBGMOn = false;
-        }
+            BGMPlayer.instance.LevelMusicChanged();
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            audioSource.CrossFade(actionBGM, 100, 2);
         }
-
 		int scoreDelta = ScoreScript.instance.score - ScoreScript.instance.displayedScore;
 		if (scoreDelta != 0) {
             if (scoreDelta > 1000 && scoreDelta != 0)
@@ -99,31 +89,8 @@ public class GameController : MonoBehaviour {
         }
 		pointText.text = ScoreScript.instance.displayedScore.ToString ();
 
-        if(actionBGMOn)
-        {
-            currentActionBGMTime--;
-            if(currentActionBGMTime <= 0)
-            {
-                audioSource.CrossFade(calmBgm, 100, 1);
-                actionBGMOn = false;
-            }
-        }
+
 	}
-
-    public void LevelMusicChanged()
-    {
-        audioSource.CrossFade(calmBgm, 100, 0);
-    }
-
-    public void PlayActionMusic()
-    {
-        if(!actionBGMOn)
-        {
-            actionBGMOn = true;
-            audioSource.CrossFade(actionBGM, 100, .2f);
-        }
-        currentActionBGMTime = actionBGMTime;
-    }
 
     public void PlayerDied() {
         restartLevelText.gameObject.SetActive(true);

@@ -373,6 +373,7 @@ MonoBehaviour:
   itemPickup: {fileID: 8300000, guid: c4077d8a0125d4649b4b3d01cd466311, type: 3}
   webEnter: {fileID: 8300000, guid: 77129052dda3c444f97d034014feccd4, type: 3}
   gemPickup: {fileID: 8300000, guid: c4077d8a0125d4649b4b3d01cd466311, type: 3}
+  deathSound: {fileID: 8300000, guid: 852d091e58cb6f7448a167ea56289614, type: 3}
 --- !u!114 &114690136648520410
 MonoBehaviour:
   m_ObjectHideFlags: 1

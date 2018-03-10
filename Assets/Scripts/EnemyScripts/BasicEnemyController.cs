@@ -72,7 +72,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         if (controller.UsingBox())
             return;
 
-        GameController.instance.PlayActionMusic();
+        BGMPlayer.instance.PlayActionMusic();
         state = BasicEnemyController.STATE_HUNTING;
 		pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 
@@ -161,7 +161,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
             state = BasicEnemyController.STATE_ALERT;
 			pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 			UpdateDestination(other.transform.position);
-            GameController.instance.PlayActionMusic();
+            BGMPlayer.instance.PlayActionMusic();
 		}
 
         if (other.CompareTag("Player") &&

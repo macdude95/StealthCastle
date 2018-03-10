@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 
 
     //sounds
-    public AudioClip loudStep, throwObject, useBox, releaseBox, webCut, itemPickup, webEnter, gemPickup;
+    public AudioClip loudStep, throwObject, useBox, releaseBox, webCut, itemPickup, webEnter, gemPickup, deathSound;
 
     void Awake() {
         soundRingPool = new GameObject[ringCount];
@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         rb.velocity = Vector2.zero;
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().sortingLayerName = "Environment";
+        audioSource.PlayOneShot(deathSound);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
