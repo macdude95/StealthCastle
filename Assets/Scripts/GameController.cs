@@ -20,8 +20,6 @@ public class GameController : MonoBehaviour {
 
     private DoubleAudioSource audioSource;
 
-	public int score;
-	private int displayedScore;
     private bool isDead = false;
     private bool actionBGMOn = false;
     public int actionBGMTime;
@@ -49,10 +47,8 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		score = 0;
-		displayedScore = 0;
 		itemText.text = "";
-		pointText.text = score.ToString();
+		pointText.text = ScoreScript.instance.score.ToString();
      
     }
 	
@@ -74,34 +70,34 @@ public class GameController : MonoBehaviour {
             audioSource.CrossFade(actionBGM, 100, 2);
         }
 
-        int scoreDelta = score - displayedScore ;
+		int scoreDelta = ScoreScript.instance.score - ScoreScript.instance.displayedScore;
 		if (scoreDelta != 0) {
             if (scoreDelta > 1000 && scoreDelta != 0)
             {
-                displayedScore += 500;
+				ScoreScript.instance.displayedScore += 500;
                 scoreDelta -= 500;
             }
 		    
             if (scoreDelta > 250 && scoreDelta != 0)
             {
-                displayedScore += 100;
+				ScoreScript.instance.displayedScore += 100;
                 scoreDelta -= 100;
 
             }
             if (scoreDelta > 30 && scoreDelta != 0)
             {
-                displayedScore += 10;
+				ScoreScript.instance.displayedScore += 10;
                 scoreDelta -= 10;
             }
 
             if (scoreDelta != 0)
             {
-                displayedScore += 1;
+				ScoreScript.instance.displayedScore += 1;
                 scoreDelta -= 1;
             }
                 
         }
-		pointText.text = displayedScore.ToString ();
+		pointText.text = ScoreScript.instance.displayedScore.ToString ();
 
         if(actionBGMOn)
         {

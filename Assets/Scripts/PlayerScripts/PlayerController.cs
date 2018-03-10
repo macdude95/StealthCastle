@@ -160,23 +160,23 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Gem")) {
-			GameController.instance.score += 100;
+			ScoreScript.instance.score += 100;
             audioSource.PlayOneShot(gemPickup);
         }
 		else if (collision.gameObject.CompareTag("Gem2")) {
-			GameController.instance.score += 500;
+			ScoreScript.instance.score += 500;
             audioSource.PlayOneShot(gemPickup);
         }
 		else if (collision.gameObject.CompareTag("Gem3")) {
-			GameController.instance.score += 1000;
+			ScoreScript.instance.score += 1000;
             audioSource.PlayOneShot(gemPickup);
         }
 		else if (collision.gameObject.CompareTag("Gem4")) {
-			GameController.instance.score += 2500;
+			ScoreScript.instance.score += 2500;
             audioSource.PlayOneShot(gemPickup);
         }
 		else if (collision.gameObject.CompareTag("Gem5")) {
-			GameController.instance.score += 5000;
+			ScoreScript.instance.score += 5000;
             audioSource.PlayOneShot(gemPickup);
         }
         else if (collision.gameObject.CompareTag("Gadget"))
