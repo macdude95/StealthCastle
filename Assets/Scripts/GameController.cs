@@ -13,7 +13,6 @@ public class GameController : MonoBehaviour {
     public Text restartLevelText;
     public Image fadeInOutImage;
     public Animator fadeInOutAnimator;
-    public AudioClip calmBgm, actionBGM;
 
 	public GameObject currItem;
 	private GameObject startItem;

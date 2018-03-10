@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IRespawnable {
 
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 	private DisguiseScript disguiseScript;
 	private string currentDisguise = null;
 
-	
 	public GameObject soundRingPrefab;
     private GameObject[] soundRingPool;
     private int ringCount = 6;
@@ -44,6 +42,9 @@ public class PlayerController : MonoBehaviour, IRespawnable {
     private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
 
+	//initial items carried over from previous level
+	private GameObject startItem;
+	private PickUpController startPickUpController;
 
     //sounds
     public AudioClip loudStep, throwObject, useBox, releaseBox, webCut, itemPickup, webEnter, gemPickup, deathSound;
@@ -67,6 +68,18 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         //Respawnable
         spawnPosition = transform.position;
         isActiveOnSpawn = gameObject.activeSelf;
+
+		startItem = GameController.instance.currItem;
+		if (startItem != null) {
+			startPickUpController =
+				startItem.GetComponent<PickUpController>();
+			if (startPickUpController.itemIsDisguise) {
+				disguiseScript.DonDisguise(startItem);
+			}
+		}
+		else {
+			startPickUpController = null;
+		}
     }
 
     void Update() {
@@ -86,8 +99,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 	}
 
     //handle any inputs here
-    void CheckInputs()
-    {
+    void CheckInputs() {
         if (animControl.GetBool("IS_CHANGING"))
             return;
 
@@ -126,13 +138,10 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         audioSource.PlayOneShot(deathSound);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Arrow"))
-        {
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Arrow")) {
             KillPlayer();
-            collision.gameObject.GetComponent<ArrowController>().HitTarget(); ;
-
+            collision.gameObject.GetComponent<ArrowController>().HitTarget();
         }
     }
 
@@ -157,7 +166,8 @@ public class PlayerController : MonoBehaviour, IRespawnable {
                 audioSource.PlayOneShot(webCut);
             }
 		}
-		else if (collision.gameObject.CompareTag("Enemy") && !usingBox && (collision.gameObject.GetComponent<BasicEnemyController>() != null)) {
+		else if (collision.gameObject.CompareTag("Enemy") && !usingBox &&
+			(collision.gameObject.GetComponent<BasicEnemyController>() != null)) {
 			KillPlayer();
 		}
 		else if (collision.gameObject.CompareTag("Gem")) {
@@ -298,17 +308,17 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         isSprinting = (Input.GetAxis("Run") > 0);
 
         //check immediately for immobilization
-        if (usingBox)
-            { speed = 0; return; }
-        if(isSprinting)
-        {
+        if (usingBox) {
+			speed = 0;
+			return;
+		}
+        if (isSprinting) {
             if (isSlowed)
                 speed = slowRun;
             else
                 speed = runSpeed;
         }
-        else
-        {
+        else {
             if (isSlowed)
                 speed = slowWalk;
             else
@@ -396,8 +406,17 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 
         interactable = null;
         canPickUp = true;
-        currentDisguise = null;
-        disguiseScript.SetAnimControlToOrig();
+
+		if (startItem != null) {
+			Debug.Assert(startPickUpController != null);
+			if (startPickUpController.itemIsDisguise) {
+				disguiseScript.DonDisguise(startItem);
+			}
+		}
+		else {
+			currentDisguise = null;
+			disguiseScript.SetAnimControlToOrig();
+		}
         animControl.SetBool("IS_DEAD", false);
         audioSource.Stop();
 
@@ -405,8 +424,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         rb.velocity = Vector2.zero;
         GetComponent<SpriteRenderer>().sortingLayerName = "Player";
 
-        if (interactable != null)
-        {
+        if (interactable != null) {
             interactable.GetComponent<PickUpController>().pickupReady(false);
             interactable = null;
         }

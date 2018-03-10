@@ -42,10 +42,10 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     //Respawnable
     private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
-    private GameObject firstNode;
+	private float initSpeed;
+	private GameObject firstNode;
 
-    void Start()
-    {
+    void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
@@ -61,13 +61,12 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         //Respawnable
         spawnPosition = transform.position;
         isActiveOnSpawn = gameObject.activeSelf;
-        firstNode = nextNode;
+		initSpeed = baseSpeed;
+		firstNode = nextNode;
     }
 
-    void Update()
-    {
-        if (!pathController.pathPending && pathController.reachedEndOfPath)
-        {
+    void Update() {
+        if (!pathController.pathPending && pathController.reachedEndOfPath) {
             //Debug.Log("Path Reached: " + pathController.reachedEndOfPath);
             ArrivedAtDestination();
         }
@@ -85,27 +84,22 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     }
 
     //called when a player is in direct LOS
-    public void PlayerInVision(GameObject player, PlayerController controller)
-    {
+    public void PlayerInVision(GameObject player, PlayerController controller) {
         if (controller.UsingBox())
             return;
 
         BGMPlayer.instance.PlayActionMusic();
-        if(!playedSeenSound)
-        {
+        if (!playedSeenSound) {
             audioSource.PlayOneShot(playerSeen);
             playedSeenSound = true;
         }
 
-
-        if(arrorwReady)
-        {
+        if (arrorwReady) {
             StartAttacking();
             arrowTargetPosition = player.transform.position;
         }
 
-        if(!animationController.GetBool("IS_ATTACKING"))
-        {
+        if (!animationController.GetBool("IS_ATTACKING")) {
             state = BasicEnemyController.STATE_HUNTING;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
 
@@ -116,28 +110,23 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
             UpdateDestination(playerPosition);
         }
-
     }
 
-    public void StartAttacking()
-    {
+    public void StartAttacking() {
         arrorwReady = false;
         animationController.SetBool("IS_ATTACKING", true);
         pathController.maxSpeed = 0;
     }
 
-    public void ArrowImpact()
-    {
+    public void ArrowImpact() {
         audioSource.PlayOneShot(arrowHit);
     }
 
-    public void ArrowFinished()
-    {
+    public void ArrowFinished() {
         arrorwReady = true;
     }
 
-    public void FireProjectile()
-    {
+    public void FireProjectile() {
         arrowProjectile.SetActive(true);
         arrowProjectile.transform.position = this.transform.position;
         Vector3 dir = Vector3.Normalize(arrowTargetPosition - this.transform.position) * arrowSpeed;
@@ -147,22 +136,18 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         audioSource.PlayOneShot(shootArrow);
     }
 
-    public void StopAttacking()
-    {
+    public void StopAttacking() {
         animationController.SetBool("IS_ATTACKING", false);
         pathController.maxSpeed = baseSpeed;
     }
 
-    private void ArrivedAtDestination()
-    {
-        if (state == BasicEnemyController.STATE_PATHING)
-        {
+    private void ArrivedAtDestination() {
+        if (state == BasicEnemyController.STATE_PATHING) {
             nextNode = nextNode.GetComponent<PathNodeController>().getNextNode();
             UpdateDestination(nextNode.transform.position);
         }
         else if (state == BasicEnemyController.STATE_HUNTING ||
-                 state == BasicEnemyController.STATE_ALERT)
-        {
+                 state == BasicEnemyController.STATE_ALERT) {
             state = STATE_PATHING;
             pathController.maxSpeed = baseSpeed;
             UpdateDestination(nextNode.transform.position);
@@ -172,67 +157,52 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     }
 
     //update destination based on current state
-    private void UpdateDestination(Vector3 newDestination)
-    {
+    private void UpdateDestination(Vector3 newDestination) {
         pathController.destination = newDestination;
         pathController.SearchPath();
     }
 
-    private void SetDir()
-    {
+    private void SetDir() {
         float horizontal = pathController.velocity.x, vertical = pathController.velocity.y;
-        if (horizontal == 0 && vertical == 0)
-        {
+        if (horizontal == 0 && vertical == 0) {
             animationController.SetBool("IS_MOVING", false);
             return;
         }
-        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical))
-        {
-            if (horizontal > 0)
-            {
+        if (Mathf.Abs(horizontal) >= Mathf.Abs(vertical)) {
+            if (horizontal > 0) {
                 animationController.SetInteger("DIR", 1);//right
             }
-            else
-            {
+            else {
                 animationController.SetInteger("DIR", 3);//left
             }
         }
-        else
-        {
-            if (vertical > 0)
-            {
+        else {
+            if (vertical > 0) {
                 animationController.SetInteger("DIR", 0);//up
             }
-            else
-            {
+            else{
                 animationController.SetInteger("DIR", 2);//down
             }
         }
         animationController.SetBool("IS_MOVING", true);
     }
 
-    private void CheckStuck()
-    {
-        if (pathController.velocity.magnitude < .4)
-        {
+    private void CheckStuck() {
+        if (pathController.velocity.magnitude < .4) {
             stuckTimer++;
-            if (stuckTimer > maxStuckTime)
-            {
+            if (stuckTimer > maxStuckTime) {
                 ArrivedAtDestination();
                 stuckTimer = 0;
             }
         }
-        else
-        {
+        else {
             stuckTimer = 0;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         GameObject entity = collision.gameObject;
-        if (entity.CompareTag("Gadget"))
-        {
+        if (entity.CompareTag("Gadget")) {
             UpdateDestination(entity.transform.position);
         }
     }
@@ -240,24 +210,22 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SoundRing") &&
-            state == BasicEnemyController.STATE_PATHING)
-        {
+            state == BasicEnemyController.STATE_PATHING) {
+
             //the guard just heard a sound
             state = BasicEnemyController.STATE_ALERT;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
             UpdateDestination(other.transform.position);
             audioSource.PlayOneShot(soundHeard);
         }
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") &&
     (!(collision.gameObject.gameObject.GetComponent<PlayerController>()).UsingBox() ||
-    state == STATE_HUNTING))
-        {
-            if(arrorwReady) {
+    state == STATE_HUNTING)) {
+            if (arrorwReady) {
                 StartAttacking();
                 arrowTargetPosition = collision.gameObject.transform.position;
                 PlayerInVision(collision.gameObject, collision.gameObject.GetComponent<PlayerController>());
@@ -270,12 +238,14 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     * Created by Michael Cantrell
     * Resets this class's attributes to their original states
     */
-    public void Respawn()
-    {
+    public void Respawn() {
         transform.position = spawnPosition;
         gameObject.SetActive(isActiveOnSpawn);
+
         state = BasicEnemyController.STATE_PATHING;
-        StopAttacking();
+		baseSpeed = initSpeed;
+
+		StopAttacking();
         nextNode = firstNode;
         UpdateDestination(nextNode.transform.position);
 

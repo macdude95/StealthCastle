@@ -19,9 +19,14 @@ public class CoinBehavior : ThrowableBehavior {
 	private bool coinTossHasPlayed = false;
 
 	void Awake() {
+		/*
+		 * The sound ring must be instantiated as a child to the coin to
+		 * simplify item persistence and item destruction.
+		 */
 		soundRing = Instantiate(soundRingPrefab,
 								transform.position,
-								new Quaternion());
+								new Quaternion(),
+								gameObject.transform);
 		soundRing.SetActive(false);
         audioSource = GetComponent<AudioSource>();
 	}
