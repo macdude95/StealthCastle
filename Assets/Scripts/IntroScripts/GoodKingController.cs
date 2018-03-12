@@ -18,6 +18,7 @@ public class GoodKingController : MonoBehaviour {
         {
             GetComponent<AudioSource>().PlayOneShot(scream);
             playScreamCollider.gameObject.SetActive(false);
+            BGMPlayer.instance.PlayActionMusic();
         }
 	}
 }
