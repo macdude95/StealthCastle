@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4498219852830726}
   - component: {fileID: 114442933338962402}
-  - component: {fileID: 114971941544487908}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -359,8 +358,6 @@ MonoBehaviour:
   restartLevelText: {fileID: 114542838998082706}
   fadeInOutImage: {fileID: 114165272347081954}
   fadeInOutAnimator: {fileID: 95548916352931612}
-  calmBgm: {fileID: 0}
-  actionBGM: {fileID: 0}
   currItem: {fileID: 0}
   actionBGMTime: 1800
 --- !u!114 &114542838998082706
@@ -541,19 +538,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114971941544487908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1325322084485898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2acd0246776ae746a8f38e248da166a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calmBGM: {fileID: 0}
-  actionBGM: {fileID: 0}
 --- !u!222 &222080232455703742
 CanvasRenderer:
   m_ObjectHideFlags: 1
