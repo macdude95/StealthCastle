@@ -25,10 +25,10 @@ public class Fading : MonoBehaviour {
 	/*Function to fade to black*/
 	public IEnumerator FadeToFullAlpha() {
 		fading = true;
-		FaderImage.color = new Color (FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, 0);	//Set the alpha
+		FaderImage.color = new Color(FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, 0);	//Set the alpha
 		//Continue looping as long as the alpha is not max
 		while (FaderImage.color.a < 1.0f) {
-			FaderImage.color = new Color (FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, FaderImage.color.a + (Time.deltaTime / fadeSpeed));	//Set the fade
+			FaderImage.color = new Color(FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, FaderImage.color.a + (Time.deltaTime / fadeSpeed));	//Set the fade
 			yield return null;
 		}
 		fading = false;
@@ -38,8 +38,8 @@ public class Fading : MonoBehaviour {
 	public IEnumerator FadeToZeroAlpha() {
 		fading = true;
 		FaderImage.color = new Color (FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, 1);
-		while (FaderImage.color.a > 0.0f) {
-			FaderImage.color = new Color (FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, FaderImage.color.a - (Time.deltaTime / fadeSpeed));	//Set the fade
+		while(FaderImage.color.a > 0.0f) {
+			FaderImage.color = new Color(FaderImage.color.r, FaderImage.color.g, FaderImage.color.b, FaderImage.color.a - (Time.deltaTime / fadeSpeed));	//Set the fade
 			yield return null;
 		}
 		fading = false;
@@ -47,9 +47,9 @@ public class Fading : MonoBehaviour {
 
 	/*Function to load scene after fading is finished*/
 	public IEnumerator DoLast(string SceneName) {
-		while (fading == true) {
-			yield return new WaitForSeconds (.1f);	//Keep looping until coroutine is finished
+		while(fading == true) {
+			yield return new WaitForSeconds(.1f);	//Keep looping until coroutine is finished
 		}
-		SceneManager.LoadScene(SceneName);	//Load the next scene
+		SceneManager.LoadScene (SceneName);	//Load the next scene
 	}
 }
