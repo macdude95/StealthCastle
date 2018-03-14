@@ -145,6 +145,8 @@ public class VisionConeController : MonoBehaviour {
     void Start()
     {
         coneMesh = GetComponent<MeshFilter>().mesh;
+        var render = GetComponent<MeshRenderer>();
+        render.sortingLayerName = "Entity";
     }
 
     /* OnDrawGizmos
