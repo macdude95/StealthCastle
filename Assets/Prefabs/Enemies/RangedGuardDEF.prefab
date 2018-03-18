@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStuckTime: 60
-  arrowSpeed: 200
+  arrowSpeed: 350
   nextNode: {fileID: 0}
   huntingSpeedMult: 3
   arrowProjectile: {fileID: 1939716107612452}
