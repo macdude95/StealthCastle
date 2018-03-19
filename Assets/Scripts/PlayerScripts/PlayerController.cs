@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         return usingBox;
     }
 
-    //sets animation direction
+    //sets animation controls
     private void SetDir() {
         float horizontal = rb.velocity.x, vertical = rb.velocity.y;
         if (horizontal == 0 && vertical == 0) {

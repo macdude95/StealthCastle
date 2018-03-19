@@ -16,7 +16,7 @@ public class GoodKingController : MonoBehaviour {
 	{
         if (playScreamCollider.IsTouching(PlayerCollider))
         {
-            GetComponent<AudioSource>().PlayOneShot(scream);
+            GetComponent<AudioSource>().PlayOneShot(scream,5);
             playScreamCollider.gameObject.SetActive(false);
             BGMPlayer.instance.PlayActionMusic();
         }

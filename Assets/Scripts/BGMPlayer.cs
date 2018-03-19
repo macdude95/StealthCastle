@@ -51,6 +51,8 @@ public class BGMPlayer : MonoBehaviour {
     public void LevelMusicChanged()
     {
         player.CrossFade(calmBGM, 100, 0);
+        actionBGMOn = false;
+        currentActionBGMTime = 0;
     }
 
     public void LoadNewMusic(AudioClip calm, AudioClip action)
