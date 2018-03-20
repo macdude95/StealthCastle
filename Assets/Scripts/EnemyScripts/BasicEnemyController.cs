@@ -35,8 +35,9 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
     private bool isActiveOnSpawn;
 	private float initSpeed;
     private GameObject firstNode;
+	public GameObject slowIndicator;
 
-    void Start() {
+	void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
@@ -51,6 +52,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         isActiveOnSpawn = gameObject.activeSelf;
 		initSpeed = baseSpeed;
 		firstNode = nextNode;
+		slowIndicator.SetActive(false);
 	}
 
     void Update() {
@@ -68,6 +70,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
 		baseSpeed *= SLOW_MULTIPLIER;
 		pathController.maxSpeed *= SLOW_MULTIPLIER;
+		slowIndicator.SetActive(true);
 	}
 
 	//called when a player is in direct LOS
@@ -205,8 +208,9 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
         state = BasicEnemyController.STATE_PATHING;
 		baseSpeed = initSpeed;
 		pathController.maxSpeed = baseSpeed;
+		slowIndicator.SetActive(false);
 
-        StopAttacking();
+		StopAttacking();
         nextNode = firstNode;
         UpdateDestination(nextNode.transform.position);
         audioSource.Stop();

@@ -39,13 +39,14 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
     public AudioClip arrowHit, shootArrow, attentionLost, soundHeard, playerSeen;
     private bool playedSeenSound = false;
 
-    //Respawnable
-    private Vector3 spawnPosition;
+	//Respawnable
+	private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
 	private float initSpeed;
 	private GameObject firstNode;
+	public GameObject slowIndicator;
 
-    void Start() {
+	void Start() {
         visionCone = transform.GetChild(0).gameObject;
         animationController = this.GetComponent<Animator>();
         pathController = this.GetComponent<AIPath>();
@@ -63,7 +64,8 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         isActiveOnSpawn = gameObject.activeSelf;
 		initSpeed = baseSpeed;
 		firstNode = nextNode;
-    }
+		slowIndicator.SetActive(false);
+	}
 
     void Update() {
         if (!pathController.pathPending && pathController.reachedEndOfPath) {
@@ -81,7 +83,8 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
         baseSpeed *= SLOW_MULTIPLIER;
         pathController.maxSpeed *= SLOW_MULTIPLIER;
-    }
+		slowIndicator.SetActive(true);
+	}
 
     //called when a player is in direct LOS
     public void PlayerInVision(GameObject player, PlayerController controller) {
@@ -244,6 +247,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
         state = BasicEnemyController.STATE_PATHING;
 		baseSpeed = initSpeed;
+		slowIndicator.SetActive(false);
 
 		StopAttacking();
         nextNode = firstNode;

@@ -11,6 +11,7 @@ public class SoundRingController : MonoBehaviour {
 	public float endScale = 0.5f;
 	public float smoothTime = 0.3F;
 	public float fadeSpeed = 50;
+    public string source = "";
 
 	private float velocity;
 

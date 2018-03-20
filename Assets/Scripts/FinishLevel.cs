@@ -9,7 +9,7 @@ public class FinishLevel : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag ("Player")) {
-			GameObject.Find ("Player").SetActive(false);	
+			GameObject.Find("Player").SetActive(false);
 			GameController.instance.LoadNewLevel (SceneName);
 		}
 	}

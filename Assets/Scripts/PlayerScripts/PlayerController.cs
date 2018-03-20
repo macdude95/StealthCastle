@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
     //Respawnable
     private Vector3 spawnPosition;
     private bool isActiveOnSpawn;
+	public GameObject slowIndicator;
 
 	//initial items carried over from previous level
 	private GameObject startItem;
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         //Respawnable
         spawnPosition = transform.position;
         isActiveOnSpawn = gameObject.activeSelf;
+		slowIndicator.SetActive(false);
 
 		startItem = GameController.instance.currItem;
 		if (startItem != null) {
@@ -87,6 +89,13 @@ public class PlayerController : MonoBehaviour, IRespawnable {
             CheckInputs();
             SetDir();
 			SetSpeed();
+		}
+		if (Input.GetButtonDown ("HaungsCheat")) {
+            GameObject finishTriggerObject = GameObject.Find("FinishTrigger");
+            if (finishTriggerObject != null) {
+                GameController.instance.LoadNewLevel(finishTriggerObject.GetComponent<FinishLevel>().SceneName);
+            }
+
 		}
     }
 
@@ -159,10 +168,9 @@ public class PlayerController : MonoBehaviour, IRespawnable {
                 if (!isSlowed)
                     audioSource.PlayOneShot(webEnter);
                 isSlowed = true;
-                
-            }
-            else
-            {
+				slowIndicator.SetActive(true);
+			}
+            else {
                 audioSource.PlayOneShot(webCut);
             }
 		}
@@ -225,7 +233,8 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 	private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.tag == "SpiderWeb") {
             isSlowed = false;
-        }
+			slowIndicator.SetActive(false);
+		}
         else if (collision.gameObject.CompareTag("Gadget"))
         {
             collision.gameObject.GetComponent<PickUpController>().pickupReady(false);
@@ -428,5 +437,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
             interactable.GetComponent<PickUpController>().pickupReady(false);
             interactable = null;
         }
-    }
+
+		slowIndicator.SetActive(false);
+	}
 }

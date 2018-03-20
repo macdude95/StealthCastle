@@ -12,6 +12,7 @@ using UnityEngine;
 public class CaltropsBehavior : ThrowableBehavior {
 
 	public AudioClip setCaltrops, throwCaltrops;
+
 	private AudioSource audioSource;
     private bool caltropsTossPlayed = false;
 
@@ -45,6 +46,7 @@ public class CaltropsBehavior : ThrowableBehavior {
 		}
 		else if (entity.CompareTag("Enemy")) {
 			entity.SendMessage("SlowEnemy");
+
 			isBeingThrown = false;
 			gameObject.SetActive(false);
 		}

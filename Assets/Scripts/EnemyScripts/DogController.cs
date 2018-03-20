@@ -29,6 +29,7 @@ public class DogController : MonoBehaviour, IRespawnable {
     private float speed;
     private Transform wanderTarget;
     private int barkingFrames = 0;
+    private const string sourceName = "Dog";
 
     //Respawnable
     private Vector3 spawnPosition;
@@ -50,6 +51,7 @@ public class DogController : MonoBehaviour, IRespawnable {
             soundRingPool[i] =
                 Instantiate(soundRingPrefab, this.transform.position, Quaternion.identity);
             soundRingPool[i].SetActive(false);
+            soundRingPool[i].GetComponent<SoundRingController>().source = sourceName;
         }
 
         StartCoroutine(ChooseNewWanderTarget());
@@ -162,7 +164,7 @@ public class DogController : MonoBehaviour, IRespawnable {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "SoundRing" && state == STATE_WANDER)
+        if (other.tag == "SoundRing" && state == STATE_WANDER && other.GetComponent<SoundRingController>().source != sourceName)
         {
             //the guard just heard the player
             state = STATE_GO_TO_NOISE;
