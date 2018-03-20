@@ -34,7 +34,7 @@ public class EndSceneController : MonoBehaviour {
 
     IEnumerator endGame() {
         kingAnimator.SetTrigger("DIE");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         GameController.instance.LoadNewLevel(endCreditsSceneName);
     }
 }
