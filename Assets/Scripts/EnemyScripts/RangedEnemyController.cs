@@ -105,15 +105,15 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
         if (!animationController.GetBool("IS_ATTACKING")) {
             state = BasicEnemyController.STATE_HUNTING;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;
-
-            Vector3 playerPosition = player.transform.position;
-            GraphNode nearestPlayerNode =
-                AstarPath.active.GetNearest(playerPosition).node;
-            playerPosition = (Vector3)nearestPlayerNode.position;
-
-            UpdateDestination(playerPosition);
         }
-    }
+
+		Vector3 playerPosition = player.transform.position;
+		GraphNode nearestPlayerNode =
+			AstarPath.active.GetNearest(playerPosition).node;
+		playerPosition = (Vector3)nearestPlayerNode.position;
+
+		UpdateDestination(playerPosition);
+	}
 
     public void StartAttacking() {
         arrorwReady = false;
@@ -212,9 +212,7 @@ public class RangedEnemyController : MonoBehaviour, IRespawnable {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("SoundRing") &&
-            state == BasicEnemyController.STATE_PATHING) {
-
+        if (other.CompareTag("SoundRing")) {
             //the guard just heard a sound
             state = BasicEnemyController.STATE_ALERT;
             pathController.maxSpeed = baseSpeed * huntingSpeedMult;

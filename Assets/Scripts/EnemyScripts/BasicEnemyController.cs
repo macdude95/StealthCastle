@@ -163,8 +163,7 @@ public class BasicEnemyController : MonoBehaviour, IRespawnable {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("SoundRing") &&
-			state == BasicEnemyController.STATE_PATHING) { 
+		if (other.CompareTag("SoundRing")) { 
 
 			//the guard just heard a sound
             state = BasicEnemyController.STATE_ALERT;
