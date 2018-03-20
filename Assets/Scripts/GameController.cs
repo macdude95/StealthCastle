@@ -98,6 +98,7 @@ public class GameController : MonoBehaviour {
 				Destroy(startItem);
 			}
 			if (currItem != null) {
+				currItem.transform.parent = null;
 				DontDestroyOnLoad(currItem);
 			}
             SceneManager.LoadScene(sceneName);
