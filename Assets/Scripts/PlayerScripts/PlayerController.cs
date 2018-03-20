@@ -76,6 +76,9 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 			startPickUpController =
 				startItem.GetComponent<PickUpController>();
 			if (startPickUpController.itemIsDisguise) {
+				DisguiseInfoContainer disguiseInfo =
+					startItem.GetComponent<DisguiseInfoContainer>();
+				currentDisguise = disguiseInfo.disguiseName;
 				disguiseScript.DonDisguise(startItem);
 			}
 		}
@@ -419,6 +422,9 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 		if (startItem != null) {
 			Debug.Assert(startPickUpController != null);
 			if (startPickUpController.itemIsDisguise) {
+				DisguiseInfoContainer disguiseInfo =
+					startItem.GetComponent<DisguiseInfoContainer>();
+				currentDisguise = disguiseInfo.disguiseName;
 				disguiseScript.DonDisguise(startItem);
 			}
 		}

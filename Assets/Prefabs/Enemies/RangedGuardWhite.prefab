@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a9ed7085b6931438578c1b98172f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seenDisguiseType: BasicGuardBlack
+  seenDisguiseType: RangedGuardWhite
   numPiRadiansOfCircle: 0.25
   numOfRays: 15
   lightRange: 145
