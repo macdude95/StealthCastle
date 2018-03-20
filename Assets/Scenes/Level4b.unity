@@ -351,7 +351,7 @@ Prefab:
     - target: {fileID: 114469609201311920, guid: 8ec6754468f214a2c841bebf408a0d86,
         type: 2}
       propertyPath: SceneName
-      value: Level6a
+      value: Level5a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ec6754468f214a2c841bebf408a0d86, type: 2}
@@ -1812,7 +1812,7 @@ Prefab:
     - target: {fileID: 114555880878487098, guid: 37638f5dc4aeff3449f62219dfdad8f0,
         type: 2}
       propertyPath: NextScene
-      value: Level6a
+      value: Level5a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37638f5dc4aeff3449f62219dfdad8f0, type: 2}
