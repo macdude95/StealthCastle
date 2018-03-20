@@ -37,8 +37,8 @@ public class ThrowableScript : MonoBehaviour {
 	}
 
 	void Update() {
-		if (GameController.instance.GetItemName().Equals("ThrowableCoin") ||
-			GameController.instance.GetItemName().Equals("Caltrops")) {
+		if (GameController.instance.GetItemName().Contains("ThrowableCoin") ||
+			GameController.instance.GetItemName().Contains("Caltrops")) {
 			int dirInt = playerAnim.GetInteger("DIR");
 			aimSlider.enabled = true;
 
