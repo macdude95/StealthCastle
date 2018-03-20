@@ -361,7 +361,7 @@ MonoBehaviour:
   runSpeed: 90
   walkSpeed: 45
   slowWalk: 10
-  slowRun: 30
+  slowRun: 10
   framesBetweenRings: 20
   ringStartScale: 0
   soundRingPrefab: {fileID: 1493550792977570, guid: 5380c808b34af4d98be50902a22069b6,
