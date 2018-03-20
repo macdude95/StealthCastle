@@ -66,7 +66,7 @@ public class CoinBehavior : ThrowableBehavior {
 
 	private void SoundRing() {
 		soundRing.transform.position = this.transform.position;
-		soundRing.transform.localScale = new Vector3(0, 0, 0f);
+		soundRing.transform.localScale = new Vector3(1f, 1f, 0f);
 
 		SpriteRenderer sr = soundRing.GetComponent<SpriteRenderer>();
 		sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, .5f);
