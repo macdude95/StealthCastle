@@ -80,3 +80,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 7a68d647c7413bf49b79dd06782627a6
+  - enabled: 1
+    path: Assets/Scenes/Level2f.unity
+    guid: 455a380ee20014deca44ec91555e5083
