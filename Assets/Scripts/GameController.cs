@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
-
 	public Image itemDisplay;
 	public Image scoreDisplay;
 	public Text itemText;
@@ -57,8 +56,8 @@ public class GameController : MonoBehaviour {
                 isDead = false;
             }));
             BGMPlayer.instance.ResetTimer();
-
         }
+
 		int scoreDelta = ScoreScript.instance.score - ScoreScript.instance.displayedScore;
 		if (scoreDelta != 0) {
             if (scoreDelta > 1000 && scoreDelta != 0) {
