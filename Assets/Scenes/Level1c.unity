@@ -485,6 +485,11 @@ Prefab:
       propertyPath: m_Offset.y
       value: -4
       objectReference: {fileID: 0}
+    - target: {fileID: 114555880878487098, guid: 37638f5dc4aeff3449f62219dfdad8f0,
+        type: 2}
+      propertyPath: NextScene
+      value: Level2a
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37638f5dc4aeff3449f62219dfdad8f0, type: 2}
   m_IsPrefabParent: 0
@@ -1772,6 +1777,11 @@ Prefab:
     - target: {fileID: 1325322084485898, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114442933338962402, guid: e48f4f2bc2278164399456663f7e2a62,
+        type: 2}
+      propertyPath: NextScene
+      value: Level2a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e48f4f2bc2278164399456663f7e2a62, type: 2}
