@@ -494,7 +494,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4950067802692650, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -20.97734
+      value: -18.28276
       objectReference: {fileID: 0}
     - target: {fileID: 4950067802692650, guid: c3e06802ef72f4a56aaee01975b3eda6, type: 2}
       propertyPath: m_LocalPosition.y
@@ -994,8 +994,8 @@ Transform:
   - {fileID: 1197226171}
   - {fileID: 327203170}
   - {fileID: 1796708905}
-  - {fileID: 1179241416}
   - {fileID: 258116266}
+  - {fileID: 1179241416}
   - {fileID: 1120475945}
   - {fileID: 710609694}
   - {fileID: 1136294440}
@@ -40095,6 +40095,11 @@ Prefab:
     - target: {fileID: 4215427005313754, guid: 8ec6754468f214a2c841bebf408a0d86, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114469609201311920, guid: 8ec6754468f214a2c841bebf408a0d86,
+        type: 2}
+      propertyPath: SceneName
+      value: Level4b
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ec6754468f214a2c841bebf408a0d86, type: 2}
