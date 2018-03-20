@@ -409,7 +409,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press Arrow Keys or (WASD) to Move.
+  m_Text: 'Press Arrow Keys to Move.
 
     Press Shift to Run.
 
