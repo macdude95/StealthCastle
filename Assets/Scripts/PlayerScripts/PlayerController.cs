@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IRespawnable {
-	public string NextScene;
-
 	public float runSpeed = 75;
 	public float walkSpeed = 45;	
 	public float slowWalk = 10;
@@ -90,7 +88,11 @@ public class PlayerController : MonoBehaviour, IRespawnable {
 			SetSpeed();
 		}
 		if (Input.GetButtonDown ("HaungsCheat")) {
-			GameController.instance.LoadNewLevel(NextScene);
+            GameObject finishTriggerObject = GameObject.Find("FinishTrigger");
+            if (finishTriggerObject != null) {
+                GameController.instance.LoadNewLevel(finishTriggerObject.GetComponent<FinishLevel>().SceneName);
+            }
+
 		}
     }
 
