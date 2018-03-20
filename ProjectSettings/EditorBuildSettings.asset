@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Level6b.unity
     guid: e92fc139a09c9d048888759dd936f32d
   - enabled: 1
-    path: Assets/Scenes/Level6a.unity
+    path: Assets/Scenes/LevelEND.unity
     guid: 6498a19fc60f8084aa4962b67ed01064
   - enabled: 0
     path: Assets/Scenes/WebCutterTutorial.unity
@@ -53,7 +53,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Playtest01.unity
     guid: b7ccde2523468439089b3ad0d5dc514a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 7a68d647c7413bf49b79dd06782627a6
   - enabled: 1
