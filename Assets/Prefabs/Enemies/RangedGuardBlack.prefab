@@ -457,11 +457,11 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   huntingSpeedMult: 3
   arrowProjectile: {fileID: 1638462804419952}
-  arrowHit: {fileID: 0}
-  shootArrow: {fileID: 0}
-  attentionLost: {fileID: 0}
-  soundHeard: {fileID: 0}
-  playerSeen: {fileID: 0}
+  arrowHit: {fileID: 8300000, guid: 5903e2d496785de41a7ef56e80ac9af6, type: 3}
+  shootArrow: {fileID: 8300000, guid: d35697353fd41ed48b733342efe9b361, type: 3}
+  attentionLost: {fileID: 8300000, guid: a592d85f7f17d3e47a71914db2a6a492, type: 3}
+  soundHeard: {fileID: 8300000, guid: 771e57cb0ccee244789de0cb0bec02bc, type: 3}
+  playerSeen: {fileID: 8300000, guid: 127bbdc81249a0842b6d5068f8639c2b, type: 3}
 --- !u!114 &114297432031290858
 MonoBehaviour:
   m_ObjectHideFlags: 1
