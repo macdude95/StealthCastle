@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*Created By: Alex Hua
+ * Purpose of the class was to set the fading of scenes.
+ * Doesn't work as intended so used other solutions*/
 public class Fading : MonoBehaviour {
 
 	public static Fading instance;	//Fading script instance

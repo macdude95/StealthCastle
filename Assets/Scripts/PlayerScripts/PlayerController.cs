@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour, IRespawnable {
             SetDir();
 			SetSpeed();
 		}
+        /*Haungs cheat button code*/
 		if (Input.GetButtonDown ("HaungsCheat")) {
             GameObject finishTriggerObject = GameObject.Find("FinishTrigger");
             if (finishTriggerObject != null) {
@@ -378,6 +379,10 @@ public class PlayerController : MonoBehaviour, IRespawnable {
         return ((currentDisguise != null) ? currentDisguise.Equals(disguiseType) : true);
     }
 
+    /*Created by: Alex Hua
+     * Purpose of function is to use the box disguise 
+     * when the player presses the key with the item.
+     * Function handles the changing of sprites*/
     private void UseBoxDisguise() {
 		if (GameController.instance.GetItemName () == "BoxDisguise") {
 			usingBox = true;
@@ -387,6 +392,10 @@ public class PlayerController : MonoBehaviour, IRespawnable {
             audioSource.PlayOneShot(useBox);
         }
 	}
+    /*Created by: Alex Hua
+     * Purpose of function is to stop using the box disguise
+     * when the player releases the key that uses the box
+     * when they have it*/
 	private void StopBoxDisguise() {
 		if (GameController.instance.GetItemName () == "BoxDisguise") {
             usingBox = false;
