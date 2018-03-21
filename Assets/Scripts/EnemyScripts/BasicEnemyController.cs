@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// [Mostly?] Written by Daniel Anderson
+/// </summary>
 public class BasicEnemyController : MonoBehaviour, IRespawnable {
 
     //state machine states

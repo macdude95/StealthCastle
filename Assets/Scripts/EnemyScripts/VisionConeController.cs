@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// [Mostly?] Written by Daniel Anderson
+/// </summary>
 public class VisionConeController : MonoBehaviour {
 
     public string seenDisguiseType;

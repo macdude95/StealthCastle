@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Written by Daniel Anderson
+/// </summary>
 public class PickUpController : MonoBehaviour, IRespawnable {
 
     public string displayName;

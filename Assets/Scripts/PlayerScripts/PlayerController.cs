@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// [Mostly?] Written by Daniel Anderson
+/// </summary>
 public class PlayerController : MonoBehaviour, IRespawnable {
 
 	public float runSpeed = 75;
